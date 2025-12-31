@@ -3,213 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>† 0NLY_D4RKNE55 †</title>
+    <title>Windows Vista - [ D4RK_V4NGU4RD ]</title>
     <style>
-        /* ESTÉTICA OSCURA / MALL GOTH */
+        /* --- ESTILOS BASE --- */
         body {
             background-color: #000;
-            /* Fondo de rejilla oscura o podrías usar una imagen de calaveras/rosas rojas */
-            background-image: radial-gradient(#333 1px, transparent 1px);
-            background-size: 15px 15px;
-            color: #ccc;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 20px;
-            cursor: crosshair; /* Cursor de cruz para más vibe */
+            background-image: url('img24.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0; padding: 0;
+            font-family: "MS Sans Serif", Tahoma, sans-serif;
         }
 
-        #myspace-wrapper {
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #1a1a1a; /* Gris muy oscuro */
-            border: 2px solid #ff0000; /* Borde rojo sangre */
-            padding: 15px;
-            box-shadow: 0 0 20px #ff0000; /* Resplandor rojo */
-        }
-
-        /* Títulos con estilo gótico */
-        #header {
-            border-bottom: 4px double #ff0000;
-            margin-bottom: 25px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        #header h1 {
-            color: #ff0000;
-            text-transform: uppercase;
-            font-size: 35px;
-            letter-spacing: 5px;
-            margin: 0;
-            text-shadow: 2px 2px #000;
-        }
-
-        .section {
-            background-color: #111;
-            border: 1px solid #444;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .section h2 {
-            background-color: #ff0000; /* Fondo rojo para títulos */
-            color: #000;
-            padding: 5px;
-            font-size: 18px;
-            margin: -15px -15px 15px -15px;
-            text-align: left;
-            text-transform: lowercase;
-        }
-
-        /* Layout de columnas */
-        #main-content {
+        .desktop-wrapper {
             display: flex;
-            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
-        #left-col { flex: 1.5; }
-        #right-col { flex: 1; }
-
-        /* Links */
-        a { color: #ff0000; text-decoration: none; font-weight: bold; }
-        a:hover { color: #fff; text-decoration: underline; }
-
-        /* Amigos Top */
-        #top-friends-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            text-align: center;
+        /* --- VENTANA MSN --- */
+        #social-window {
+            position: fixed; top: 20px; left: 20px; width: 210px;
+            background-color: #d4d0c8; border: 2px outset #fff;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.4); z-index: 100;
         }
 
-        .friend img {
-            width: 100%;
-            border: 1px solid #ff0000;
-            filter: grayscale(100%); /* Fotos en blanco y negro */
+        .win-title-bar {
+            background: linear-gradient(to bottom, #0058ee 0%, #3593ff 100%);
+            color: white; padding: 3px 5px; font-weight: bold; font-size: 11px;
+            display: flex; justify-content: space-between;
         }
 
-        .friend img:hover { filter: grayscale(0%); border-color: #fff; }
-
-        .friend p { font-size: 11px; margin-top: 5px; }
-
-        /* Cuadro de texto para comentarios */
-        textarea {
-            background: #000;
-            color: #ff0000;
-            border: 1px solid #ff0000;
-            width: 95%;
-            padding: 5px;
+        .win-content {
+            padding: 5px; border: 2px inset #fff; background: #fff;
+            max-height: 250px; overflow-y: auto;
         }
 
-        button {
-            background: #ff0000;
-            border: none;
-            color: #000;
-            padding: 5px 15px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
+        .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
+        .buddy-list li { display: flex; align-items: center; padding: 4px; border-bottom: 1px solid #eee; }
+        .buddy-list a { text-decoration: none; color: black; display: flex; align-items: center; width: 100%; }
+        .buddy-icon { width: 14px; height: 14px; margin-right: 8px; }
+        .status-dot { width: 7px; height: 7px; border-radius: 50%; margin-left: auto; border: 1px solid #555; }
+        .online { background: #0f0; }
+        .busy { background: #f00; }
+
+        /* --- VENTANA PRINCIPAL (FIJA EN PC) --- */
+        #netscape-window {
+            width: 950px; 
+            height: 650px; 
+            background-color: #c0c0c0; border: 2px solid #fff;
+            border-right-color: #444; border-bottom-color: #444;
+            display: flex; flex-direction: column; z-index: 10;
         }
 
-        /* Reproductor Winamp Falso */
-        .player {
-            background: #333;
-            border: 2px solid #555;
-            color: #0f0; /* Pantalla verde */
-            padding: 5px;
-            font-size: 12px;
-            margin-bottom: 20px;
+        .app-title-bar {
+            background: linear-gradient(90deg, #800000, #ff0000);
+            color: white; padding: 4px 10px; font-weight: bold;
+            display: flex; justify-content: space-between;
         }
 
-        .mood-bar { font-size: 12px; color: #888; margin-bottom: 10px; }
-        .mood-bar b { color: #ff0000; }
+        #viewport {
+            background-color: #000; border: 2px inset #444;
+            margin: 5px; color: #ccc; display: flex;
+            flex-grow: 1; overflow: hidden;
+        }
 
+        .sidebar {
+            width: 200px; background: #0a0a0a; border-right: 2px solid #ff0000;
+            padding: 15px; text-align: center; flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .profile-pic { width: 120px; height: 120px; border: 2px solid #ff0000; object-fit: cover; margin-bottom: 10px; }
+
+        .user-info {
+            font-size: 11px; text-align: left; color: #fff; margin-bottom: 15px; 
+            padding: 8px; border: 1px solid #333; background: #111; line-height: 1.4;
+        }
+
+        .sidebar-nav { list-style: none; padding: 0; }
+        .sidebar-nav a { 
+            display: block; padding: 8px; color: #ff0000; 
+            text-decoration: none; border-bottom: 1px solid #222; font-size: 12px; 
+        }
+
+        .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; }
+        
+        section { display: none; } 
+        #inicio { display: block; }
+
+        h1, h2 { color: #ff0000; font-family: "Impact", sans-serif; border-bottom: 1px solid #ff0000; }
+
+        /* --- GALERÍA --- */
+        .photo-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;
+        }
+        .photo-card { background: #111; border: 1px solid #444; padding: 5px; cursor: pointer; }
+        .photo-card img { width: 100%; height: 110px; object-fit: cover; }
+
+        /* --- MODAL ZOOM --- */
+        #zoom-modal {
+            display: none; position: fixed; z-index: 2000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
+        }
+        #zoom-img { max-width: 95%; max-height: 85%; border: 1px solid #fff; }
+
+        /* -------------------------------------------
+            ✨ ESTILO BONITO DE COMENTARIOS (CUSDIS)
+        ------------------------------------------- */
+        .comment-box-container {
+            background: #111; 
+            border: 2px inset #444; 
+            padding: 20px; 
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        #cusdis_thread {
+            color-scheme: dark !important;
+        }
+
+        /* Forzamos el color de los textos mediante filtros si el widget carga claro */
+        #cusdis_thread iframe {
+            filter: invert(0.9) hue-rotate(180deg) brightness(1.2);
+        }
+
+        /* -------------------------------------------
+            📱 AJUSTES PARA CELULAR
+        ------------------------------------------- */
+        @media (max-width: 768px) {
+            .desktop-wrapper { padding: 10px; flex-direction: column; align-items: center; }
+            #social-window { position: relative; top: 0; left: 0; width: 100%; max-width: 320px; margin-bottom: 15px; box-shadow: none; }
+            #netscape-window { width: 100%; height: auto; box-shadow: none; }
+            #viewport { flex-direction: column; height: auto; overflow: visible; }
+            .sidebar { width: auto; border-right: none; border-bottom: 2px solid #ff0000; display: flex; flex-direction: column; align-items: center; }
+            .user-info { width: 90%; max-width: 250px; }
+            .main-content { height: auto; overflow-y: visible; padding: 15px; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="myspace-wrapper">
-        <div id="header">
-            <h1>† iNsIdE_mY_HeAd †</h1>
-            <div class="mood-bar">
-                <b>Mood:</b> Apático / <b>Escuchando:</b> Evanescence - Going Under
+    <div id="zoom-modal" onclick="this.style.display='none'">
+        <img id="zoom-img" src="">
+    </div>
+
+    <div class="desktop-wrapper">
+        <div id="social-window">
+            <div class="win-title-bar">
+                <span><img src="https://cyber.dabamos.de/88x31/msn.gif" height="10"> Messenger</span>
+                <span>_ □ X</span>
+            </div>
+            <div class="win-content">
+                <div style="display: flex; align-items: center; padding: 5px; gap: 10px;">
+                    <img src="https://cyber.dabamos.de/88x31/user_male.gif" style="border:1px inset #fff; width: 30px;">
+                    <div style="color:black; font-weight:bold; font-size:11px;">Iannget.raped_</div>
+                </div>
+                <ul class="buddy-list">
+                    <li><a href="https://github.com/catekath" target="_blank"><img src="https://github.githubassets.com/favicons/favicon.svg" class="buddy-icon"> GitHub <div class="status-dot online"></div></a></li>
+                    <li><a href="https://www.instagram.com/iannget.raped_/" target="_blank"><img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" class="buddy-icon"> Instagram <div class="status-dot online"></div></a></li>
+                    <li style="color:black; font-size: 10px; padding: 5px; border-top: 1px dotted #ccc;"><b>Tel:</b> +52 777 352 3251</li>
+                </ul>
             </div>
         </div>
 
-        <div id="main-content">
-            <div id="left-col">
-                <div class="section">
-                    <h2>sobre mi...</h2>
-                    <img src="https://via.placeholder.com/150/000000/FFFFFF?text=GOTH+IMAGE" style="float:left; margin-right: 15px; border: 2px solid #ff0000; width: 120px;">
-                    <p>No busques nada aquí. Solo soy otra alma perdida en la red. </p>
-                    <p>Me gusta la oscuridad, los cementerios y el café cargado. Si me vas a agregar, que sea para hablar de música de verdad, no esa basura que sale en la radio ahora.</p>
-                    <p><i>"Life is a tragedy for those who feel..."</i></p>
-                    <div style="clear:both;"></div>
-                </div>
-
-                <div class="section">
-                    <h2>mis demonios (top 6)</h2>
-                    <div id="top-friends-grid">
-                        <div class="friend">
-                            <img src="https://via.placeholder.com/80/222/888" alt="f1"><p>Zero</p>
-                        </div>
-                        <div class="friend">
-                            <img src="https://via.placeholder.com/80/222/888" alt="f2"><p>Vamp_X</p>
-                        </div>
-                        <div class="friend">
-                            <img src="https://via.placeholder.com/80/222/888" alt="f3"><p>Alice</p>
-                        </div>
-                        <div class="friend">
-                            <img src="https://via.placeholder.com/80/222/888" alt="f4"><p>NoBody</p>
-                        </div>
-                        <div class="friend">
-                            <img src="https://via.placeholder.com/80/222/888" alt="f5"><p>Shadow</p>
-                        </div>
-                        <div class="friend">
-                            <img src="https://via.placeholder.com/80/222/888" alt="f6"><p>Lost</p>
-                        </div>
-                    </div>
-                </div>
+        <div id="netscape-window">
+            <div class="app-title-bar">
+                <span>Netscape - [ D4RK_V4NGU4RD ]</span>
+                <span>_ ▢ X</span>
             </div>
-
-            <div id="right-col">
-                <div class="player">
-                    <marquee>NOW PLAYING: My Chemical Romance - I'm Not Okay (I Promise)</marquee>
-                    <div style="display:flex; justify-content: space-between; font-family: monospace;">
-                        <span>[II]</span> <span>[>>]</span> <span>[REC]</span>
+            
+            <div id="viewport">
+                <aside class="sidebar">
+                    <img src="fotodeperfil.jpg" class="profile-pic" alt="Profile">
+                    
+                    <div class="user-info">
+                        <b>User:</b> Iannget.raped_<br>
+                        <b>Mood:</b> <span style="color:#ff0000;">hi</span><br>
+                        <b>Status:</b> Online
                     </div>
-                </div>
 
-                <div class="section">
-                    <h2>detalles</h2>
-                    <p><b>Estado:</b> Solo/a</p>
-                    <p><b>Orientación:</b> No importa</p>
-                    <p><b>Hobby:</b> Escribir poemas tristes</p>
-                    <p><b>Color:</b> <span style="color:#ff0000">Rojo</span> & Negro</p>
-                </div>
+                    <div class="sidebar-nav" style="width: 100%;">
+                        <a href="#inicio">:: INICIO ::</a>
+                        <a href="#fotos">:: GALERIA ::</a>
+                        <a href="#comentarios">:: COMENTARIOS ::</a>
+                    </div>
+                </aside>
 
-                <div class="section">
-                    <h2>contactar</h2>
-                    <p>💌 Enviar Mensaje</p>
-                    <p>⭐ Añadir a Amigos</p>
-                    <p>📢 Bloquear Usuario</p>
-                </div>
-                
-                <div style="text-align: center;">
-                    <img src="https://cyber.dabamos.de/88x31/creepy.gif" alt="gif">
-                    <img src="https://cyber.dabamos.de/88x31/demon.gif" alt="gif">
-                </div>
+                <main class="main-content">
+                    <section id="inicio">
+                        <h1>INTRODUCCIÓN</h1>
+                        <p>Bienvenido a mi espacio personal. Explora las secciones desde el menú.</p>
+                        <img src="https://cyber.dabamos.de/88x31/hacker.gif">
+                    </section>
+
+                    <section id="fotos">
+                        <h2>GALERÍA</h2>
+                        <div class="photo-grid">
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.JPEG"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.JPG"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG3.JPG"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG4.JPG"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG5.PNG"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG6.JPG"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG7.JPG"></div>
+                        </div>
+                    </section>
+
+                    <section id="comentarios">
+                        <h2>GUESTBOOK</h2>
+                        <p style="font-size: 11px; color: #ff0000; letter-spacing: 1px;">&gt; Deja tu mensaje en la base de datos...</p>
+                        
+                        <div class="comment-box-container">
+                            <div id="cusdis_thread"
+                                data-host="https://cusdis.com"
+                                data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
+                                data-page-id="main_profile"
+                                data-page-url="https://catekath.github.io/"
+                                data-page-title="D4RK_V4NGU4RD"
+                            ></div>
+                        </div>
+                        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                    </section>
+                </main>
             </div>
-        </div>
-
-        <div class="section">
-            <h2>comentarios de las sombras</h2>
-            <p><b>Vamp_X:</b> "Oye, buena música. Pásate por mi perfil."</p>
-            <textarea placeholder="Deja tu huella de sangre..."></textarea><br>
-            <button>GRITAR AL VACÍO</button>
         </div>
     </div>
 
+    <script>
+        function openZoom(element) {
+            var fullImg = element.getElementsByTagName('img')[0].src;
+            document.getElementById('zoom-img').src = fullImg;
+            document.getElementById('zoom-modal').style.display = 'flex';
+        }
+
+        window.addEventListener('hashchange', function() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(s => s.style.display = 'none');
+            const activeSection = document.querySelector(window.location.hash || '#inicio');
+            if (activeSection) activeSection.style.display = 'block';
+        });
+    </script>
 </body>
 </html>
