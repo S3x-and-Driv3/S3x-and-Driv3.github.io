@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~* PerFiL dE [Tu Nombre Aquí] *~</title>
+    <style>
+        /* FONDO Y CURSOR - ¡Lo más importante! */
+        body {
+            /* Puedes cambiar esta imagen de fondo por cualquier cosa */
+            background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejV2amc0a3Vrd3d4Zm55cmZ6Z215eHh4eHh4eHh4eHh4eHh4eHh4eHh4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/sYfWbCjL6iO8M/giphy.gif');
+            background-size: cover; /* o 'repeat' para patrones */
+            background-attachment: fixed;
+            background-color: #ffccff; /* Color de fondo si la imagen no carga */
+            font-family: Arial, sans-serif; /* Fuente por defecto */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center; /* Todo centrado como en MySpace */
+            cursor: url('https://cur.cursors-4u.net/hearts/hea-1/hea13.cur'), auto; /* Cursor de corazón */
+        }
+
+        /* Contenedor Principal de MySpace */
+        #myspace-wrapper {
+            width: 80%;
+            max-width: 960px; /* Ancho típico de MySpace */
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco semi-transparente */
+            border: 5px solid #ff69b4; /* Borde rosa brillante */
+            padding: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            text-align: left; /* Contenido del wrapper alineado a la izquierda */
+        }
+
+        /* Encabezado y Nombre de Usuario */
+        #header {
+            background-color: #ffc0cb; /* Rosa claro */
+            padding: 10px 20px;
+            border-bottom: 3px dashed #ff69b4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #header h1 {
+            color: #8a2be2; /* Violeta */
+            font-family: 'Comic Sans MS', cursive; /* Fuente exagerada */
+            font-size: 40px;
+            text-shadow: 3px 3px #fff;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        /* Sección de "Sobre Mí" y Amigos */
+        .section {
+            background-color: #f0f8ff; /* Azul claro */
+            border: 2px solid #add8e6; /* Borde azul */
+            padding: 15px;
+            margin-bottom: 20px;
+            position: relative; /* Para el gif flotante */
+        }
+
+        .section h2 {
+            background-color: #add8e6;
+            color: #000;
+            padding: 5px 10px;
+            margin: -15px -15px 15px -15px; /* Para que el fondo abarque todo el título */
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 20px;
+            text-shadow: 1px 1px #fff;
+            text-align: center;
+        }
+
+        /* Diseño de 2 columnas para el contenido principal */
+        #main-content {
+            display: flex;
+            gap: 20px;
+        }
+
+        #left-col {
+            flex: 1; /* Ocupa el espacio restante */
+        }
+
+        #right-col {
+            width: 300px; /* Ancho fijo para el sidebar de MySpace */
+        }
+
+        /* Amigos Top (Top 8/16) */
+        #top-friends-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .friend-profile {
+            text-align: center;
+        }
+
+        .friend-profile img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 3px solid #ff69b4;
+            border-radius: 5px;
+        }
+
+        .friend-profile p {
+            font-weight: bold;
+            color: #8a2be2;
+            margin-top: 5px;
+        }
+
+        /* Comentarios */
+        .comment {
+            border: 1px dashed #cccccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+
+        .comment span {
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        /* Música de fondo (Botón Falso) */
+        #music-player {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #music-player button {
+            background-color: #8a2be2;
+            color: white;
+            border: 3px outset #bf80ff;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #music-player button:active {
+            border: 3px inset #bf80ff;
+        }
+
+        /* GIF flotante */
+        .floating-gif {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" style="display:none;"></iframe>
+    <div id="music-player">
+        <button>🎵 Click para Escuchar "My Chemical Romance - Helena" 🎵</button>
+    </div>
+
+    <div id="myspace-wrapper">
+        <div id="header">
+            <h1>~* Mi Nombre Es [Tu Nombre Aquí] *~</h1>
+            <p>Estado: En Línea! (y aburrida lol)</p>
+        </div>
+
+        <div id="main-content">
+            <div id="left-col">
+                <div class="section">
+                    <h2>Sobre Mi 💖</h2>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejV2amc0a3Vrd3d4Zm55cmZ6Z215eHh4eHh4eHh4eHh4eHh4eHh4eHh4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/sYfWbCjL6iO8M/giphy.gif" alt="yo" style="float: left; margin-right: 15px; border: 3px solid #ff69b4; width: 150px;">
+                    <p>Hiii! Soy [Tu Nombre]. Me encanta la música rock, salir con mis amigxs y chismear en MSN. Si no estoy en la compu, seguro estoy escuchando música a todo volumen en mi cuarto. NO TOLERO LA GENTE FALSA. Agregame a tu top y te agrego al mío! XOXO</p>
+                    <p><b>Cumpleaños:</b> 12 de Octubre</p>
+                    <p><b>Intereses:</b> Música, Moda, Chismear, Mi Perro</p>
+                    <div style="clear: both;"></div>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Npa2Q4aHk5cml5ajZkdzZ1b3c3amFsaWVnaDh3OGQ5MWYwdjA4eXlpeWhnYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/l41lTfuxVpT62X20w/giphy.gif" class="floating-gif">
+                </div>
+
+                <div class="section">
+                    <h2>Mis Amigos Top 8 ⭐</h2>
+                    <div id="top-friends-grid">
+                        <div class="friend-profile">
+                            <img src="https://via.placeholder.com/100/FF00FF/FFFFFF?text=SkaterBoi" alt="Amigo 1">
+                            <p>SkaterBoi88</p>
+                        </div>
+                        <div class="friend-profile">
+                            <img src="https://via.placeholder.com/100/00FFFF/FFFFFF?text=GothicGirl" alt="Amigo 2">
+                            <p>GothicGirl</p>
+                        </div>
+                        <div class="friend-profile">
+                            <img src="https://via.placeholder.com/100/FFFF00/000000?text=PartyGuy" alt="Amigo 3">
+                            <p>PartyGuy</p>
+                        </div>
+                        <div class="friend-profile">
+                            <img src="https://via.placeholder.com/100/00FF00/000000?text=BFF_xoxo" alt="Amigo 4">
+                            <p>BFF_xoxo</p>
+                        </div>
+                        </div>
+                </div>
+
+                <div class="section">
+                    <h2>Comentarios (¡Deja el tuyo!) 💬</h2>
+                    <div class="comment">
+                        <span>xXx_EmoQueen_xXx:</span> "Tu perfil es lo más! Me encanta la canción de fondo."
+                    </div>
+                    <div class="comment">
+                        <span>DudeCool99:</span> "Que onda, tienes más fotos?"
+                    </div>
+                    <textarea placeholder="Escribe tu comentario aquí..." style="width: 95%; height: 80px; margin-top: 10px; border: 2px inset #ccc; padding: 5px;"></textarea>
+                    <button style="background-color: #ff69b4; color: white; border: 2px outset #ffb6c1; padding: 5px 10px; margin-top: 5px;">Postear Comentario</button>
+                </div>
+            </div>
+
+            <div id="right-col">
+                <div class="section">
+                    <h2>Detalles ℹ️</h2>
+                    <p><b>Signo Zodiacal:</b> Libra ♎</p>
+                    <p><b>Mi Crush:</b> [Secreto🤫]</p>
+                    <p><b>Serie Fav:</b> Friends</p>
+                    <p><b>Banda Favorita:</b> My Chemical Romance</p>
+                    <p><b>Color Favorito:</b> Rosa y Negro</p>
+                    <p><b>Cita Favorita:</b> "Never say never" ~ Justin Bieber</p>
+                </div>
+
+                <div class="section">
+                    <h2>Mi Blog ✍️</h2>
+                    <p><a href="#">~* DiArio dE MaYo *~</a></p>
+                    <p><a href="#">~* La VIda Es Un DRama *~</a></p>
+                    <p><a href="#">~* Mi AmOr X La MUsIcA *~</a></p>
+                </div>
+
+                <div class="section">
+                    <h2>Contador de Visitas 👁️‍🗨️</h2>
+                    <p style="background-color: #000; color: #0f0; font-family: 'Courier New', monospace; padding: 5px; text-align: center; font-size: 20px;">
+                        00012345
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2>Mis Ídolos ✨</h2>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTVvZnQ2aDc0dWl3dmQ0NWMzZ2FvMHcxemY3MGFsdmZkNWw5NWU1eDdpNjl6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/13zC9jOq20oKXu/giphy.gif" width="100%" alt="Avril Lavigne">
+                    <p>Avril Lavigne</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
