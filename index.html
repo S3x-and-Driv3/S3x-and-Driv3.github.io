@@ -49,6 +49,25 @@
             max-height: 350px; overflow-y: auto;
         }
 
+        /* Cabecera del Messenger BLANCA */
+        .msn-header {
+            display: flex; align-items: center; padding: 10px; gap: 10px; 
+            background: #ffffff; /* FONDO BLANCO PEDIDO */
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Animación de parpadeo para el nombre */
+        @keyframes blink-red {
+            0% { color: black; }
+            50% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
+            100% { color: black; }
+        }
+
+        .user-name-msn:hover {
+            animation: blink-red 0.6s infinite;
+            cursor: default;
+        }
+
         .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
         .buddy-list li { display: flex; align-items: center; padding: 6px; border-bottom: 1px solid #eee; }
         .buddy-list a { text-decoration: none; color: black; display: flex; align-items: center; width: 100%; transition: 0.2s; }
@@ -60,8 +79,7 @@
 
         /* --- VENTANA PRINCIPAL --- */
         #netscape-window {
-            width: 950px; 
-            height: 650px; 
+            width: 950px; height: 650px; 
             background-color: #c0c0c0; border: 2px solid #fff;
             border-right-color: #444; border-bottom-color: #444;
             display: flex; flex-direction: column; z-index: 10;
@@ -79,11 +97,8 @@
             flex-grow: 1; overflow: hidden;
         }
 
-        /* --- CAMBIO: SIDEBAR CON FONDO BLANCO --- */
         .sidebar {
-            width: 200px; 
-            background: #ffffff; /* FONDO BLANCO */
-            border-right: 2px solid #ff0000;
+            width: 200px; background: #0a0a0a; border-right: 2px solid #ff0000;
             padding: 15px; text-align: center; flex-shrink: 0;
             overflow-y: auto;
         }
@@ -91,24 +106,18 @@
         .profile-pic { width: 120px; height: 120px; border: 2px solid #ff0000; object-fit: cover; margin-bottom: 10px; }
 
         .user-info {
-            font-size: 11px; text-align: left; 
-            color: #000; /* TEXTO NEGRO PARA QUE SE VEA EN BLANCO */
-            margin-bottom: 15px; 
-            padding: 8px; border: 1px solid #ccc; 
-            background: #f9f9f9; line-height: 1.4;
+            font-size: 11px; text-align: left; color: #fff; margin-bottom: 15px; 
+            padding: 8px; border: 1px solid #333; background: #111; line-height: 1.4;
         }
 
         .sidebar-nav a { 
             display: block; padding: 8px; color: #ff0000; 
-            text-decoration: none; border-bottom: 1px solid #eee; font-size: 12px; 
+            text-decoration: none; border-bottom: 1px solid #222; font-size: 12px; 
         }
-        .sidebar-nav a:hover { background: #fff0f0; }
 
         .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; }
-        
         section { display: none; } 
         #inicio { display: block; }
-
         h1, h2 { color: #ff0000; font-family: "Impact", sans-serif; border-bottom: 1px solid #ff0000; }
 
         .photo-grid {
@@ -153,10 +162,11 @@
                 <span>_ □ X</span>
             </div>
             <div class="win-content">
-                <div style="display: flex; align-items: center; padding: 8px; gap: 10px; background: #e1e1e1; border-bottom: 1px solid #999;">
+                <div class="msn-header">
                     <img src="PERFIL.JPG" style="border: 2px solid #ff0000; width: 45px; height: 45px; object-fit: cover; background: #000;">
+                    
                     <div style="color:black; font-weight:bold; font-size:11px; line-height: 1.2;">
-                        Iannget.raped_<br>
+                        <span class="user-name-msn">Iannget.raped_</span><br>
                         <span style="font-weight:normal; color: #008000;">(Online)</span>
                     </div>
                 </div>
