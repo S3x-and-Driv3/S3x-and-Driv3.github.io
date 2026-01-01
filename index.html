@@ -9,11 +9,12 @@
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #800000; border: 1px solid #ff0000; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff0000; }
 
         /* --- ESTILOS BASE --- */
         body {
             background-color: #000;
-            background-image: url('./img20.jpg'); /* Añadido ./ para asegurar ruta relativa */
+            background-image: url('./img20.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -32,7 +33,7 @@
 
         /* --- VENTANA MSN --- */
         #social-window {
-            position: fixed; top: 20px; left: 20px; width: 210px;
+            position: fixed; top: 20px; left: 20px; width: 220px;
             background-color: #d4d0c8; border: 2px outset #fff;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.4); z-index: 100;
         }
@@ -44,13 +45,16 @@
         }
 
         .win-content {
-            padding: 5px; border: 2px inset #fff; background: #fff;
-            max-height: 250px; overflow-y: auto;
+            padding: 0; border: 2px inset #fff; background: #fff;
+            max-height: 350px; overflow-y: auto;
         }
 
+        /* Estilo para los enlaces de Messenger */
         .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
-        .buddy-list li { display: flex; align-items: center; padding: 4px; border-bottom: 1px solid #eee; }
-        .buddy-list a { text-decoration: none; color: black; display: flex; align-items: center; width: 100%; }
+        .buddy-list li { display: flex; align-items: center; padding: 6px; border-bottom: 1px solid #eee; }
+        .buddy-list a { text-decoration: none; color: black; display: flex; align-items: center; width: 100%; transition: 0.2s; }
+        .buddy-list a:hover { color: #ff0000; font-weight: bold; transform: translateX(3px); }
+        
         .buddy-icon { width: 14px; height: 14px; margin-right: 8px; }
         .status-dot { width: 7px; height: 7px; border-radius: 50%; margin-left: auto; border: 1px solid #555; }
         .online { background: #0f0; }
@@ -108,8 +112,8 @@
         .photo-card { background: #111; border: 1px solid #444; padding: 5px; cursor: pointer; }
         .photo-card img { width: 100%; height: 110px; object-fit: cover; }
 
-        /* --- COMENTARIOS INTEGRADOS --- */
-        #cusdis_thread { width: 100% !important; min-height: 400px; }
+        /* --- COMENTARIOS (SISTEMA INTEGRADO) --- */
+        #cusdis_thread { width: 100% !important; min-height: 450px; margin-top: 10px; }
         #cusdis_thread iframe {
             filter: invert(1) hue-rotate(180deg) brightness(1.5);
             background: transparent !important;
@@ -126,7 +130,7 @@
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .desktop-wrapper { padding: 10px; flex-direction: column; }
-            #social-window { position: relative; width: 100%; margin-bottom: 15px; }
+            #social-window { position: relative; width: 100%; margin-bottom: 15px; top: 0; left: 0; box-shadow: none; }
             #netscape-window { width: 100%; height: auto; }
             #viewport { flex-direction: column; height: auto; overflow: visible; }
             .sidebar { width: auto; border-right: none; border-bottom: 2px solid #ff0000; }
@@ -147,14 +151,20 @@
                 <span>_ □ X</span>
             </div>
             <div class="win-content">
-                <div style="display: flex; align-items: center; padding: 5px; gap: 10px;">
-                    <img src="https://cyber.dabamos.de/88x31/user_male.gif" style="border:1px inset #fff; width: 30px;">
-                    <div style="color:black; font-weight:bold; font-size:11px;">Iannget.raped_</div>
+                <div style="display: flex; align-items: center; padding: 8px; gap: 10px; background: #e1e1e1; border-bottom: 1px solid #999;">
+                    <img src="PERFIL.JPG" style="border: 2px solid #ff0000; width: 45px; height: 45px; object-fit: cover; background: #000;">
+                    
+                    <div style="color:black; font-weight:bold; font-size:11px; line-height: 1.2;">
+                        Iannget.raped_<br>
+                        <span style="font-weight:normal; color: #008000;">(Online)</span>
+                    </div>
                 </div>
                 <ul class="buddy-list">
                     <li><a href="https://github.com/catekath" target="_blank"><img src="https://github.githubassets.com/favicons/favicon.svg" class="buddy-icon"> GitHub <div class="status-dot online"></div></a></li>
                     <li><a href="https://www.instagram.com/iannget.raped_/" target="_blank"><img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" class="buddy-icon"> Instagram <div class="status-dot online"></div></a></li>
-                    <li style="color:black; font-size: 10px; padding: 5px; border-top: 1px dotted #ccc;"><b>Tel:</b> +52 777 352 3251</li>
+                    <li style="color:black; font-size: 10px; padding: 8px; border-top: 1px dotted #ccc; background: #f9f9f9;">
+                        <b>Tel:</b> +52 777 352 3251
+                    </li>
                 </ul>
             </div>
         </div>
@@ -185,26 +195,27 @@
                         <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
                         <img src="https://cyber.dabamos.de/88x31/hacker.gif">
                     </section>
-                
-                <section id="fotos">
-                    <h2>GALERÍA</h2>
-                    <div class="photo-grid">
-                        <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.jpeg"></div>
-                        <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.jpg"></div>
-                        <div class="photo-card" onclick="openZoom(this)"><img src="IMG3.jpg"></div>
-                        <div class="photo-card" onclick="openZoom(this)"><img src="IMG4.jpg"></div>
-                        <div class="photo-card" onclick="openZoom(this)"><img src="IMG5.png"></div>
-                        <div class="photo-card" onclick="openZoom(this)"><img src="IMG6.jpg"></div>
-                        <div class="photo-card" onclick="openZoom(this)"><img src="IMG7.jpg"></div>
-                    </div>
-                </section>
+
+                    <section id="fotos">
+                        <h2>GALERÍA</h2>
+                        <div class="photo-grid">
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.jpeg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG3.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG4.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG5.png"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG6.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG7.jpg"></div>
+                        </div>
+                    </section>
 
                     <section id="comentarios">
-                        <h2>COMENTARIOS</h2>
+                        <h2>GUESTBOOK / COMENTARIOS</h2>
+                        <p style="color:#ff0000; font-size: 11px; margin-bottom: 10px;">&gt; Deja un mensaje en el servidor...</p>
                         <div id="cusdis_thread"
                             data-host="https://cusdis.com"
                             data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
-                            data-page-id="vanguard_vfinal"
+                            data-page-id="vanguard_vfinal_new"
                             data-page-url="https://catekath.github.io/"
                             data-page-title="D4RK_V4NGU4RD"
                         ></div>
