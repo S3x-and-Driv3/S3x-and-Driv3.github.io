@@ -49,7 +49,6 @@
             max-height: 350px; overflow-y: auto;
         }
 
-        /* Estilo para los enlaces de Messenger */
         .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
         .buddy-list li { display: flex; align-items: center; padding: 6px; border-bottom: 1px solid #eee; }
         .buddy-list a { text-decoration: none; color: black; display: flex; align-items: center; width: 100%; transition: 0.2s; }
@@ -80,8 +79,11 @@
             flex-grow: 1; overflow: hidden;
         }
 
+        /* --- CAMBIO: SIDEBAR CON FONDO BLANCO --- */
         .sidebar {
-            width: 200px; background: #0a0a0a; border-right: 2px solid #ff0000;
+            width: 200px; 
+            background: #ffffff; /* FONDO BLANCO */
+            border-right: 2px solid #ff0000;
             padding: 15px; text-align: center; flex-shrink: 0;
             overflow-y: auto;
         }
@@ -89,14 +91,18 @@
         .profile-pic { width: 120px; height: 120px; border: 2px solid #ff0000; object-fit: cover; margin-bottom: 10px; }
 
         .user-info {
-            font-size: 11px; text-align: left; color: #fff; margin-bottom: 15px; 
-            padding: 8px; border: 1px solid #333; background: #111; line-height: 1.4;
+            font-size: 11px; text-align: left; 
+            color: #000; /* TEXTO NEGRO PARA QUE SE VEA EN BLANCO */
+            margin-bottom: 15px; 
+            padding: 8px; border: 1px solid #ccc; 
+            background: #f9f9f9; line-height: 1.4;
         }
 
         .sidebar-nav a { 
             display: block; padding: 8px; color: #ff0000; 
-            text-decoration: none; border-bottom: 1px solid #222; font-size: 12px; 
+            text-decoration: none; border-bottom: 1px solid #eee; font-size: 12px; 
         }
+        .sidebar-nav a:hover { background: #fff0f0; }
 
         .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; }
         
@@ -105,21 +111,18 @@
 
         h1, h2 { color: #ff0000; font-family: "Impact", sans-serif; border-bottom: 1px solid #ff0000; }
 
-        /* --- GALERÍA --- */
         .photo-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;
         }
         .photo-card { background: #111; border: 1px solid #444; padding: 5px; cursor: pointer; }
         .photo-card img { width: 100%; height: 110px; object-fit: cover; }
 
-        /* --- COMENTARIOS (SISTEMA INTEGRADO) --- */
         #cusdis_thread { width: 100% !important; min-height: 450px; margin-top: 10px; }
         #cusdis_thread iframe {
             filter: invert(1) hue-rotate(180deg) brightness(1.5);
             background: transparent !important;
         }
 
-        /* --- MODAL ZOOM --- */
         #zoom-modal {
             display: none; position: fixed; z-index: 2000;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -127,7 +130,6 @@
         }
         #zoom-img { max-width: 95%; max-height: 85%; border: 1px solid #fff; }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .desktop-wrapper { padding: 10px; flex-direction: column; }
             #social-window { position: relative; width: 100%; margin-bottom: 15px; top: 0; left: 0; box-shadow: none; }
@@ -153,7 +155,6 @@
             <div class="win-content">
                 <div style="display: flex; align-items: center; padding: 8px; gap: 10px; background: #e1e1e1; border-bottom: 1px solid #999;">
                     <img src="PERFIL.JPG" style="border: 2px solid #ff0000; width: 45px; height: 45px; object-fit: cover; background: #000;">
-                    
                     <div style="color:black; font-weight:bold; font-size:11px; line-height: 1.2;">
                         Iannget.raped_<br>
                         <span style="font-weight:normal; color: #008000;">(Online)</span>
