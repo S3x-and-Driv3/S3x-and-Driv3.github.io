@@ -21,6 +21,7 @@
             margin: 0; padding: 0;
             font-family: "MS Sans Serif", Tahoma, sans-serif;
             color: #ccc;
+            overflow-x: hidden; /* Evita scroll lateral en cel */
         }
 
         .desktop-wrapper {
@@ -127,6 +128,76 @@
             background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
         }
         #zoom-img { max-width: 95%; max-height: 85%; border: 1px solid #fff; }
+
+        /* ========================================= */
+        /* === MODO CELULAR (RESPONSIVE) === */
+        /* ========================================= */
+        @media (max-width: 900px) {
+            /* 1. Cambiamos la orientación general a columna */
+            .desktop-wrapper {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+                display: block; /* Importante para que no colapse */
+            }
+
+            /* 2. El MSN deja de flotar y se pone arriba normal */
+            #social-window {
+                position: relative; /* Ya no es fixed */
+                top: auto; left: auto;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+            }
+
+            /* 3. La ventana principal se adapta al ancho */
+            #netscape-window {
+                width: 100%;
+                height: auto; /* Altura automática, no fija */
+                min-height: 600px;
+            }
+
+            /* 4. El interior se vuelve columna (Sidebar arriba, contenido abajo) */
+            #viewport {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid #ff0000;
+                padding: 10px;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar-nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+                width: 100%;
+            }
+
+            .sidebar-nav a {
+                background: #111;
+                border: 1px solid #333;
+                margin: 2px;
+                flex-grow: 1;
+                text-align: center;
+            }
+
+            /* 5. Ajustes de la galería para pantallas pequeñas */
+            .photo-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columnas en cel */
+            }
+            .photo-card img {
+                height: 80px; /* Fotos más pequeñas para que quepan */
+            }
+        }
     </style>
 </head>
 <body>
@@ -194,8 +265,8 @@
                             <span class="post-date">02/01/2026</span>
                             <h3 style="color:#ff0000; font-family:'Impact'; margin-top:0;">BIENVENIDOS</h3>
                             <p>Este es mi primer post manual. Aquí puedo escribir lo que quiera directamente en el código.</p>
-                            </div>
-                        </section>
+                        </div>
+                    </section>
 
                     <section id="fotos">
                         <h2>GALERÍA (27 ÍTEMS)</h2>
