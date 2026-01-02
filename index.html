@@ -113,18 +113,18 @@
         .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; }
         section { display: none; } 
         #inicio { display: block; }
-        h1, h2 { color: #ff0000; font-family: "Impact", sans-serif; border-bottom: 1px solid #ff0000; }
+        h1, h2 { color: #ff0000; font-family: "Impact", sans-serif; border-bottom: 1px solid #ff0000; margin-bottom: 15px; }
 
-        /* --- ESTILOS TUMBLR --- */
+        /* --- BOTÓN POSTEAR --- */
         .post-btn {
             background: #d4d0c8; border: 2px outset #fff; color: black;
-            padding: 3px 10px; font-size: 10px; text-decoration: none;
-            float: right; font-family: sans-serif; margin-bottom: 10px;
+            padding: 5px 10px; font-size: 10px; text-decoration: none;
+            float: right; font-family: sans-serif; font-weight: bold;
         }
         .post-btn:active { border: 2px inset #fff; }
 
         .tumblr-body img { max-width: 100%; height: auto; border: 1px solid #333; margin: 10px 0; }
-        .tumblr-body a { color: #ff0000; }
+        .tumblr-body a { color: #ff0000; text-decoration: underline; }
 
         .photo-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;
@@ -159,7 +159,7 @@
                         <span class="user-name-msn">Iannget.raped_</span><br>
                         <span style="font-weight:normal; color: #555; display: flex; align-items: center; gap: 3px; font-size: 10px;">
                             <span style="color: #0058ee;">♫</span> 
-                            <marquee id="music-status" scrollamount="2" style="width: 110px;">Conectando...</marquee>
+                            <marquee id="music-status" scrollamount="2" style="width: 110px;">Cargando Last.fm...</marquee>
                         </span>
                     </div>
                 </div>
@@ -193,11 +193,13 @@
                     <section id="inicio">
                         <a href="https://www.tumblr.com/new/text" target="_blank" class="post-btn">+ NUEVO POST</a>
                         <h1>INTRODUCCIÓN</h1>
-                        <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas...</p>
+                        <div style="background:#111; border:1px solid #333; padding:10px; margin-bottom:20px;">
+                           <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
+                        </div>
                         
                         <h1>ÚLTIMOS POSTS</h1>
-                        <div id="tumblr-feed" style="max-height: 450px; overflow-y: auto;">
-                            <p style="text-align:center; color:#ff0000;">Cargando feed seguro...</p>
+                        <div id="tumblr-feed" style="max-height: 450px; overflow-y: auto; padding-right:5px;">
+                            <p style="text-align:center; color:#ff0000;">Sincronizando con Tumblr...</p>
                         </div>
                     </section>
 
@@ -205,7 +207,8 @@
                         <h2>GALERÍA</h2>
                         <div class="photo-grid">
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.jpeg"></div>
-                            </div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.jpg"></div>
+                        </div>
                     </section>
 
                     <section id="comentarios">
@@ -236,45 +239,47 @@
             if (activeSection) activeSection.style.display = 'block';
         });
 
-        // --- LAST.FM (MÚSICA) ---
+        // --- LAST.FM ---
         async function updateMusic() {
+            const user = 'catekath';
+            const apiKey = '76e271576f7556a3103239a06316283b';
             try {
-                const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=catekath&api_key=76e271576f7556a3103239a06316283b&format=json&limit=1`);
+                const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
                 const isPlaying = track['@attr'] && track['@attr'].nowplaying;
                 document.getElementById('music-status').innerText = (isPlaying ? "Escuchando: " : "Última: ") + track.name + " - " + track.artist['#text'];
-            } catch (e) { document.getElementById('music-status').innerText = "Sin música"; }
+            } catch (e) { document.getElementById('music-status').innerText = "Last.fm Offline"; }
         }
 
-        // --- TUMBLR (FEED SEGURO) ---
+        // --- TUMBLR FEED (OPTIMIZADO GITHUB) ---
         async function fetchTumblr() {
-            const tumblrUser = 'catekath';
+            const user = 'catekath';
             const apiKey = 'fuiFE97v74Gv0E6Y6J8Xp6H5idG2zLYS9Z6shH97m2N8j7i6L9';
-            const proxy = 'https://api.allorigins.win/raw?url=';
-            const target = `https://api.tumblr.com/v2/blog/${tumblrUser}.tumblr.com/posts?api_key=${apiKey}&limit=10`;
+            const container = document.getElementById('tumblr-feed');
             
             try {
-                const response = await fetch(proxy + encodeURIComponent(target));
+                const response = await fetch(`https://api.tumblr.com/v2/blog/${user}.tumblr.com/posts?api_key=${apiKey}&limit=10`);
                 const data = await response.json();
-                const posts = data.response ? data.response.posts : data.posts;
-                const container = document.getElementById('tumblr-feed');
+                const posts = data.response.posts;
+                
                 container.innerHTML = '';
 
                 posts.forEach(post => {
                     const card = document.createElement('div');
                     card.style = "background:#0a0a0a; border:1px solid #ff0000; padding:15px; margin-bottom:15px; position:relative; font-size:12px;";
                     
-                    let content = post.type === 'photo' ? `<img src="${post.photos[0].original_size.url}" style="width:100%; border:1px solid #333;"><p>${post.caption || ''}</p>` : post.body || post.summary;
+                    let title = post.title || (post.type === 'photo' ? "NUEVA ENTRADA" : "LOG_ENTRY");
+                    let content = post.type === 'photo' ? `<img src="${post.photos[0].original_size.url}" style="width:100%; border:1px solid #333;"><p>${post.caption || ''}</p>` : (post.body || post.summary);
 
                     card.innerHTML = `
                         <span style="font-size:9px; color:#666; position:absolute; top:5px; right:10px;">${new Date(post.date).toLocaleDateString()}</span>
-                        <h3 style="margin:0 0 10px 0; color:#ff0000; font-size:13px; font-family:'Impact';">${(post.title || "LOG_ENTRY").toUpperCase()}</h3>
+                        <h3 style="margin:0 0 10px 0; color:#ff0000; font-size:13px; font-family:'Impact'; border-bottom:1px dotted #444;">${title.toUpperCase()}</h3>
                         <div class="tumblr-body" style="color:#ccc;">${content}</div>
                     `;
                     container.appendChild(card);
                 });
-            } catch (e) { document.getElementById('tumblr-feed').innerHTML = '<p style="color:red;">Error de protocolo. Intenta refrescar.</p>'; }
+            } catch (e) { container.innerHTML = '<p style="color:red;">Error cargando posts.</p>'; }
         }
 
         updateMusic();
