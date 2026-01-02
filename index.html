@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netscape - IFHY ₍^. .^₎Ⳋ</title>
+    
+    <link rel="icon" type="image/jpeg" href="./fotodeperfil.jpg">
+
     <style>
         /* --- SCROLLBAR ROJA --- */
         ::-webkit-scrollbar { width: 10px; }
@@ -21,7 +24,7 @@
             margin: 0; padding: 0;
             font-family: "MS Sans Serif", Tahoma, sans-serif;
             color: #ccc;
-            overflow-x: hidden; /* Evita scroll lateral en cel */
+            overflow-x: hidden;
         }
 
         .desktop-wrapper {
@@ -56,11 +59,16 @@
         }
 
         .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
-        .buddy-list li { display: flex; align-items: center; padding: 6px; border-bottom: 1px solid #eee; }
-        .buddy-list a { text-decoration: none; color: black; display: flex; align-items: center; width: 100%; transition: 0.2s; }
-        .buddy-list a:hover { color: #ff0000; font-weight: bold; transform: translateX(3px); }
+        .buddy-list li { display: flex; flex-direction: column; padding: 6px; border-bottom: 1px solid #eee; } 
+        /* Cambié li a columna para el texto extra del cel */
         
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; margin-left: auto; border: 1px solid #555; }
+        .buddy-item-link { 
+            text-decoration: none; color: black; display: flex; align-items: center; width: 100%; transition: 0.2s; 
+            flex-direction: row; justify-content: space-between;
+        }
+        .buddy-item-link:hover { color: #ff0000; font-weight: bold; transform: translateX(3px); }
+        
+        .status-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid #555; }
         .online { background: #0f0; }
 
         /* --- VENTANA PRINCIPAL --- */
@@ -133,36 +141,28 @@
         /* === MODO CELULAR (RESPONSIVE) === */
         /* ========================================= */
         @media (max-width: 900px) {
-            /* 1. Cambiamos la orientación general a columna */
             .desktop-wrapper {
                 flex-direction: column;
                 align-items: center;
                 padding: 10px;
-                display: block; /* Importante para que no colapse */
+                display: block; 
             }
-
-            /* 2. El MSN deja de flotar y se pone arriba normal */
             #social-window {
-                position: relative; /* Ya no es fixed */
+                position: relative; 
                 top: auto; left: auto;
                 width: 100%;
                 max-width: 100%;
                 margin-bottom: 20px;
                 box-sizing: border-box;
             }
-
-            /* 3. La ventana principal se adapta al ancho */
             #netscape-window {
                 width: 100%;
-                height: auto; /* Altura automática, no fija */
+                height: auto; 
                 min-height: 600px;
             }
-
-            /* 4. El interior se vuelve columna (Sidebar arriba, contenido abajo) */
             #viewport {
                 flex-direction: column;
             }
-
             .sidebar {
                 width: 100%;
                 border-right: none;
@@ -173,7 +173,6 @@
                 flex-direction: column;
                 align-items: center;
             }
-
             .sidebar-nav {
                 display: flex;
                 flex-wrap: wrap;
@@ -181,7 +180,6 @@
                 gap: 5px;
                 width: 100%;
             }
-
             .sidebar-nav a {
                 background: #111;
                 border: 1px solid #333;
@@ -189,14 +187,8 @@
                 flex-grow: 1;
                 text-align: center;
             }
-
-            /* 5. Ajustes de la galería para pantallas pequeñas */
-            .photo-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 columnas en cel */
-            }
-            .photo-card img {
-                height: 80px; /* Fotos más pequeñas para que quepan */
-            }
+            .photo-grid { grid-template-columns: repeat(3, 1fr); }
+            .photo-card img { height: 80px; }
         }
     </style>
 </head>
@@ -224,10 +216,22 @@
                     </div>
                 </div>
                 <ul class="buddy-list">
-                    <li><a href="https://github.com/catekath" target="_blank"> GitHub <div class="status-dot online"></div></a></li>
-                    <li><a href="https://www.instagram.com/iannget.raped_/" target="_blank"> Instagram <div class="status-dot online"></div></a></li>
+                    <li>
+                        <a href="https://github.com/catekath" target="_blank" class="buddy-item-link"> 
+                            GitHub <div class="status-dot online"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/iannget.raped_/" target="_blank" class="buddy-item-link"> 
+                            Instagram <div class="status-dot online"></div>
+                        </a>
+                    </li>
+                    
                     <li style="color:black; font-size: 11px; padding: 10px; border-top: 1px dotted #ccc; background: #f0f0f0; display: block;">
-                        <b>Tel:</b> +52 777 352 3251
+                        <b>Tel:</b> +52 777 352 3251<br>
+                        <span style="font-size: 9px; color: #555; font-style: italic;">
+                            (mandame mensaje lwk o algo)
+                        </span>
                     </li>
                 </ul>
             </div>
