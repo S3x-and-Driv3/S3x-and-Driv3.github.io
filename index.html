@@ -46,7 +46,7 @@
 
         .win-content {
             padding: 0; border: 2px inset #fff; background: #fff;
-            max-height: 350px; overflow-y: auto;
+            max-height: 550px; overflow-y: auto; /* Aumentado para que quepa el reproductor */
         }
 
         .msn-header {
@@ -74,6 +74,22 @@
         .buddy-icon { width: 14px; height: 14px; margin-right: 8px; }
         .status-dot { width: 7px; height: 7px; border-radius: 50%; margin-left: auto; border: 1px solid #555; }
         .online { background: #0f0; }
+
+        /* --- SPOTIFY SECTION --- */
+        .spotify-container {
+            padding: 5px;
+            background: #f0f0f0;
+            border-top: 1px solid #ccc;
+        }
+        .spotify-label {
+            font-size: 10px;
+            color: #444;
+            font-weight: bold;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 
         /* --- VENTANA PRINCIPAL --- */
         #netscape-window {
@@ -129,7 +145,6 @@
             width: 100% !important; 
             min-height: 450px; 
             margin-top: 10px;
-            /* Filtro para que el texto sea visible en fondo negro */
             filter: invert(0.9) hue-rotate(180deg);
         }
 
@@ -177,6 +192,14 @@
                         <b>Tel:</b> +52 777 352 3251
                     </li>
                 </ul>
+
+                <div class="spotify-container">
+                    <div class="spotify-label">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" width="12"> 
+                        Listening to...
+                    </div>
+                    <iframe style="border-radius:0px" src="https://open.spotify.com/embed/track/1Z8pS7T6tN9S9S6S6T?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
             </div>
         </div>
 
@@ -211,7 +234,8 @@
                     </section>
 
                     <section id="fotos">
-                        <h2>GALERÍA, puedes darle click a las imagenes y verlas mejor btw</h2>
+                        <h2>GALERÍA</h2>
+                        <p style="font-size: 11px;">(Dale click a las imágenes para verlas mejor btw)</p>
                         <div class="photo-grid">
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.jpeg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.jpg"></div>
@@ -220,8 +244,8 @@
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG5.png"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG6.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG7.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG8.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG9.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG08.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG09.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG10.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG11.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG12.jpg"></div>
@@ -240,7 +264,6 @@
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG25.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG26.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG27.jpg"></div>
-                            
                         </div>
                     </section>
 
