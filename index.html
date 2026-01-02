@@ -124,7 +124,12 @@
         .photo-card { background: #111; border: 1px solid #444; padding: 5px; cursor: pointer; }
         .photo-card img { width: 100%; height: 110px; object-fit: cover; }
 
-        /* --- ARREGLO PARA COMENTARIOS (CUSDIS) --- */
+        /* --- TUMBLR BODY STYLES --- */
+        .tumblr-body img { max-width: 100%; height: auto; border: 1px solid #333; margin-top: 10px; }
+        .tumblr-body a { color: #ff0000; text-decoration: underline; }
+        .tumblr-body p { margin: 10px 0; }
+
+        /* --- ARREGLO PARA COMENTARIOS --- */
         #cusdis_thread { 
             width: 100% !important; 
             min-height: 450px; 
@@ -207,11 +212,19 @@
 
                 <main class="main-content">
                     <section id="inicio">
-                        <h1>INTRODUCCIÓN</h1>
-                        <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
-                        <div style="width: 100%; display: flex; justify-content: center; margin: 20px 0;">
-                             <img src="IFHY.png" style="width: 280px; height: auto; border: 2px solid #ff0000; box-shadow: 0 0 10px rgba(255,0,0,0.2); cursor: pointer;" onclick="openZoom(this.parentElement)">
+                        <h1>ESTADO / STATUS</h1>
+                        <div style="background:#111; border:1px solid #444; padding:10px; margin-bottom:20px;">
+                            <p style="margin:0; font-family: monospace; color:#0f0;">> iann@vanguard:~$ cat intro.txt</p>
+                            <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
                         </div>
+
+                        <h1>ÚLTIMOS POSTS</h1>
+                        <div id="tumblr-feed" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
+                            <p style="text-align:center; color:#ff0000; font-size: 11px;">
+                                <marquee width="150">Conectando con el blog...</marquee>
+                            </p>
+                        </div>
+                        <p style="font-size:10px; color:#444; text-align:center; margin-top:20px;">-- Final de la transmisión --</p>
                     </section>
 
                     <section id="fotos">
@@ -227,24 +240,7 @@
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG08.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG09.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG10.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG11.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG12.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG13.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG14.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG15.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG16.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG17.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG18.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG19.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG20.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG21.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG22.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG23.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG24.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG25.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG26.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG27.jpg"></div>
-                        </div>
+                            </div>
                     </section>
 
                     <section id="comentarios">
@@ -264,6 +260,7 @@
     </div>
 
     <script>
+        // --- ZOOM DE FOTOS ---
         function openZoom(element) {
             var img = element.getElementsByTagName('img')[0];
             if(img) {
@@ -272,6 +269,7 @@
             }
         }
 
+        // --- NAVEGACIÓN SECCIONES ---
         window.addEventListener('hashchange', function() {
             const sections = document.querySelectorAll('section');
             sections.forEach(s => s.style.display = 'none');
@@ -279,35 +277,63 @@
             if (activeSection) activeSection.style.display = 'block';
         });
 
-        // --- LÓGICA DE LAST.FM CORREGIDA ---
+        // --- MÚSICA EN TIEMPO REAL (LAST.FM) ---
         const LASTFM_USER = 'catekath'; 
-        const API_KEY = '76e271576f7556a3103239a06316283b'; 
+        const LASTFM_KEY = '76e271576f7556a3103239a06316283b'; 
 
         async function updateMusic() {
             try {
-                const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${API_KEY}&format=json&limit=1`);
+                const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_KEY}&format=json&limit=1`);
                 const data = await response.json();
-                
                 if (data.recenttracks && data.recenttracks.track.length > 0) {
                     const track = data.recenttracks.track[0];
                     const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
-                    const statusText = document.getElementById('music-status');
-                    
-                    if (isPlaying) {
-                        statusText.innerText = `Escuchando: ${track.name} - ${track.artist['#text']}`;
-                    } else {
-                        statusText.innerText = `Última: ${track.name} - ${track.artist['#text']}`;
-                    }
+                    document.getElementById('music-status').innerText = (isPlaying ? "Escuchando: " : "Última: ") + track.name + " - " + track.artist['#text'];
                 }
-            } catch (e) {
-                console.error("Error cargando Last.fm:", e);
-                document.getElementById('music-status').innerText = "Messenger desconectado";
-            }
+            } catch (e) { document.getElementById('music-status').innerText = "Offline"; }
         }
 
-        // Actualizar cada 5 segundos para ser mas gay
-        setInterval(updateMusic, 5000);
+        // --- FEED DE TUMBLR (CATEKATH) ---
+        async function fetchTumblr() {
+            const tumblrUser = 'catekath'; 
+            const apiKey = 'fuiFE97v74Gv0E6Y6J8Xp6H5idG2zLYS9Z6shH97m2N8j7i6L9'; 
+            const url = `https://api.tumblr.com/v2/blog/${tumblrUser}.tumblr.com/posts?api_key=${apiKey}&limit=10`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const posts = data.response.posts;
+                const container = document.getElementById('tumblr-feed');
+                container.innerHTML = '';
+
+                posts.forEach(post => {
+                    const postDate = new Date(post.date).toLocaleDateString('es-ES');
+                    const card = document.createElement('div');
+                    card.style = "background:#0a0a0a; border:1px solid #ff0000; padding:15px; margin-bottom:15px; position:relative; font-size:12px;";
+                    
+                    let content = "";
+                    if (post.type === 'photo') {
+                        content = `<img src="${post.photos[0].original_size.url}" style="width:100%; border:1px solid #333;"><p>${post.caption || ''}</p>`;
+                    } else if (post.type === 'text') {
+                        content = post.body;
+                    } else {
+                        content = post.summary || "Post no compatible";
+                    }
+
+                    card.innerHTML = `
+                        <span style="font-size:9px; color:#666; position:absolute; top:5px; right:10px;">${postDate}</span>
+                        <h3 style="margin:0 0 10px 0; color:#ff0000; font-size:13px; font-family:'Impact';">${(post.title || "LOG_ENTRY").toUpperCase()}</h3>
+                        <div class="tumblr-body" style="color:#ccc;">${content}</div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (e) { document.getElementById('tumblr-feed').innerHTML = '<p style="color:red;">Error de conexión.</p>'; }
+        }
+
+        // INICIAR TODO
         updateMusic();
+        setInterval(updateMusic, 20000);
+        fetchTumblr();
     </script>
 </body>
 </html>
