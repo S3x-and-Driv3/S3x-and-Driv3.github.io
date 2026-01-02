@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netscape - IFHY ₍^. .^₎Ⳋ</title>
     <style>
-        /* --- SCROLLBAR --- */
-        ::-webkit-scrollbar { width: 8px; }
+        /* --- SCROLLBAR ROJA --- */
+        ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #800000; border: 1px solid #ff0000; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff0000; }
 
+        /* --- ESTILOS BASE --- */
         body {
             background-color: #000;
             background-image: url('./FONDO.jpg'); 
@@ -19,29 +21,21 @@
             margin: 0; padding: 0;
             font-family: "MS Sans Serif", Tahoma, sans-serif;
             color: #ccc;
-            overflow-x: hidden;
         }
 
         .desktop-wrapper {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
+            justify-content: center;
+            padding: 20px;
             min-height: 100vh;
+            box-sizing: border-box;
         }
 
-        /* --- VENTANA MSN (AJUSTADA PARA MÓVIL) --- */
+        /* --- VENTANA MSN --- */
         #social-window {
-            width: 100%;
-            max-width: 250px;
-            background-color: #d4d0c8;
-            border: 2px outset #fff;
-            margin-bottom: 20px;
-            z-index: 100;
-        }
-
-        @media (min-width: 900px) {
-            #social-window { position: fixed; top: 20px; left: 20px; margin-bottom: 0; }
+            position: fixed; top: 20px; left: 20px; width: 220px;
+            background-color: #d4d0c8; border: 2px outset #fff;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.4); z-index: 100;
         }
 
         .win-title-bar {
@@ -50,25 +44,30 @@
             display: flex; justify-content: space-between;
         }
 
-        .win-content { padding: 0; border: 2px inset #fff; background: #fff; }
+        .win-content {
+            padding: 0; border: 2px inset #fff; background: #fff;
+            max-height: 500px; overflow-y: auto;
+        }
 
         .msn-header {
             display: flex; align-items: center; padding: 10px; gap: 10px; 
             background: #ffffff; border-bottom: 1px solid #ccc;
         }
 
-        .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; color: black; }
-        .buddy-list li { padding: 6px; border-bottom: 1px solid #eee; }
-        .buddy-list a { text-decoration: none; color: black; display: block; }
+        .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
+        .buddy-list li { display: flex; align-items: center; padding: 6px; border-bottom: 1px solid #eee; }
+        .buddy-list a { text-decoration: none; color: black; display: flex; align-items: center; width: 100%; transition: 0.2s; }
+        .buddy-list a:hover { color: #ff0000; font-weight: bold; transform: translateX(3px); }
+        
+        .status-dot { width: 7px; height: 7px; border-radius: 50%; margin-left: auto; border: 1px solid #555; }
+        .online { background: #0f0; }
 
-        /* --- VENTANA PRINCIPAL (RESPONSIVE) --- */
+        /* --- VENTANA PRINCIPAL --- */
         #netscape-window {
-            width: 100%;
-            max-width: 950px;
-            background-color: #c0c0c0;
-            border: 2px solid #fff;
+            width: 950px; height: 650px; 
+            background-color: #c0c0c0; border: 2px solid #fff;
             border-right-color: #444; border-bottom-color: #444;
-            display: flex; flex-direction: column;
+            display: flex; flex-direction: column; z-index: 10;
         }
 
         .app-title-bar {
@@ -80,60 +79,54 @@
         #viewport {
             background-color: #000; border: 2px inset #444;
             margin: 5px; color: #ccc; display: flex;
-            flex-direction: column; /* Por defecto para móvil */
-        }
-
-        @media (min-width: 768px) {
-            #viewport { flex-direction: row; height: 600px; }
+            flex-grow: 1; overflow: hidden;
         }
 
         .sidebar {
-            width: 100%; background: #0a0a0a; border-bottom: 2px solid #ff0000;
-            padding: 15px; text-align: center; box-sizing: border-box;
+            width: 200px; background: #0a0a0a; border-right: 2px solid #ff0000;
+            padding: 15px; text-align: center; flex-shrink: 0; overflow-y: auto;
         }
 
-        @media (min-width: 768px) {
-            .sidebar { width: 200px; border-bottom: none; border-right: 2px solid #ff0000; }
+        .profile-pic { width: 120px; height: 120px; border: 2px solid #ff0000; object-fit: cover; margin-bottom: 10px; }
+
+        .user-info {
+            font-size: 11px; text-align: left; color: #fff; margin-bottom: 15px; 
+            padding: 8px; border: 1px solid #333; background: #111; line-height: 1.4;
         }
-
-        .profile-pic { width: 100px; height: 100px; border: 2px solid #ff0000; object-fit: cover; }
-
-        .sidebar-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-top: 10px; }
-        @media (min-width: 768px) { .sidebar-nav { flex-direction: column; } }
 
         .sidebar-nav a { 
-            padding: 5px 10px; color: #ff0000; text-decoration: none; 
-            border: 1px solid #222; font-size: 11px; background: #111;
+            display: block; padding: 8px; color: #ff0000; 
+            text-decoration: none; border-bottom: 1px solid #222; font-size: 12px; 
         }
 
-        .main-content { flex-grow: 1; padding: 15px; overflow-y: auto; box-sizing: border-box; }
+        .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; }
         section { display: none; } 
         #inicio { display: block; }
-        h1 { color: #ff0000; font-family: "Impact", sans-serif; font-size: 1.5rem; border-bottom: 1px solid #ff0000; }
+        h1, h2 { color: #ff0000; font-family: "Impact", sans-serif; border-bottom: 1px solid #ff0000; margin-bottom: 15px; }
 
-        /* POSTS */
+        /* POSTS MANUALES */
         .manual-post {
             background: #0a0a0a; border: 1px solid #ff0000; padding: 15px;
-            margin-bottom: 20px; position: relative;
+            margin-bottom: 20px; position: relative; font-size: 13px;
         }
+        .post-date { font-size: 9px; color: #666; position: absolute; top: 5px; right: 10px; }
+        .manual-post img { max-width: 100%; border: 1px solid #333; margin: 10px 0; }
 
-        /* GALERÍA RESPONSIVE */
+        /* COMENTARIOS */
+        #cusdis_thread { background: #fff !important; padding: 10px; border: 2px inset #ccc; }
+
         .photo-grid {
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); /* 2 columnas en cel */
-            gap: 8px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;
         }
-        @media (min-width: 480px) { grid-template-columns: repeat(3, 1fr); }
-        @media (min-width: 768px) { grid-template-columns: repeat(4, 1fr); }
-
-        .photo-card img { width: 100%; height: 120px; object-fit: cover; border: 1px solid #333; }
+        .photo-card { background: #111; border: 1px solid #444; padding: 5px; cursor: pointer; }
+        .photo-card img { width: 100%; height: 110px; object-fit: cover; }
 
         #zoom-modal {
             display: none; position: fixed; z-index: 2000;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
         }
-        #zoom-img { max-width: 90%; max-height: 80%; }
+        #zoom-img { max-width: 95%; max-height: 85%; border: 1px solid #fff; }
     </style>
 </head>
 <body>
@@ -144,60 +137,102 @@
 
     <div class="desktop-wrapper">
         <div id="social-window">
-            <div class="win-title-bar"><span>Messenger</span><span>X</span></div>
+            <div class="win-title-bar">
+                <span>Messenger</span>
+                <span>_ □ X</span>
+            </div>
             <div class="win-content">
                 <div class="msn-header">
-                    <img src="CALLME.jpg" style="width: 40px; height: 40px; border:1px solid #ff0000;">
-                    <div style="color:black; font-size:10px;">
-                        <b>Iannget.raped_</b><br>
-                        <marquee id="music-status" style="width:100px;">Cargando...</marquee>
+                    <img src="CALLME.jpg" style="border: 2px solid #ff0000; width: 45px; height: 45px; object-fit: cover;">
+                    <div style="color:black; font-weight:bold; font-size:11px;">
+                        <span style="cursor:default;">Iannget.raped_</span><br>
+                        <span style="font-weight:normal; color: #555; display: flex; align-items: center; gap: 3px; font-size: 10px;">
+                            <span style="color: #0058ee;">♫</span> 
+                            <marquee id="music-status" scrollamount="2" style="width: 110px;">Escuchando Last.fm...</marquee>
+                        </span>
                     </div>
                 </div>
                 <ul class="buddy-list">
-                    <li><a href="https://github.com/catekath">GitHub</a></li>
-                    <li><a href="https://www.instagram.com/iannget.raped_/">Instagram</a></li>
-                    <li style="background:#eee; font-weight:bold;">Tel: +52 777 352 3251</li>
+                    <li><a href="https://github.com/catekath" target="_blank"> GitHub <div class="status-dot online"></div></a></li>
+                    <li><a href="https://www.instagram.com/iannget.raped_/" target="_blank"> Instagram <div class="status-dot online"></div></a></li>
+                    <li style="color:black; font-size: 11px; padding: 10px; border-top: 1px dotted #ccc; background: #f0f0f0; display: block;">
+                        <b>Tel:</b> +52 777 352 3251
+                    </li>
                 </ul>
             </div>
         </div>
 
         <div id="netscape-window">
-            <div class="app-title-bar"><span>Netscape - IFHY</span><span>X</span></div>
+            <div class="app-title-bar">
+                <span>Netscape - IFHY ₍^. .^₎Ⳋ.</span>
+                <span>_ ▢ X</span>
+            </div>
             <div id="viewport">
                 <aside class="sidebar">
                     <img src="./fotodeperfil.jpg" class="profile-pic">
+                    <div class="user-info">
+                        <b>User:</b> Iannget.raped_<br>
+                        <b>Status:</b> Online
+                    </div>
                     <nav class="sidebar-nav">
-                        <a href="#inicio">INICIO</a>
-                        <a href="#fotos">GALERIA</a>
-                        <a href="#comentarios">MSGS</a>
+                        <a href="#inicio">:: INICIO ::</a>
+                        <a href="#fotos">:: GALERIA ::</a>
+                        <a href="#comentarios">:: COMENTARIOS ::</a>
                     </nav>
                 </aside>
+
                 <main class="main-content">
                     <section id="inicio">
-                        <h1>WELCOME</h1>
-                        <div class="manual-post">
-                            <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas...</p>
+                        <h1>INTRODUCCIÓN</h1>
+                        <div style="background:#111; border:1px solid #333; padding:15px; margin-bottom:20px;">
+                           <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
                         </div>
-                        <h1>LOGS</h1>
+                        
+                        <h1>ÚLTIMOS POSTS</h1>
+                        
                         <div class="manual-post">
-                            <small style="color:#666">02/01/2026</small>
-                            <h3 style="color:#ff0000">SISTEMA ONLINE</h3>
-                            <p>Web optimizada para móvil. PUAJJAAJA ya no se ve del culo.</p>
-                        </div>
-                    </section>
+                            <span class="post-date">02/01/2026</span>
+                            <h3 style="color:#ff0000; font-family:'Impact'; margin-top:0;">BIENVENIDOS</h3>
+                            <p>Este es mi primer post manual. Aquí puedo escribir lo que quiera directamente en el código.</p>
+                            </div>
+                        </section>
 
                     <section id="fotos">
-                        <h1>GALERÍA</h1>
+                        <h2>GALERÍA (27 ÍTEMS)</h2>
                         <div class="photo-grid">
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.jpeg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG3.jpg"></div>
-                            </div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG4.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG5.png"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG6.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG7.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG08.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG09.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG10.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG11.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG12.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG13.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG14.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG15.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG16.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG17.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG18.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG19.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG20.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG21.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG22.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG23.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG24.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG25.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG26.jpg"></div>
+                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG27.jpg"></div>
+                        </div>
                     </section>
 
                     <section id="comentarios">
-                        <h1>GUESTBOOK</h1>
-                        <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" data-page-id="vanguard_mobile"></div>
+                        <h2>GUESTBOOK / COMENTARIOS</h2>
+                        <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" data-page-id="vanguard_vfinal_new"></div>
                         <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
                     </section>
                 </main>
@@ -207,21 +242,31 @@
 
     <script>
         function openZoom(element) {
-            document.getElementById('zoom-img').src = element.querySelector('img').src;
-            document.getElementById('zoom-modal').style.display = 'flex';
+            var img = element.getElementsByTagName('img')[0];
+            if(img) {
+                document.getElementById('zoom-img').src = img.src;
+                document.getElementById('zoom-modal').style.display = 'flex';
+            }
         }
-        window.addEventListener('hashchange', () => {
-            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
-            document.querySelector(window.location.hash || '#inicio').style.display = 'block';
+
+        window.addEventListener('hashchange', function() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(s => s.style.display = 'none');
+            const activeSection = document.querySelector(window.location.hash || '#inicio');
+            if (activeSection) activeSection.style.display = 'block';
         });
+
         async function updateMusic() {
             try {
                 const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=catekath&api_key=76e271576f7556a3103239a06316283b&format=json&limit=1`);
                 const data = await res.json();
-                document.getElementById('music-status').innerText = data.recenttracks.track[0].name;
-            } catch (e) { document.getElementById('music-status').innerText = "Offline"; }
+                const track = data.recenttracks.track[0];
+                document.getElementById('music-status').innerText = (track['@attr'] ? "Escuchando: " : "Última: ") + track.name;
+            } catch (e) { document.getElementById('music-status').innerText = "Last.fm Offline"; }
         }
+
         updateMusic();
+        setInterval(updateMusic, 30000);
     </script>
 </body>
 </html>
