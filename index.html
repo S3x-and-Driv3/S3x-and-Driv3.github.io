@@ -169,7 +169,7 @@
                         
                         <span style="font-weight:normal; color: #555; display: flex; align-items: center; gap: 3px; font-size: 10px; margin-top: 2px;">
                             <span style="color: #0058ee;">♫</span> 
-                            <marquee scrollamount="2" style="width: 110px;">Escuchando: IFHY - Tyler, The Creator</marquee>
+                            <marquee id="music-status" scrollamount="2" style="width: 110px;">Cargando música...</marquee>
                         </span>
 
                         <span style="font-weight:normal; color: #008000;">(Online)</span>
@@ -217,7 +217,6 @@
 
                     <section id="fotos">
                         <h2>GALERÍA</h2>
-                        <p style="font-size: 11px;">(Dale click a las imágenes para verlas mejor btw)</p>
                         <div class="photo-grid">
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.jpeg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.jpg"></div>
@@ -251,7 +250,6 @@
 
                     <section id="comentarios">
                         <h2>GUESTBOOK / COMENTARIOS</h2>
-                        <p style="color:#ffffff; font-size: 11px; margin-bottom: 10px;">> Deja un mensaje en el servidor...</p>
                         <div id="cusdis_thread"
                             data-host="https://cusdis.com"
                             data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
@@ -267,6 +265,7 @@
     </div>
 
     <script>
+        // --- FUNCIÓN PARA ZOOM ---
         function openZoom(element) {
             var img = element.getElementsByTagName('img')[0];
             if(img) {
@@ -275,12 +274,39 @@
             }
         }
 
+        // --- NAVEGACIÓN ---
         window.addEventListener('hashchange', function() {
             const sections = document.querySelectorAll('section');
             sections.forEach(s => s.style.display = 'none');
             const activeSection = document.querySelector(window.location.hash || '#inicio');
             if (activeSection) activeSection.style.display = 'block';
         });
+
+        // --- FUNCIÓN SPOTIFY AUTOMÁTICA (VIA LAST.FM) ---
+        // REEMPLAZA 'TU_USUARIO' POR TU NOMBRE DE USUARIO DE LAST.FM
+        const LASTFM_USER = 'catekath'; 
+        const API_KEY = '76e271576f7556a3103239a06316283b'; // Esta es una key pública genérica
+
+        async function updateMusic() {
+            try {
+                const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${API_KEY}&format=json&limit=1`);
+                const data = await response.json();
+                const track = data.recenttracks.track[0];
+                const isPlaying = track['@attr'] && track['@attr'].nowplaying;
+                
+                const statusText = document.getElementById('music-status');
+                if (isPlaying) {
+                    statusText.innerText = `Escuchando: ${track.name} - ${track.artist['#text']}`;
+                } else {
+                    statusText.innerText = `Última: ${track.name} - ${track.artist['#text']}`;
+                }
+            } catch (e) {
+                document.getElementById('music-status').innerText = "Sin música";
+            }
+        }
+
+        setInterval(updateMusic, 30000); // Se actualiza cada 30 seg
+        updateMusic();
     </script>
 </body>
 </html>
