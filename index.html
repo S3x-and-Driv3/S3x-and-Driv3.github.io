@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netscape - IFHY ₍^. .^₎Ⳋ</title>
     
-    <link rel="icon" type="image/jpeg" href="./fotodeperfil.jpg">
+    <link rel="icon" type="image/jpeg" href="niko.jpg">
 
     <style>
         /* --- SCROLLBAR ROJA --- */
@@ -50,7 +50,7 @@
 
         .win-content {
             padding: 0; border: 2px inset #fff; background: #fff;
-            max-height: 500px; overflow-y: auto;
+            max-height: 550px; overflow-y: auto;
         }
 
         .msn-header {
@@ -69,6 +69,23 @@
         
         .status-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid #555; }
         .online { background: #0f0; }
+
+        /* NUEVO ESTILO PARA LA MUSICA GRANDE */
+        .music-big-card {
+            background: #111;
+            color: #ff0000;
+            padding: 10px;
+            border-top: 2px solid #ff0000;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+        #music-status-big {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
 
         /* --- VENTANA PRINCIPAL --- */
         #netscape-window {
@@ -117,9 +134,6 @@
             margin-bottom: 20px; position: relative; font-size: 13px;
         }
         .post-date { font-size: 9px; color: #666; position: absolute; top: 5px; right: 10px; }
-        .manual-post img { max-width: 100%; border: 1px solid #333; margin: 10px 0; }
-
-        #cusdis_thread { background: #fff !important; padding: 10px; border: 2px inset #ccc; }
 
         .photo-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;
@@ -139,7 +153,7 @@
             #social-window { position: relative; top: auto; left: auto; width: 100%; margin-bottom: 20px; }
             #netscape-window { width: 100%; height: auto; min-height: 600px; }
             #viewport { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 2px solid #ff0000; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 2px solid #ff0000; padding: 10px; }
             .sidebar-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
             .photo-grid { grid-template-columns: repeat(3, 1fr); }
         }
@@ -162,10 +176,7 @@
                     <img src="CALLME.jpg" style="border: 2px solid #ff0000; width: 45px; height: 45px; object-fit: cover;">
                     <div style="color:black; font-weight:bold; font-size:11px;">
                         <span style="cursor:default;">Iannget.raped_</span><br>
-                        <span style="font-weight:normal; color: #555; display: flex; align-items: center; gap: 3px; font-size: 10px;">
-                            <span style="color: #0058ee;">♫</span> 
-                            <marquee id="music-status" scrollamount="2" style="width: 110px;">Cargando música...</marquee>
-                        </span>
+                        <span style="font-weight:normal; color: #00aa00; font-size: 10px;">(Conectado)</span>
                     </div>
                 </div>
                 <ul class="buddy-list">
@@ -185,6 +196,10 @@
                             (mandame mensaje lwk o algo)
                         </span>
                     </li>
+                    <div class="music-big-card">
+                        <span style="font-size: 9px; color: #888;">NOW PLAYING:</span>
+                        <marquee id="music-status-big" scrollamount="3">Cargando...</marquee>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -304,11 +319,12 @@
                 const songName = track.name;
                 
                 const isPlaying = track['@attr'] && track['@attr'].nowplaying;
-                const statusText = isPlaying ? "Escuchando: " : "Última: ";
+                const statusLabel = isPlaying ? "Escuchando: " : "Última: ";
                 
-                document.getElementById('music-status').innerText = statusText + songName + " - " + artist;
+                // Actualizamos el marquee grande debajo del teléfono
+                document.getElementById('music-status-big').innerText = statusLabel + songName + " - " + artist;
             } catch (e) { 
-                document.getElementById('music-status').innerText = "Last.fm Offline"; 
+                document.getElementById('music-status-big').innerText = "Last.fm Offline"; 
             }
         }
 
