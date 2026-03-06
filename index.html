@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netscape - IFHY ₍^. .^₎Ⳋ</title>
+    <title>Frutiger - IFHY ₍^. .^₎Ⳋ</title>
     
     <link rel="icon" type="image/jpeg" href="niko.jpg">
 
     <style>
-        /* --- SCROLLBAR ROJA --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #800000; border: 1px solid #ff0000; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff0000; }
+        /* --- SCROLLBAR FRUTIGER --- */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #e1f5fe; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(to right, #4fc3f7, #0288d1); 
+            border-radius: 10px; border: 2px solid #e1f5fe;
+        }
 
-        /* --- ESTILOS BASE --- */
+        /* --- ESTILOS BASE FRUTIGER AERO --- */
         body {
-            background-color: #000;
-            background-image: url('./FONDO.jpg'); 
+            background-color: #add8e6;
+            background-image: url('https://web.archive.org/web/20230325143317im_/https://img.freepik.com/free-vector/abstract-green-nature-background_1048-13000.jpg?w=1380'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             margin: 0; padding: 0;
-            font-family: "MS Sans Serif", Tahoma, sans-serif;
-            color: #ccc;
+            font-family: 'Segoe UI', 'Frutiger', Tahoma, sans-serif;
+            color: #333;
             overflow-x: hidden;
         }
 
@@ -33,129 +35,154 @@
             padding: 20px;
             min-height: 100vh;
             box-sizing: border-box;
+            backdrop-filter: blur(2px);
         }
 
-        /* --- VENTANA MSN --- */
+        /* --- VENTANA MSN (WLM Style) --- */
         #social-window {
-            position: fixed; top: 20px; left: 20px; width: 220px;
-            background-color: #d4d0c8; border: 2px outset #fff;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.4); z-index: 100;
+            position: fixed; top: 20px; left: 20px; width: 240px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px 12px 0 0;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            overflow: hidden;
         }
 
         .win-title-bar {
-            background: linear-gradient(to bottom, #0058ee 0%, #3593ff 100%);
-            color: white; padding: 3px 5px; font-weight: bold; font-size: 11px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(173,216,230,0.6) 100%);
+            color: #01579b; padding: 8px 12px; font-weight: bold; font-size: 12px;
             display: flex; justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.5);
         }
 
         .win-content {
-            padding: 0; border: 2px inset #fff; background: #fff;
+            padding: 0; background: rgba(255, 255, 255, 0.5);
             max-height: 550px; overflow-y: auto;
         }
 
         .msn-header {
-            display: flex; align-items: center; padding: 10px; gap: 10px; 
-            background: #ffffff; border-bottom: 1px solid #ccc;
+            display: flex; align-items: center; padding: 15px; gap: 12px; 
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(200,230,201,0.5));
         }
 
-        .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
-        .buddy-list li { display: flex; flex-direction: column; padding: 6px; border-bottom: 1px solid #eee; } 
+        .msn-header img {
+            border-radius: 8px; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .buddy-list { list-style: none; padding: 0; margin: 0; }
+        .buddy-list li { padding: 8px 15px; border-bottom: 1px solid rgba(255,255,255,0.3); } 
         
         .buddy-item-link { 
-            text-decoration: none; color: black; display: flex; align-items: center; width: 100%; transition: 0.2s; 
-            flex-direction: row; justify-content: space-between;
+            text-decoration: none; color: #0277bd; display: flex; align-items: center; 
+            justify-content: space-between; font-size: 12px; transition: 0.3s;
         }
-        .buddy-item-link:hover { color: #ff0000; font-weight: bold; transform: translateX(3px); }
+        .buddy-item-link:hover { color: #00e676; transform: scale(1.05); }
         
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid #555; }
-        .online { background: #0f0; }
+        .status-dot { width: 9px; height: 9px; border-radius: 50%; box-shadow: inset 0 0 4px rgba(0,0,0,0.3); }
+        .online { background: radial-gradient(circle, #00ff00, #008000); }
 
-        /* NUEVO ESTILO PARA LA MUSICA GRANDE */
+        /* MUSICA GRANDE (Aero Look) */
         .music-big-card {
-            background: #111;
-            color: #ff0000;
-            padding: 10px;
-            border-top: 2px solid #ff0000;
-            font-family: 'Courier New', Courier, monospace;
+            background: rgba(255, 255, 255, 0.8);
+            color: #2e7d32; padding: 12px;
+            border-top: 1px solid #fff;
             text-align: center;
+            border-radius: 0 0 10px 10px;
         }
         #music-status-big {
-            display: block;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 5px;
-            text-transform: uppercase;
+            display: block; font-size: 13px; font-weight: 600;
+            margin-top: 5px; color: #0288d1;
         }
 
-        /* --- VENTANA PRINCIPAL --- */
+        /* --- VENTANA PRINCIPAL (AERO GLASS) --- */
         #netscape-window {
-            width: 950px; height: 650px; 
-            background-color: #c0c0c0; border: 2px solid #fff;
-            border-right-color: #444; border-bottom-color: #444;
-            display: flex; flex-direction: column; z-index: 10;
+            width: 950px; height: 700px; 
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+            display: flex; flex-direction: column; overflow: hidden;
         }
 
         .app-title-bar {
-            background: linear-gradient(90deg, #800000, #ff0000);
-            color: white; padding: 4px 10px; font-weight: bold;
+            background: linear-gradient(to bottom, #74c7ff 0%, #0078d7 100%);
+            color: white; padding: 10px 15px; font-weight: bold;
             display: flex; justify-content: space-between;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
         #viewport {
-            background-color: #000; border: 2px inset #444;
-            margin: 5px; color: #ccc; display: flex;
-            flex-grow: 1; overflow: hidden;
+            margin: 10px; background: rgba(255,255,255,0.9);
+            border-radius: 10px; display: flex; flex-grow: 1; overflow: hidden;
+            border: 1px solid #fff;
         }
 
         .sidebar {
-            width: 200px; background: #0a0a0a; border-right: 2px solid #ff0000;
-            padding: 15px; text-align: center; flex-shrink: 0; overflow-y: auto;
+            width: 200px; background: linear-gradient(to bottom, #f0f9ff, #cbebff);
+            border-right: 1px solid #b3e5fc; padding: 20px; text-align: center;
         }
 
-        .profile-pic { width: 120px; height: 120px; border: 2px solid #ff0000; object-fit: cover; margin-bottom: 10px; }
+        .profile-pic { 
+            width: 130px; height: 130px; border-radius: 50%; 
+            border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            object-fit: cover; margin-bottom: 15px;
+        }
 
         .user-info {
-            font-size: 11px; text-align: left; color: #fff; margin-bottom: 15px; 
-            padding: 8px; border: 1px solid #333; background: #111; line-height: 1.4;
+            font-size: 12px; text-align: center; color: #01579b; margin-bottom: 20px; 
+            padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.5);
         }
 
         .sidebar-nav a { 
-            display: block; padding: 8px; color: #ff0000; 
-            text-decoration: none; border-bottom: 1px solid #222; font-size: 12px; 
+            display: block; padding: 10px; color: #0277bd; font-weight: bold;
+            text-decoration: none; border-radius: 8px; margin-bottom: 5px; transition: 0.3s;
         }
+        .sidebar-nav a:hover { background: #fff; color: #00e676; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; }
-        section { display: none; } 
-        #inicio { display: block; }
-        h1, h2 { color: #ff0000; font-family: "Impact", sans-serif; border-bottom: 1px solid #ff0000; margin-bottom: 15px; }
+        .main-content { flex-grow: 1; padding: 25px; overflow-y: auto; color: #444; }
+        
+        section { display: none; animation: fadeIn 0.5s; } 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h1, h2 { 
+            color: #0288d1; font-family: 'Segoe UI', sans-serif; 
+            border-bottom: 2px solid #b3e5fc; padding-bottom: 5px;
+        }
 
         .manual-post {
-            background: #0a0a0a; border: 1px solid #ff0000; padding: 15px;
-            margin-bottom: 20px; position: relative; font-size: 13px;
+            background: #fff; border-radius: 12px; padding: 20px;
+            margin-bottom: 25px; border: 1px solid #e1f5fe;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03); position: relative;
         }
-        .post-date { font-size: 9px; color: #666; position: absolute; top: 5px; right: 10px; }
+        .post-date { font-size: 10px; color: #9ecae1; position: absolute; top: 10px; right: 15px; }
 
         .photo-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px;
         }
-        .photo-card { background: #111; border: 1px solid #444; padding: 5px; cursor: pointer; }
-        .photo-card img { width: 100%; height: 110px; object-fit: cover; }
+        .photo-card { 
+            background: #fff; border-radius: 10px; padding: 8px; 
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); transition: 0.3s;
+        }
+        .photo-card:hover { transform: translateY(-5px) rotate(2deg); }
+        .photo-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; }
 
         #zoom-modal {
             display: none; position: fixed; z-index: 2000;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);
+            justify-content: center; align-items: center;
         }
-        #zoom-img { max-width: 95%; max-height: 85%; border: 1px solid #fff; }
+        #zoom-img { max-width: 90%; max-height: 80%; border: 5px solid #fff; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
         @media (max-width: 900px) {
             .desktop-wrapper { display: block; padding: 10px; }
             #social-window { position: relative; top: auto; left: auto; width: 100%; margin-bottom: 20px; }
-            #netscape-window { width: 100%; height: auto; min-height: 600px; }
+            #netscape-window { width: 100%; height: auto; }
             #viewport { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 2px solid #ff0000; padding: 10px; }
-            .sidebar-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
-            .photo-grid { grid-template-columns: repeat(3, 1fr); }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #b3e5fc; }
         }
     </style>
 </head>
@@ -168,15 +195,15 @@
     <div class="desktop-wrapper">
         <div id="social-window">
             <div class="win-title-bar">
-                <span>Messenger</span>
-                <span>_ □ X</span>
+                <span>Windows Live Messenger</span>
+                <span>— ❐ ✕</span>
             </div>
             <div class="win-content">
                 <div class="msn-header">
-                    <img src="CALLME.jpg" style="border: 2px solid #ff0000; width: 45px; height: 45px; object-fit: cover;">
-                    <div style="color:black; font-weight:bold; font-size:11px;">
-                        <span style="cursor:default;">Iannget.raped_</span><br>
-                        <span style="font-weight:normal; color: #00aa00; font-size: 10px;">(Conectado)</span>
+                    <img src="CALLME.jpg" style="width: 50px; height: 50px; object-fit: cover;">
+                    <div style="font-size:12px;">
+                        <b style="color:#01579b;">Iannget.raped_</b><br>
+                        <span style="color: #4caf50; font-size: 11px;">(Disponible)</span>
                     </div>
                 </div>
                 <ul class="buddy-list">
@@ -190,15 +217,13 @@
                             Instagram <div class="status-dot online"></div>
                         </a>
                     </li>
-                    <li style="color:black; font-size: 11px; padding: 10px; border-top: 1px dotted #ccc; background: #f0f0f0; display: block;">
+                    <li style="color:#555; font-size: 11px; padding: 12px; background: rgba(255,255,255,0.3);">
                         <b>Tel:</b> +52 777 352 3251<br>
-                        <span style="font-size: 9px; color: #555; font-style: italic;">
-                            (mandame mensaje lwk o algo)
-                        </span>
+                        <i style="font-size: 10px;">(mandame mensaje lwk o algo)</i>
                     </li>
                     <div class="music-big-card">
-                        <span style="font-size: 9px; color: #888;">NOW PLAYING:</span>
-                        <marquee id="music-status-big" scrollamount="3">Cargando...</marquee>
+                        <span style="font-size: 10px; font-weight: bold; color: #81c784;">● NOW LISTENING</span>
+                        <marquee id="music-status-big" scrollamount="3">Connecting to Last.fm...</marquee>
                     </div>
                 </ul>
             </div>
@@ -206,44 +231,43 @@
 
         <div id="netscape-window">
             <div class="app-title-bar">
-                <span>Netscape - IFHY ₍^. .^₎Ⳋ.</span>
-                <span>_ ▢ X</span>
+                <span>Aero Explorer - IFHY ₍^. .^₎Ⳋ</span>
+                <span>— ❐ ✕</span>
             </div>
             <div id="viewport">
                 <aside class="sidebar">
                     <img src="./fotodeperfil.jpg" class="profile-pic">
                     <div class="user-info">
-                        <b>User:</b> Iannget.raped_<br>
-                        <b>Status:</b> Online
+                        <b>Iann</b><br>
+                        Status: Viviendo
                     </div>
                     <nav class="sidebar-nav">
-                        <a href="#inicio">:: INICIO ::</a>
-                        <a href="#fotos">:: GALERIA ::</a>
-                        <a href="#comentarios">:: COMENTARIOS ::</a>
+                        <a href="#inicio">Home</a>
+                        <a href="#fotos">Gallery</a>
+                        <a href="#comentarios">Guestbook</a>
                     </nav>
                 </aside>
 
                 <main class="main-content">
-                    <section id="inicio">
-                        <h1>Wsp</h1>
-                        <div style="background:#111; border:1px solid #333; padding:15px; margin-bottom:20px;">
+                    <section id="inicio" style="display: block;">
+                        <h1>Welcome</h1>
+                        <div style="background: linear-gradient(to right, #e8f5e9, #ffffff); border-left: 5px solid #81c784; padding:15px; border-radius: 8px; margin-bottom:20px;">
                            <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
                         </div>
                         
-                        <h1>posting shit</h1>
+                        <h2>Latest Posts</h2>
                         <div class="manual-post">
                             <span class="post-date">02/01/2026</span>
-                            <h3 style="color:#ff0000; font-family:'courier'; margin-top:0;">tiktok es una mierda (no todo tiktok btw)</h3>
+                            <h3 style="color:#0288d1; margin-top:0;">tiktok es una mierda (no todo tiktok btw)</h3>
                             <p>Hola, un poco de contexto:</p>
                             <p>Estaba viendo cosas de tiktok por que pues lwk no ocupo tiktok y decidi verlo, pues me encontre un grupo o bueno una "comunidad" de tiktok que DESEA CON TODA SU ALMA tener alguna discapacidad mental como autismo, TLP, paranoia o esquizofremia.</p>
-                            <p>Como algunos de ustedes ya saben padezco de la mayoria de estos desordenes mentales, en especifico padezco de paranoia relacionada a la ansiedad y autismo en el espectro de asperger, esa mierda es super asquerosa osea, por que seria gracioso o divertido tener algun tipo de discapacidad mental, no digo que todos los usuarios de tiktok esten asi de dañados, pero el problema es que es una comunidad grande que puede influenciar a mas personas a pedir de rodillas una enfermedad mental.</p>
-                            <p>Vivir con este tipo de problemas mentales es complejo, sin decir complicado, me ha costado mucho socializar o mantener un vinculo con toda esta mierda y no esta divertido encerrarse de todas las personas por 5 meses por miedo que te haran algo, se que algunos son ragebait pero incluso como ragebait no queda yk, ya mucha bullshit, espero que tu te hayas quedado hasta el final y por tu atencion.</p>
-                            <p>Gracias.</p>
+                            <p>Como algunos de ustedes ya saben padezco de la mayoria de estos desordenes mentales... [Ver más]</p>
+                            <p>Gracias por tu atención.</p>
                         </div>
 
                         <div class="manual-post">
                             <span class="post-date">02/01/2026</span>
-                            <h3 style="color:#ff0000; font-family:'courier'; margin-top:0;">wsp nigga</h3>
+                            <h3 style="color:#0288d1; margin-top:0;">wsp nigga</h3>
                             <p>yo wsk, im testing thi shi, esto lo estoy haciendo usando la api de tumblr, osea es raro yk pero aja si ay si okay si esta bien hermano .</p>
                         </div>
                     </section>
@@ -256,33 +280,12 @@
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG25.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG24.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG23.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG22.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG21.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG20.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG19.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG18.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG17.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG16.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG15.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG14.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG13.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG12.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG11.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG10.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG09.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG08.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG7.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG6.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG5.png"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG4.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG3.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.jpeg"></div>
                         </div>
                     </section>
 
                     <section id="comentarios">
-                        <h2>GUESTBOOK / COMENTARIOS</h2>
+                        <h2>GUESTBOOK</h2>
                         <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" data-page-id="vanguard_vfinal_new"></div>
                         <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
                     </section>
@@ -310,18 +313,14 @@
         async function updateMusic() {
             const user = "catekath";
             const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
-            
             try {
                 const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
                 const artist = track.artist['#text'];
                 const songName = track.name;
-                
                 const isPlaying = track['@attr'] && track['@attr'].nowplaying;
-                const statusLabel = isPlaying ? "Escuchando: " : "Última: ";
-                
-                // Actualizamos el marquee grande debajo del teléfono
+                const statusLabel = isPlaying ? "Listening to: " : "Last played: ";
                 document.getElementById('music-status-big').innerText = statusLabel + songName + " - " + artist;
             } catch (e) { 
                 document.getElementById('music-status-big').innerText = "Last.fm Offline"; 
