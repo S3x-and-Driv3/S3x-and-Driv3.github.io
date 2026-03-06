@@ -3,261 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netscape - IFHY ₍^. .^₎Ⳋ</title>
+    <title>~ iann's hell ~ Netscape</title>
     
     <link rel="icon" type="image/jpeg" href="niko.jpg">
 
     <style>
-        /* --- SCROLLBAR ROJA ESTILO Y2K --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #800000; border: 1px solid #ff0000; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff0000; }
+        /* --- ESTILO WEB 1.0 (OLD SCHOOL) --- */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #1a0000; }
+        ::-webkit-scrollbar-thumb { background: #ff0000; border: 2px solid #000; }
 
-        /* --- ESTILOS BASE --- */
         body {
             background-color: #000;
+            /* Fondo con textura clásica de los 2000 si tienes una, si no, negro sólido */
             background-image: url('./FONDO.jpg'); 
-            background-size: cover;
-            background-position: center;
+            background-size: auto; /* Repetido como en los viejos tiempos */
             background-attachment: fixed;
             margin: 0; padding: 0;
-            font-family: "MS Sans Serif", Tahoma, sans-serif;
-            color: #ccc;
+            font-family: "Courier New", Courier, monospace;
+            color: #ff0000;
             overflow-x: hidden;
         }
 
+        /* Efecto de texto parpadeante clásico */
+        blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
         .desktop-wrapper {
             display: flex;
+            flex-direction: row;
             justify-content: center;
-            padding: 20px;
-            min-height: 100vh;
-            box-sizing: border-box;
+            padding: 10px;
+            gap: 20px;
         }
 
-        /* --- VENTANA MSN MESSENGER FLOTANTE --- */
+        /* --- MSN MESSENGER (VERSIÓN 6.2 STYLE) --- */
         #social-window {
-            position: fixed; top: 20px; left: 20px; width: 220px;
-            background-color: #d4d0c8; border: 2px outset #fff;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.4); z-index: 100;
+            width: 200px;
+            background-color: #ECE9D8; /* Color clásico Windows XP */
+            border: 2px outset #fff;
+            font-family: Tahoma, sans-serif;
+            height: fit-content;
         }
 
         .win-title-bar {
-            background: linear-gradient(to bottom, #0058ee 0%, #3593ff 100%);
-            color: white; padding: 3px 5px; font-weight: bold; font-size: 11px;
-            display: flex; justify-content: space-between;
+            background: linear-gradient(to right, #0054E3, #2788F5);
+            color: white; padding: 2px 5px; font-weight: bold; font-size: 11px;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
         .win-content {
-            padding: 0; border: 2px inset #fff; background: #fff;
-            max-height: 550px; overflow-y: auto;
+            background: #fff; border: 1px inset #808080; margin: 2px;
         }
 
         .msn-header {
-            display: flex; align-items: center; padding: 10px; gap: 10px; 
-            background: #ffffff; border-bottom: 1px solid #ccc;
-        }
-
-        .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
-        .buddy-list li { display: flex; flex-direction: column; padding: 6px; border-bottom: 1px solid #eee; } 
-        
-        .buddy-item-link { 
-            text-decoration: none; color: black; display: flex; align-items: center; width: 100%; transition: 0.2s; 
-            flex-direction: row; justify-content: space-between;
-        }
-        .buddy-item-link:hover { color: #ff0000; font-weight: bold; transform: translateX(3px); }
-        
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid #555; }
-        .online { background: #0f0; }
-
-        /* REPRODUCTOR DE MÚSICA Y2K */
-        .music-big-card {
-            background: #111;
-            color: #ff0000;
-            padding: 10px;
-            border-top: 2px solid #ff0000;
-            font-family: 'Courier New', Courier, monospace;
+            padding: 5px; background: #fff; border-bottom: 1px solid #ccc;
             text-align: center;
         }
-        #music-status-big {
-            display: block;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 5px;
-            text-transform: uppercase;
+
+        .msn-header img { border: 1px solid #716F64; padding: 2px; background: #fff; width: 60px; height: 60px; }
+
+        .buddy-list { list-style: none; padding: 5px; margin: 0; font-size: 10px; color: #000; }
+        .buddy-list li { margin-bottom: 4px; border-bottom: 1px dotted #ccc; }
+        .buddy-item-link { text-decoration: none; color: #000; display: flex; justify-content: space-between; }
+        .buddy-item-link:hover { text-decoration: underline; color: blue; }
+
+        /* --- MARQUEE DE MÚSICA TIPO WINAMP --- */
+        .music-player {
+            background: #000; color: #0f0; padding: 5px;
+            border: 1px solid #555; font-size: 10px; font-family: 'Courier New';
+            margin-top: 5px; text-transform: uppercase;
         }
 
-        /* --- VENTANA PRINCIPAL NETSCAPE --- */
+        /* --- VENTANA NETSCAPE (EL CORAZÓN) --- */
         #netscape-window {
-            width: 950px; height: 650px; 
-            background-color: #c0c0c0; border: 2px solid #fff;
-            border-right-color: #444; border-bottom-color: #444;
-            display: flex; flex-direction: column; z-index: 10;
+            width: 850px;
+            background-color: #c0c0c0; /* Gris industrial 90s */
+            border: 3px outset #fff;
+            padding: 2px;
         }
 
         .app-title-bar {
-            background: linear-gradient(90deg, #800000, #ff0000);
-            color: white; padding: 4px 10px; font-weight: bold;
+            background: #000080; /* Azul oscuro clásico */
+            color: #fff; padding: 3px 10px; font-weight: bold;
             display: flex; justify-content: space-between;
         }
 
+        .toolbar {
+            background: #c0c0c0; border-bottom: 1px solid #808080;
+            padding: 5px; display: flex; gap: 10px; font-size: 11px; color: #000;
+        }
+
         #viewport {
-            background-color: #000; border: 2px inset #444;
-            margin: 5px; color: #ccc; display: flex;
-            flex-grow: 1; overflow: hidden;
+            background-color: #000; border: 3px inset #fff;
+            margin: 2px; display: flex; min-height: 600px;
         }
 
+        /* --- SIDEBAR --- */
         .sidebar {
-            width: 200px; background: #0a0a0a; border-right: 2px solid #ff0000;
-            padding: 15px; text-align: center; flex-shrink: 0; overflow-y: auto;
+            width: 160px; background: #111; border-right: 2px dashed #ff0000;
+            padding: 10px; text-align: center;
         }
 
-        .profile-pic { width: 120px; height: 120px; border: 2px solid #ff0000; object-fit: cover; margin-bottom: 10px; }
-
-        .user-info {
-            font-size: 11px; text-align: left; color: #fff; margin-bottom: 15px; 
-            padding: 8px; border: 1px solid #333; background: #111; line-height: 1.4;
-        }
+        .profile-pic { width: 100%; border: 2px solid #ff0000; filter: contrast(1.2) grayscale(0.5); }
 
         .sidebar-nav a { 
-            display: block; padding: 8px; color: #ff0000; 
-            text-decoration: none; border-bottom: 1px solid #222; font-size: 12px; 
+            display: block; padding: 10px 0; color: #ff0000; 
+            text-decoration: none; border-bottom: 1px solid #333; font-size: 12px;
+            text-transform: uppercase; font-weight: bold;
         }
+        .sidebar-nav a:hover { background: #ff0000; color: #000; }
 
+        /* --- CONTENIDO --- */
         .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; }
-        section { display: none; } 
-        #inicio { display: block; }
-        h1, h2 { color: #ff0000; font-family: "Impact", sans-serif; border-bottom: 1px solid #ff0000; margin-bottom: 15px; }
+        section { display: none; }
 
-        /* POSTS MANUALES */
+        h1 { color: #fff; background: #ff0000; padding: 5px; font-size: 18px; text-align: center; }
+        h2 { border-bottom: 2px solid #ff0000; font-size: 16px; margin-top: 30px; }
+
         .manual-post {
-            background: #0a0a0a; border: 1px solid #ff0000; padding: 15px;
-            margin-bottom: 20px; position: relative; font-size: 13px;
+            border: 1px solid #444; padding: 10px; margin-bottom: 30px;
+            background: rgba(20, 0, 0, 0.8);
         }
-        .post-date { font-size: 9px; color: #666; position: absolute; top: 5px; right: 10px; }
-        .manual-post img { max-width: 100%; border: 1px solid #333; margin: 10px 0; }
+        .post-title { color: #ff0000; font-weight: bold; font-size: 16px; border-bottom: 1px dotted #ff0000; }
+        .post-date { color: #666; font-size: 10px; float: right; }
 
-        /* COMENTARIOS */
-        #cusdis_thread { background: #fff !important; padding: 10px; border: 2px inset #ccc; }
-
-        /* GALERÍA COMPLETA (27 IMÁGENES) */
+        /* --- GALERÍA PIXELADA --- */
         .photo-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
         }
-        .photo-card { background: #111; border: 1px solid #444; padding: 5px; cursor: pointer; }
-        .photo-card img { width: 100%; height: 110px; object-fit: cover; }
+        .photo-card { border: 1px solid #ff0000; padding: 2px; background: #000; }
+        .photo-card img { width: 100%; height: 100px; object-fit: cover; filter: sepia(0.5); }
+        .photo-card:hover img { filter: none; }
 
-        #zoom-modal {
-            display: none; position: fixed; z-index: 2000;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
-        }
-        #zoom-img { max-width: 95%; max-height: 85%; border: 1px solid #fff; }
+        /* --- GUESTBOOK --- */
+        #cusdis_thread { filter: invert(1); } /* Invertir para que pegue con el fondo negro */
 
-        /* RESPONSIVE BÁSICO */
-        @media (max-width: 900px) {
-            .desktop-wrapper { display: block; padding: 10px; }
-            #social-window { position: relative; top: auto; left: auto; width: 100%; margin-bottom: 20px; }
-            #netscape-window { width: 100%; height: auto; min-height: 600px; }
-            #viewport { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 2px solid #ff0000; }
-            .sidebar-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
-            .photo-grid { grid-template-columns: repeat(3, 1fr); }
+        @media (max-width: 800px) {
+            .desktop-wrapper { flex-direction: column; align-items: center; }
+            #netscape-window { width: 95%; }
+            #social-window { position: static; width: 95%; }
         }
     </style>
 </head>
 <body>
 
-    <div id="zoom-modal" onclick="this.style.display='none'">
-        <img id="zoom-img" src="">
+    <div id="zoom-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center;" onclick="this.style.display='none'">
+        <img id="zoom-img" style="max-width:90%; border:2px solid #ff0000;">
     </div>
 
     <div class="desktop-wrapper">
         <div id="social-window">
             <div class="win-title-bar">
-                <span>Messenger</span>
-                <span>_ □ X</span>
+                <span>MSN Messenger</span>
+                <span>[?] [X]</span>
             </div>
             <div class="win-content">
                 <div class="msn-header">
-                    <img src="CALLME.jpg" style="border: 2px solid #ff0000; width: 45px; height: 45px; object-fit: cover;">
-                    <div style="color:black; font-weight:bold; font-size:11px;">
-                        <span style="cursor:default;">Iannget.raped_</span><br>
-                        <span style="font-weight:normal; color: #00aa00; font-size: 10px;">(Conectado)</span>
+                    <img src="CALLME.jpg">
+                    <div style="font-size:11px; color:#000; margin-top:5px;">
+                        <b>iann_ (Online)</b><br>
+                        <span style="font-size:9px;">"fuck tiktok"</span>
                     </div>
                 </div>
                 <ul class="buddy-list">
-                    <li>
-                        <a href="https://github.com/catekath" target="_blank" class="buddy-item-link"> 
-                            GitHub <div class="status-dot online"></div>
-                        </a>
+                    <li><a href="#" class="buddy-item-link">GitHub <span style="color:green">(·)</span></a></li>
+                    <li><a href="#" class="buddy-item-link">Insta <span style="color:green">(·)</span></a></li>
+                    <li style="background:#FFFFE1; padding:5px; border:1px solid #E6DB55;">
+                        <b>Nota:</b> +52 777 352 3251
                     </li>
-                    <li>
-                        <a href="https://www.instagram.com/iannget.raped_/" target="_blank" class="buddy-item-link"> 
-                            Instagram <div class="status-dot online"></div>
-                        </a>
-                    </li>
-                    <li style="color:black; font-size: 11px; padding: 10px; border-top: 1px dotted #ccc; background: #f0f0f0; display: block;">
-                        <b>Tel:</b> +52 777 352 3251<br>
-                        <span style="font-size: 9px; color: #555; font-style: italic;">
-                            (mandame mensaje lwk o algo)
-                        </span>
-                    </li>
-                    <div class="music-big-card">
-                        <span style="font-size: 9px; color: #888;">NOW PLAYING:</span>
-                        <marquee id="music-status-big" scrollamount="3">Cargando...</marquee>
-                    </div>
                 </ul>
+                <div class="music-player">
+                    <span style="color:#0f0;">WINAMP 5.0</span><br>
+                    <marquee id="music-status-big" scrollamount="2">Cargando track...</marquee>
+                </div>
             </div>
         </div>
 
         <div id="netscape-window">
             <div class="app-title-bar">
-                <span>Netscape - IFHY ₍^. .^₎Ⳋ.</span>
-                <span>_ ▢ X</span>
+                <span>Netscape Navigator - [iann.html]</span>
+                <span>_ [] X</span>
             </div>
+            <div class="toolbar">
+                <u>F</u>ile <u>E</u>dit <u>V</u>iew <u>G</u>o <u>B</u>ookmarks <u>O</u>ptions
+            </div>
+            
             <div id="viewport">
                 <aside class="sidebar">
                     <img src="./fotodeperfil.jpg" class="profile-pic">
-                    <div class="user-info">
-                        <b>User:</b> Iannget.raped_<br>
-                        <b>Status:</b> Online
-                    </div>
                     <nav class="sidebar-nav">
-                        <a href="#inicio">:: INICIO ::</a>
-                        <a href="#fotos">:: GALERIA ::</a>
-                        <a href="#comentarios">:: COMENTARIOS ::</a>
+                        <a href="#inicio">Index</a>
+                        <a href="#fotos">Pics</a>
+                        <a href="#comentarios">Guestbook</a>
                     </nav>
+                    <div style="margin-top:20px;">
+                        <img src="https://web.archive.org/web/20090830035031/http://geocities.com/Tokyo/6530/netscape.gif" width="88">
+                        <br>
+                        <img src="https://web.archive.org/web/20091027042004im_/http://geocities.com/Pentagon/Base/6410/88x31_an.gif" width="88">
+                    </div>
                 </aside>
 
                 <main class="main-content">
-                    <section id="inicio">
-                        <h1>Wsp</h1>
-                        <div style="background:#111; border:1px solid #333; padding:15px; margin-bottom:20px;">
-                           <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
-                        </div>
-                        
-                        <h1>posting shit</h1>
+                    <section id="inicio" style="display:block;">
+                        <h1><blink>>>> WELCOME TO MY HELL <<<</blink></h1>
                         
                         <div class="manual-post">
-                            <span class="post-date">02/01/2026</span>
-                            <h3 style="color:#ff0000; font-family:'courier'; margin-top:0;">tiktok es una mierda (no todo tiktok btw)</h3>
-                            <p>Hola, un poco de contexto:</p>
-                            <p>Estaba viendo cosas de tiktok por que pues lwk no ocupo tiktok y decidi verlo, pues me encontre un grupo o bueno una "comunidad" de tiktok que DESEA CON TODA SU ALMA tener alguna discapacidad mental como autismo, TLP, paranoia o esquizofremia.</p>
-                            <p>Como algunos de ustedes ya saben padezco de la mayoria de estos desordenes mentales, en especifico padezco de paranoia relacionada a la ansiedad y autismo en el espectro de asperger, esa mierda es super asquerosa osea, por que seria gracioso o divertido tener algun tipo de discapacidad mental, no digo que todos los usuarios de tiktok esten asi de dañados, pero el problema es que es una comunidad grande que puede influenciar a mas personas a pedir de rodillas una enfermedad mental.</p>
-                            <p>Vivir con este tipo de problemas mentales es complejo, sin decir complicado, me ha costado mucho socializar o mantener un vinculo con toda esta mierda y no esta divertido encerrarse de todas las personas por 5 meses por miedo que te haran algo, se que algunos son ragebait pero incluso como ragebait no queda yk, ya mucha bullshit, espero que tu te hayas quedado hasta el final y por tu atencion.</p>
-                            <p>Gracias.</p>
+                            <span class="post-date">2026-01-02</span>
+                            <div class="post-title">TIKTOK = TRASH</div>
+                            <p>Hola... contexto: encontré comunidades que fingen discapacidades. Como alguien con paranoia y Asperger, me parece una mierda. No es un trend, no es divertido encerrarse 5 meses por miedo. Ya mucha bullshit.</p>
                         </div>
 
                         <div class="manual-post">
-                            <span class="post-date">02/01/2026</span>
-                            <h3 style="color:#ff0000; font-family:'courier'; margin-top:0;">wsp nigga</h3>
-                            <p>yo wsk, im testing thi shi, esto lo estoy haciendo usando la api de tumblr, osea es raro yk pero aja si ay si okay si esta bien hermano .</p>
+                            <span class="post-date">2026-01-01</span>
+                            <div class="post-title">TESTING...</div>
+                            <p>probando esta mierda de código. si estás leyendo esto, felicidades, encontraste mi rincón del internet.</p>
                         </div>
                     </section>
 
                     <section id="fotos">
-                        <h2>GALERÍA (27 ÍTEMS)</h2>
+                        <h2>-- MY PICS --</h2>
                         <div class="photo-grid">
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG27.jpg"></div>
                             <div class="photo-card" onclick="openZoom(this)"><img src="IMG26.jpg"></div>
@@ -290,16 +255,20 @@
                     </section>
 
                     <section id="comentarios">
-                        <h2>GUESTBOOK / COMENTARIOS</h2>
+                        <h2>-- GUESTBOOK --</h2>
                         <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" data-page-id="vanguard_vfinal_new"></div>
-                        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
                     </section>
                 </main>
+            </div>
+            <div style="background:#c0c0c0; padding:2px; font-size:10px; color:#000; border-top:1px solid #808080;">
+                Document: Done. (0.45 seconds)
             </div>
         </div>
     </div>
 
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     <script>
+        // Zoom de fotos
         function openZoom(element) {
             var img = element.getElementsByTagName('img')[0];
             if(img) {
@@ -308,6 +277,7 @@
             }
         }
 
+        // Navegación
         window.addEventListener('hashchange', function() {
             const sections = document.querySelectorAll('section');
             sections.forEach(s => s.style.display = 'none');
@@ -315,27 +285,19 @@
             if (activeSection) activeSection.style.display = 'block';
         });
 
+        // Música Last.fm
         async function updateMusic() {
             const user = "catekath";
             const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
-            
             try {
                 const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
                 const artist = track.artist['#text'];
                 const songName = track.name;
-                
-                const isPlaying = track['@attr'] && track['@attr'].nowplaying;
-                const statusLabel = isPlaying ? "Escuchando: " : "Última: ";
-                
-                // Actualizamos el marquee grande debajo del teléfono
-                document.getElementById('music-status-big').innerText = statusLabel + songName + " - " + artist;
-            } catch (e) { 
-                document.getElementById('music-status-big').innerText = "Last.fm Offline"; 
-            }
+                document.getElementById('music-status-big').innerText = "Playing: " + songName + " by " + artist;
+            } catch (e) { document.getElementById('music-status-big').innerText = "Winamp Offline"; }
         }
-
         updateMusic();
         setInterval(updateMusic, 30000);
     </script>
