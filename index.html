@@ -3,276 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAYER_06 // PROTOCOL: WIRED</title>
+    <title>LAYER_06 // iannknow_wred.sys</title>
     
     <link rel="icon" type="image/jpeg" href="niko.jpg">
 
     <style>
-        /* --- CORE: THE WIRED AESTHETIC (HYBRID) --- */
+        /* --- PROTOCOLO WIRED: ESTÉTICA SUAVIZADA --- */
         :root {
-            --bg-color: #000000;
-            --terminal-green: #00ff00; /* Verde fósforo */
-            --neon-blue: #00ffff;
-            --neon-purple: #bc13fe;
-            --dark-purple: #2d004d;
-            --text-main: #cccccc; /* Gris claro para texto */
-            --text-muted: #666666; /* Gris oscuro para detalles */
-            --border-color: #333333;
+            --bg-color: #050505; /* Casi negro, pero con profundidad */
+            --terminal-dim: #4da64d; /* Verde terminal apagado, no neón */
+            --text-main: #d1d1d1; /* Gris claro/blanco hueso */
+            --text-muted: #555555; /* Gris oscuro para detalles */
+            --border-dim: #222222; /* Bordes muy sutiles */
+            --accent-gray: #333333;
             --font-stack: "MS UI Gothic", "Courier New", monospace;
-            --scanlines: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.5) 50%);
         }
 
-        /* --- CONFIGURACIÓN BASE --- */
-        * { box-sizing: border-box; scroll-behavior: smooth; } /* Scroll suave activado */
+        * { box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-color);
-            background-image: url('https://web.archive.org/web/20091027102741im_/http://geocities.com/area51/vault/6433/wired.gif');
+            /* Fondo con ruido estático muy tenue para dar textura sin distraer */
+            background-image: url('https://web.archive.org/web/20090830045543im_/http://geocities.com/TimesSquare/Labyrinth/6104/noise.gif');
             background-attachment: fixed;
+            background-repeat: repeat;
+            opacity: 1;
             margin: 0; padding: 0;
             font-family: var(--font-stack);
             color: var(--text-main);
             overflow-x: hidden;
-            font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        /* --- CAPA 1: EFECTO CRT (LINEAS DE ESCANEO) --- */
+        /* --- CAPA DE ESCANEO CRT (MUY SUTIL) --- */
         body::before {
             content: " ";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--scanlines);
-            background-size: 100% 4px;
-            pointer-events: none; z-index: 9998;
-            opacity: 0.5;
-        }
-
-        /* --- CAPA 2: RUIDO ESTÁTICO CONSTANTE --- */
-        body::after {
-            content: " ";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://web.archive.org/web/20090830045543im_/http://geocities.com/TimesSquare/Labyrinth/6104/noise.gif');
-            opacity: 0.03;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 3px;
             pointer-events: none; z-index: 9999;
-            animation: staticNoise 0.2s infinite;
+            opacity: 0.3;
         }
 
-        @keyframes staticNoise {
-            0% { background-position: 0 0; }
-            100% { background-position: 10px 10px; }
-        }
-
-        /* --- CONTENEDOR PRINCIPAL (ESTRUCTURA VERTICAL) --- */
+        /* --- CONTENEDOR CENTRAL --- */
         .navi-wrapper {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
+            border-left: 1px solid var(--border-dim);
+            border-right: 1px solid var(--border-dim);
+            background: rgba(0, 0, 0, 0.7);
             min-height: 100vh;
-            border-left: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-            position: relative;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* --- HEADER / PERFIL (FIJO ARRIBA) --- */
-        .profile-header {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            border-bottom: 1px solid var(--neon-blue);
-            padding: 15px;
+        /* --- HEADER FIJO --- */
+        .fixed-header {
+            position: sticky; top: 0;
+            background: rgba(5, 5, 5, 0.95);
+            border-bottom: 1px solid var(--accent-gray);
+            padding: 15px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            backdrop-filter: blur(5px);
             z-index: 100;
+            backdrop-filter: blur(4px);
         }
 
-        .profile-area { display: flex; align-items: center; gap: 15px; }
-
+        .profile-area { display: flex; align-items: center; gap: 12px; }
+        
         .profile-pic {
-            width: 60px; height: 60px;
+            width: 50px; height: 50px;
+            border: 1px solid var(--accent-gray);
+            filter: grayscale(100%) contrast(120%);
             object-fit: cover;
-            border: 1px solid var(--terminal-green);
-            /* Filtro Lain: Grises, alto contraste y tono morado */
-            filter: grayscale(100%) contrast(150%) brightness(80%) sepia(50%) hue-rotate(240deg);
-            box-shadow: 0 0 10px var(--dark-purple);
         }
 
-        .user-id-block { display: flex; flex-direction: column; }
-        .user-id { color: #fff; font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 5px var(--neon-blue); }
-        .user-status { font-size: 8px; color: var(--text-muted); margin-top: 2px; }
+        .user-info { display: flex; flex-direction: column; }
+        .user-name { font-weight: bold; font-size: 13px; color: #fff; letter-spacing: 1px; }
+        .status-tag { font-size: 9px; color: var(--terminal-dim); font-family: monospace; }
 
-        /* --- REPRODUCTOR DE MÚSICA (EN EL HEADER) --- */
-        .wired-player {
-            width: 250px;
+        /* REPRODUCTOR SUPERIOR */
+        .music-box {
+            width: 200px;
+            font-size: 10px;
+            border: 1px solid var(--accent-gray);
+            padding: 4px;
             background: #000;
-            border: 1px solid var(--border-color);
-            padding: 5px;
-            font-family: monospace;
-            font-size: 9px;
-            text-align: center;
         }
-        .player-title { color: var(--neon-purple); font-weight: bold; text-transform: uppercase; margin-bottom: 2px; }
-        marquee { background: #111; color: var(--terminal-green); padding: 1px; border: 1px solid #222; text-transform: uppercase; }
+        marquee { color: var(--terminal-dim); font-family: monospace; text-transform: uppercase; }
 
-        /* --- NAVEGACIÓN (DEBAJO DEL HEADER) --- */
-        .top-nav {
-            width: 100%;
-            background: rgba(10, 10, 10, 0.9);
-            border-bottom: 1px dashed var(--border-color);
+        /* --- NAVEGACIÓN --- */
+        .nav-bar {
             padding: 10px;
             display: flex;
             justify-content: center;
-            gap: 15px;
-            z-index: 90;
+            gap: 20px;
+            border-bottom: 1px dashed var(--border-dim);
         }
-        .top-nav a {
-            color: var(--text-main);
+        .nav-bar a {
             text-decoration: none;
-            padding: 5px 10px;
-            border: 1px solid transparent;
-            text-transform: uppercase;
-            font-family: monospace;
+            color: var(--text-muted);
             font-size: 11px;
-            transition: 0.2s;
-        }
-        .top-nav a:hover {
-            border-color: var(--terminal-green);
-            color: #fff;
-            text-shadow: 0 0 5px var(--terminal-green);
-        }
-
-        /* --- ÁREA DE CONTENIDO PRINCIPAL (SCROLL VERTICAL) --- */
-        .main-content {
-            flex-grow: 1;
-            padding: 30px;
-            background: rgba(5, 5, 5, 0.8);
-        }
-
-        /* TÍTULOS CON EFECTO */
-        h1, h2 {
-            font-family: "Impact", sans-serif;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--neon-purple);
+            transition: 0.3s;
+        }
+        .nav-bar a:hover { color: #fff; }
+
+        /* --- SECCIONES --- */
+        .content-section { padding: 40px 30px; }
+        
+        h1, h2 {
+            font-family: var(--font-stack);
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 1px solid var(--accent-gray);
             padding-bottom: 10px;
-            color: #fff;
-            text-shadow: 0 0 10px var(--neon-purple);
+            margin-bottom: 25px;
         }
+        h1 { color: #fff; font-size: 18px; }
+        h2 { color: #888; font-size: 15px; margin-top: 50px; }
 
-        h2 { color: var(--neon-blue); text-shadow: 0 0 8px var(--neon-blue); border-color: var(--neon-blue); margin-top: 60px; }
-
-        /* PÁRRAFOS TERMINAL */
-        p { color: var(--text-main); margin-bottom: 20px; font-family: monospace; font-size: 13px; }
-
-        /* --- BLOQUES DE CONTENIDO (LOGS) --- */
+        /* LOGS */
         .log-entry {
-            background: rgba(20, 0, 20, 0.6);
-            border: 1px solid var(--dark-purple);
-            padding: 20px;
-            margin-bottom: 30px;
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(188, 19, 254, 0.1);
+            margin-bottom: 40px;
+            border-left: 2px solid var(--accent-gray);
+            padding-left: 20px;
         }
-        .log-entry::before { content: "DATA_STREAM"; position: absolute; top: -8px; left: 15px; background: #000; color: var(--neon-purple); font-size: 9px; padding: 0 5px; font-family: monospace; border: 1px solid var(--dark-purple); }
-        .log-entry h3 { color: #fff; font-family: monospace; text-transform: uppercase; margin-top: 0; font-size: 14px; border-bottom: 1px dotted var(--border-color); padding-bottom: 5px; }
-        .post-date { font-size: 10px; color: var(--text-muted); position: absolute; bottom: 5px; right: 10px; font-family: monospace; }
+        .log-entry h3 { font-size: 13px; color: #aaa; margin: 0 0 10px 0; text-transform: uppercase; }
+        .log-entry p { font-size: 13px; color: var(--text-main); margin: 0; }
+        .log-date { font-size: 9px; color: var(--text-muted); margin-top: 8px; font-family: monospace; }
 
-        /* --- GALERÍA (FILTRO LAIN CORE) --- */
+        /* GALERÍA (ESTILO LAIN MINIMAL) */
         .photo-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px;
         }
         .photo-card {
-            border: 1px solid var(--border-color);
-            background: #000;
+            background: #111;
+            border: 1px solid var(--border-dim);
             padding: 2px;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            /* Filtro Lain: Gris, alto contraste, tono morado y oscuro */
-            filter: grayscale(100%) contrast(160%) brightness(60%) sepia(40%) hue-rotate(260deg);
-            transition: 0.1s;
-        }
-        .photo-card:hover {
-            filter: none;
-            border-color: var(--neon-blue);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--neon-blue);
-            z-index: 10;
-        }
-        .photo-card img { width: 100%; height: 90px; object-fit: cover; }
-
-        /* --- SECCIÓN CONTACTOS (AL FINAL) --- */
-        .contacts-section {
-            width: 100%;
-            border-top: 1px solid var(--border-color);
-            padding: 20px;
-            margin-top: 60px;
-            background: rgba(0,0,0,0.5);
-            text-align: center;
-        }
-        .contacts-title { font-size: 12px; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
-        .contacts-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .contact-link {
-            color: var(--text-main);
-            text-decoration: none;
-            font-family: monospace;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            filter: grayscale(100%) contrast(130%) brightness(70%);
             transition: 0.2s;
         }
-        .contact-link:hover { color: var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue); }
-        .contact-icon { width: 10px; height: 10px; background: #fff; }
+        .photo-card:hover {
+            filter: grayscale(100%) brightness(100%);
+            border-color: #555;
+        }
+        .photo-card img { width: 100%; height: 80px; object-fit: cover; display: block; }
 
-        /* --- MODAL DE ZOOM (CORREGIDO) --- */
+        /* --- ZOOM MODAL (LIMPIO Y COLORIDO) --- */
         #zoom-modal {
-            display: none; position: fixed; z-index: 99999;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 10000;
             justify-content: center; align-items: center;
         }
-        /* Contenedor que anula cualquier filtro heredado */
-        #zoom-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            filter: none !important; /* Anula filtros de sepia/grayscale globales */
+        #zoom-container { filter: none !important; } /* Anula filtros del body */
+        #zoom-img { max-width: 90%; max-height: 85%; border: 1px solid #333; }
+
+        /* --- CONTACTOS --- */
+        .footer-contacts {
+            margin-top: 80px;
+            padding: 40px;
+            border-top: 1px solid var(--border-dim);
+            text-align: center;
         }
-        #zoom-img {
-            max-width: 90%; max-height: 85%;
-            border: 1px solid #fff;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-            /* Imagen limpia */
+        .contact-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px; }
+        .contact-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .contact-links a:hover { color: #fff; }
+
+        /* --- COMENTARIOS --- */
+        #cusdis_thread { filter: invert(1) grayscale(1) opacity(0.6); margin-top: 20px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 600px) {
+            .fixed-header { flex-direction: column; gap: 10px; padding: 10px; }
+            .music-box { width: 100%; }
+            .photo-grid { grid-template-columns: repeat(3, 1fr); }
+            .content-section { padding: 25px 15px; }
         }
 
-        /* --- GUESTBOOK --- */
-        #cusdis_thread { filter: invert(1) grayscale(1) contrast(150%) hue-rotate(180deg); background: transparent !important; margin-top: 20px;}
-
-        /* --- RESPONSIVE TELÉFONOS --- */
-        @media (max-width: 768px) {
-            .profile-header { flex-direction: column; gap: 10px; padding: 10px; }
-            .wired-player { width: 100%; }
-            .top-nav { flex-wrap: wrap; gap: 5px; padding: 5px; }
-            .top-nav a { font-size: 10px; padding: 3px 6px; }
-            .main-content { padding: 15px; }
-            h1 { font-size: 18px; }
-            h2 { font-size: 14px; margin-top: 40px; }
-            .photo-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; }
-            .photo-card img { height: 60px; }
-        }
-
-        /* EFECTOS TEXTO */
-        .blink { animation: blinker 1.5s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-        .glitch-text { position: relative; color: #fff; animation: titlePulse 4s infinite;}
-        @keyframes titlePulse { 0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--neon-purple); } 50% { opacity: 0.8; text-shadow: 0 0 15px var(--neon-purple); } }
+        .blink { animation: blinker 2s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0.3; } }
 
     </style>
 </head>
@@ -286,52 +203,47 @@
 
     <div class="navi-wrapper">
         
-        <header class="profile-header">
+        <header class="fixed-header">
             <div class="profile-area">
                 <img src="./fotodeperfil.jpg" class="profile-pic">
-                <div class="user-id-block">
-                    <div class="user-id">iann_wred</div>
-                    <div class="user-status">Wired_Node: LAYER_06 // <span class="blink" style="color:var(--terminal-green);">ACTIVE</span></div>
+                <div class="user-info">
+                    <span class="user-name">iannknow_wred.sys</span>
+                    <span class="status-tag blink">NODE_STABLE // CONNECTED</span>
                 </div>
             </div>
 
-            <div class="wired-player">
-                <div class="player-title">Wired_Signal_v6.0</div>
-                <marquee id="music-status" scrollamount="2">Waiting for connection...</marquee>
+            <div class="music-box">
+                <marquee id="music-status">Loading Signal...</marquee>
             </div>
         </header>
 
-        <nav class="top-nav">
-            <a href="#inicio">Log</a>
-            <a href="#fotos">Visuals</a>
-            <a href="#comentarios">Signals</a>
-            <a href="#contacto">Protocol</a>
+        <nav class="nav-bar">
+            <a href="#inicio">System_Log</a>
+            <a href="#visuals">Visual_Data</a>
+            <a href="#signals">Signals</a>
+            <a href="#protocol">Protocol</a>
         </nav>
 
         <main class="main-content">
             
-            <section id="inicio">
-                <h1><span class="glitch-text">PRESENT DAY, PRESENT TIME</span><span style="color:var(--text-muted);">... hahaha</span></h1>
+            <section id="inicio" class="content-section">
+                <h1>PRESENT DAY, PRESENT TIME...</h1>
                 
-                <p class="blink" style="color:#555;">> Secure connection established...</p>
-
                 <div class="log-entry">
-                    <h3>[LOG_01: INTRO]</h3>
+                    <h3>> root_intro.txt</h3>
                     <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
-                    <div class="post-date">INFO_TYPE: BASIC</div>
+                    <div class="log-date">ID: 001 // STATUS: READ_ONLY</div>
                 </div>
 
                 <div class="log-entry">
-                    <h3>[LOG_02: SYSTEM_ERROR]</h3>
+                    <h3>> system_rant.log</h3>
                     <p>La comunidad que desea discapacidades mentales... Vivir con paranoia y autismo no es un aesthetic de internet, es una realidad compleja. Socializar es un laberinto cuando el sistema tiene errores de conexión constantes.</p>
-                    <p>Gracias por leer este reporte.</p>
-                    <div class="post-date">RANT // 2026.01.02</div>
+                    <div class="log-date">ID: 002 // 2026.01.02</div>
                 </div>
             </section>
 
-            <section id="fotos">
-                <h2>Visual_Archive</h2>
-                <p class="blink" style="color:#555;">> Loading visual data stream [Layer_Filter Active]...</p>
+            <section id="visuals" class="content-section">
+                <h2>VISUAL_ARCHIVE</h2>
                 <div class="photo-grid">
                     <script>
                         for(let i=27; i>=1; i--) {
@@ -346,29 +258,24 @@
                 </div>
             </section>
 
-            <section id="comentarios">
-                <h2>Guestbook_Signals</h2>
-                <p>> Waiting for external signals...</p>
+            <section id="signals" class="content-section">
+                <h2>GUEST_SIGNALS</h2>
                 <div id="cusdis_thread" 
                      data-host="https://cusdis.com" 
                      data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" 
-                     data-page-id="vanguard_vfinal_lain_hybrid"></div>
+                     data-page-id="iann_v6_final"></div>
             </section>
 
-            <footer id="contacto" class="contacts-section">
-                <div class="contacts-title">> PROTOCOL_DIRECTORIES</div>
-                <div class="contacts-grid">
-                    <a href="https://www.instagram.com/iannget.raped_/" target="_blank" class="contact-link">
-                        <div class="contact-icon"></div> INSTAGRAM
-                    </a>
-                    <a href="https://github.com/catekath" target="_blank" class="contact-link">
-                        <div class="contact-icon"></div> GITHUB
-                    </a>
-                    <a href="https://x.com/tu_usuario" target="_blank" class="contact-link">
-                        <div class="contact-icon"></div> X.COM
-                    </a>
+            <footer id="protocol" class="footer-contacts">
+                <div style="font-size: 11px; color: #444; letter-spacing: 2px;">PROTOCOL_DIRECTORIES</div>
+                <div class="contact-links">
+                    <a href="https://www.instagram.com/iannget.raped_/" target="_blank">Instagram</a>
+                    <a href="https://github.com/catekath" target="_blank">GitHub</a>
+                    <a href="https://x.com/tu_usuario" target="_blank">X.com</a>
                 </div>
-                <p style="font-size: 10px; color: var(--text-muted); margin-top: 15px;">No body required.</p>
+                <p style="font-size: 9px; color: #333; margin-top: 30px; font-family: monospace;">
+                    No matter where you are, everyone is always connected.
+                </p>
             </footer>
 
         </main>
@@ -376,26 +283,20 @@
 
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     <script>
-        // Zoom de fotos (CORREGIDO: MUESTRA IMAGEN LIMPIA)
         function openZoom(element) {
             var img = element.getElementsByTagName('img')[0];
             if(img) {
-                // Asignamos la ruta de la imagen original
                 document.getElementById('zoom-img').src = img.src;
-                // Mostramos el modal
                 document.getElementById('zoom-modal').style.display = 'flex';
-                // Evitamos el scroll del fondo
                 document.body.style.overflow = 'hidden';
             }
         }
         
-        // Cerrar modal al hacer click en cualquier parte
         document.getElementById('zoom-modal').addEventListener('click', function() {
             this.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restauramos el scroll
+            document.body.style.overflow = 'auto';
         });
 
-        // Música con Last.fm (Datos reales restaurados)
         async function updateMusic() {
             const user = "catekath";
             const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
@@ -403,10 +304,8 @@
                 const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
-                const artist = track.artist['#text'];
-                const songName = track.name;
-                document.getElementById('music-status').innerText = `${songName.toUpperCase()} // ${artist.toUpperCase()}`;
-            } catch (e) { document.getElementById('music-status').innerText = "SIGNAL_LOST"; }
+                document.getElementById('music-status').innerText = `${track.name.toUpperCase()} - ${track.artist['#text'].toUpperCase()}`;
+            } catch (e) { document.getElementById('music-status').innerText = "OFFLINE"; }
         }
         updateMusic();
         setInterval(updateMusic, 30000);
