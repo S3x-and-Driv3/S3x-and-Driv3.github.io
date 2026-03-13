@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAYER_06 // iannknow_wred.sys</title>
+    <title>PROTOCOL: WIRED // LAYER-07 // iannknow_wred.sys</title>
     
     <link rel="icon" type="image/jpeg" href="niko.jpg">
 
     <style>
+        /* --- PROTOCOLO: THE WIRED CORE --- */
         :root {
-            --bg-color: #050505;
-            --terminal-dim: #4da64d;
-            --text-main: #d1d1d1;
-            --text-muted: #555555;
-            --border-dim: #222222;
-            --accent-gray: #333333;
+            --bg-color: #020202;
+            --terminal-green: #00ff00;
+            --neon-blue: #00ffff;
+            --neon-purple: #bc13fe;
+            --dark-purple: #1a0029;
+            --text-main: #b3ffb3; /* Verde muy pálido para el texto principal */
+            --grid-color: rgba(0, 255, 255, 0.1);
             --font-stack: "MS UI Gothic", "Courier New", monospace;
         }
 
@@ -22,121 +24,210 @@
 
         body {
             background-color: var(--bg-color);
-            /* Fondo de estática más visible pero suave */
-            background-image: url('https://web.archive.org/web/20090830045543im_/http://geocities.com/TimesSquare/Labyrinth/6104/noise.gif');
-            background-attachment: fixed;
             margin: 0; padding: 0;
             font-family: var(--font-stack);
             color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* --- FILTRO TV ANTIGUA (SOLO EN LA WEB) --- */
-        #tv-filter {
+        /* --- CAPA 1: FONDO DE CIRCUITO (PCB) Y DATOS FLUYENDO --- */
+        /* Rejilla base estilo placa base */
+        .circuit-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-            background-size: 100% 3px;
-            pointer-events: none; z-index: 999; /* Debajo del modal pero sobre la web */
-            opacity: 0.6;
+            z-index: -3;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        /* Animación de "datos" moviéndose por los circuitos */
+        .data-flow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: linear-gradient(90deg, transparent 0%, rgba(188, 19, 254, 0.2) 50%, transparent 100%);
+            background-size: 200% 100%;
+            animation: dataMoveX 8s linear infinite;
+            opacity: 0.5;
+        }
+        .data-flow-y {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 255, 0.15) 50%, transparent 100%);
+            background-size: 100% 200%;
+            animation: dataMoveY 12s linear infinite;
         }
 
+        @keyframes dataMoveX { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+        @keyframes dataMoveY { 0% { background-position: 0 100%; } 100% { background-position: 0 -100%; } }
+
+        /* --- CAPA 2: RUIDO Y ESCANEO CRT --- */
+        #crt-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            pointer-events: none; z-index: 9998;
+        }
+        #noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://web.archive.org/web/20090830045543im_/http://geocities.com/TimesSquare/Labyrinth/6104/noise.gif');
+            opacity: 0.04; pointer-events: none; z-index: 9999;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
         .navi-wrapper {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            border-left: 1px solid var(--border-dim);
-            border-right: 1px solid var(--border-dim);
-            background: rgba(0, 0, 0, 0.85); /* Un poco más opaco para leer mejor */
+            background: rgba(5, 5, 8, 0.85); /* Fondo oscuro translúcido para leer bien */
+            border-left: 2px solid var(--neon-purple);
+            border-right: 2px solid var(--neon-blue);
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.1);
             min-height: 100vh;
             position: relative;
         }
 
+        /* --- HEADER FIJO --- */
         .fixed-header {
             position: sticky; top: 0;
-            background: rgba(5, 5, 5, 0.98);
-            border-bottom: 1px solid var(--accent-gray);
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 2px solid var(--neon-blue);
             padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between;
             z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.1);
         }
 
+        .profile-area { display: flex; align-items: center; gap: 15px; }
         .profile-pic {
-            width: 50px; height: 50px;
-            border: 1px solid var(--accent-gray);
-            filter: grayscale(100%);
+            width: 55px; height: 55px;
+            border: 1px solid var(--terminal-green);
+            box-shadow: 0 0 10px var(--terminal-green);
+            /* Avatar con filtro intenso por defecto */
+            filter: grayscale(100%) contrast(150%) sepia(100%) hue-rotate(250deg);
             object-fit: cover;
         }
 
-        .music-box { width: 200px; font-size: 10px; border: 1px solid var(--accent-gray); padding: 4px; background: #000; }
-        marquee { color: var(--terminal-dim); font-family: monospace; }
+        .user-info { display: flex; flex-direction: column; }
+        .user-name { font-weight: bold; font-size: 14px; color: #fff; text-shadow: 0 0 5px var(--neon-blue); }
+        .status-tag { font-size: 10px; color: var(--terminal-green); font-family: monospace; letter-spacing: 1px;}
 
+        /* REPRODUCTOR */
+        .music-box { width: 220px; font-size: 10px; border: 1px solid var(--neon-purple); padding: 5px; background: #000; box-shadow: inset 0 0 10px rgba(188, 19, 254, 0.3);}
+        marquee { color: var(--terminal-green); font-family: monospace; text-transform: uppercase; }
+
+        /* --- NAVEGACIÓN --- */
         .nav-bar {
-            padding: 10px; display: flex; justify-content: center; gap: 20px;
-            border-bottom: 1px dashed var(--border-dim);
+            padding: 12px; display: flex; justify-content: center; gap: 25px;
+            border-bottom: 1px dashed var(--neon-purple);
+            background: rgba(0,0,0,0.5);
         }
-        .nav-bar a { text-decoration: none; color: var(--text-muted); font-size: 11px; text-transform: uppercase; }
-        .nav-bar a:hover { color: #fff; }
+        .nav-bar a { text-decoration: none; color: var(--neon-blue); font-size: 12px; font-weight: bold; text-transform: uppercase; transition: 0.3s; text-shadow: 0 0 5px transparent;}
+        .nav-bar a:before { content: "[ "; color: var(--text-muted); }
+        .nav-bar a:after { content: " ]"; color: var(--text-muted); }
+        .nav-bar a:hover { color: #fff; text-shadow: 0 0 8px var(--neon-blue); }
 
+        /* --- SECCIONES Y CONTENIDO --- */
         .content-section { padding: 40px 30px; }
-        h1, h2 { font-weight: normal; text-transform: uppercase; letter-spacing: 3px; border-bottom: 1px solid var(--accent-gray); padding-bottom: 10px; }
-        h1 { color: #fff; font-size: 18px; }
+        
+        /* Títulos Glitch Cyberpunk */
+        h1, h2 {
+            font-family: "Impact", sans-serif;
+            text-transform: uppercase; letter-spacing: 4px;
+            border-bottom: 1px solid var(--neon-purple); padding-bottom: 10px;
+            position: relative;
+        }
+        h1 { color: #fff; font-size: 22px; text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-purple); animation: textGlitch 3s infinite; }
+        h2 { color: var(--neon-blue); font-size: 18px; text-shadow: 0 0 8px var(--neon-blue); margin-top: 50px; }
 
-        /* --- GALERÍA MEJORADA --- */
+        @keyframes textGlitch {
+            0%, 100% { text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-purple); }
+            50% { text-shadow: -2px 0 var(--neon-blue), 2px 0 var(--neon-purple); }
+        }
+
+        /* LOGS */
+        .log-entry { margin-bottom: 40px; background: rgba(20, 0, 30, 0.6); border: 1px solid var(--dark-purple); padding: 20px; box-shadow: inset 0 0 15px rgba(188, 19, 254, 0.1); position: relative; }
+        .log-entry::before { content: "SYS_LOG"; position: absolute; top: -8px; left: 10px; background: #000; color: var(--neon-blue); font-size: 10px; padding: 0 5px; border: 1px solid var(--neon-blue);}
+        .log-entry h3 { font-size: 14px; color: #fff; margin: 0 0 10px 0; font-family: monospace; border-bottom: 1px dotted var(--neon-purple); padding-bottom: 5px;}
+        .log-entry p { font-size: 13px; margin: 0; font-family: monospace;}
+        .log-date { font-size: 10px; color: var(--neon-purple); margin-top: 10px; text-align: right;}
+
+        /* --- GALERÍA (LAIN CORE) --- */
         .photo-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 15px;
         }
         .photo-card {
             background: #000;
-            border: 1px solid var(--border-dim);
-            padding: 2px;
+            border: 1px solid var(--dark-purple);
+            padding: 3px;
             cursor: pointer;
-            filter: grayscale(100%) contrast(120%) brightness(60%);
-            transition: filter 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        /* Al poner el ratón: Se ilumina con su color real */
+        
+        /* IMAGEN POR DEFECTO: Oscura, desaturada, vibe Lain */
+        .photo-card img { 
+            width: 100%; height: 100px; object-fit: cover; display: block; 
+            filter: grayscale(100%) contrast(150%) brightness(50%) sepia(30%) hue-rotate(240deg);
+            transition: filter 0.3s ease;
+        }
+
+        /* HOVER: Ilumina el marco y muestra EL COLOR REAL de la foto */
         .photo-card:hover {
-            filter: grayscale(0%) contrast(100%) brightness(100%);
-            border-color: var(--terminal-dim);
-            transform: scale(1.05);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+            transform: scale(1.08);
             z-index: 10;
         }
-        .photo-card img { width: 100%; height: 100px; object-fit: cover; display: block; }
+        .photo-card:hover img {
+            filter: none; /* QUITA TODOS LOS FILTROS -> COLOR REAL */
+        }
 
-        /* --- ZOOM MODAL ADAPTABLE --- */
+        /* --- ZOOM MODAL ADAPTABLE Y PERFECTO --- */
         #zoom-modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98); z-index: 10000; /* Sobre el filtro de TV */
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.95); z-index: 100000;
             justify-content: center; align-items: center;
-            padding: 20px;
+            backdrop-filter: blur(5px);
         }
         #zoom-img { 
-            max-width: 100%; 
+            /* Esto arregla que no se vea ni enorme ni minúscula */
+            max-width: 90vw; 
             max-height: 90vh; 
-            object-fit: contain; /* Asegura que se vea completa sin deformar */
-            border: 1px solid #444;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            object-fit: contain; 
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
         }
 
-        .log-entry { margin-bottom: 40px; border-left: 2px solid var(--accent-gray); padding-left: 20px; }
-        
-        /* Ajuste Comentarios */
-        #cusdis_thread { filter: invert(0.8) grayscale(1); margin-top: 20px; }
+        /* --- SECCIÓN CONTACTOS / PROTOCOLO --- */
+        footer { padding: 40px; text-align: center; border-top: 1px dashed var(--neon-blue); background: rgba(0,0,0,0.8); margin-top: 40px;}
+        .contact-links { display: flex; justify-content: center; gap: 30px; margin-top: 15px; }
+        .contact-links a { color: var(--terminal-green); text-decoration: none; font-size: 12px; font-family: monospace; border: 1px solid var(--terminal-green); padding: 5px 10px; transition: 0.2s;}
+        .contact-links a:hover { background: rgba(0,255,0,0.2); color: #fff; box-shadow: 0 0 10px var(--terminal-green); }
 
-        footer { padding: 40px; text-align: center; border-top: 1px solid var(--border-dim); }
-        .contact-links { display: flex; justify-content: center; gap: 20px; margin-top: 10px; }
-        .contact-links a { color: var(--text-muted); text-decoration: none; font-size: 10px; }
-        .contact-links a:hover { color: #fff; }
+        /* Ajuste Comentarios Cusdis (Invertido para verse bien en oscuro) */
+        #cusdis_thread { filter: invert(1) hue-rotate(180deg) contrast(120%); margin-top: 20px; }
 
         @media (max-width: 600px) {
             .fixed-header { flex-direction: column; gap: 10px; }
-            .photo-grid { grid-template-columns: repeat(3, 1fr); }
+            .music-box { width: 100%; }
+            .photo-grid { grid-template-columns: repeat(3, 1fr); gap: 8px;}
+            .photo-card img { height: 80px; }
+            .content-section { padding: 25px 15px; }
         }
+
+        .blink { animation: blinker 1.5s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
     </style>
 </head>
 <body>
 
-    <div id="tv-filter"></div>
+    <div class="circuit-background"></div>
+    <div class="data-flow"></div>
+    <div class="data-flow-y"></div>
+    <div id="crt-overlay"></div>
+    <div id="noise-overlay"></div>
 
     <div id="zoom-modal" onclick="this.style.display='none'">
         <img id="zoom-img" src="">
@@ -146,13 +237,14 @@
         <header class="fixed-header">
             <div class="profile-area">
                 <img src="./fotodeperfil.jpg" class="profile-pic">
-                <div style="display: flex; flex-direction: column;">
-                    <span style="font-weight: bold; font-size: 13px;">iannknow_wred.sys</span>
-                    <span style="font-size: 9px; color: var(--terminal-dim);">NODE_06 // CONNECTED</span>
+                <div class="user-info">
+                    <span class="user-name">iannknow_wred.sys</span>
+                    <span class="status-tag blink">NODE_07 // LINK_ACTIVE</span>
                 </div>
             </div>
             <div class="music-box">
-                <marquee id="music-status">Initializing Protocol...</marquee>
+                <div style="color:var(--neon-purple); border-bottom:1px solid #333; margin-bottom:2px;">Wired_Signal_v7.0</div>
+                <marquee id="music-status" scrollamount="3">Connecting to Navi network...</marquee>
             </div>
         </header>
 
@@ -166,20 +258,26 @@
         <main>
             <section id="inicio" class="content-section">
                 <h1>PRESENT DAY, PRESENT TIME...</h1>
+                
                 <div class="log-entry">
                     <h3>> root_intro.txt</h3>
-                    <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas...</p>
+                    <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
+                    <div class="log-date">ID: 001 // STATUS: ENCRYPTED</div>
                 </div>
+
                 <div class="log-entry">
                     <h3>> system_rant.log</h3>
-                    <p>La comunidad que desea discapacidades mentales... Vivir con paranoia y autismo no es un aesthetic de internet...</p>
+                    <p>La comunidad que desea discapacidades mentales... Vivir con paranoia y autismo no es un aesthetic de internet, es una realidad compleja. Socializar es un laberinto cuando el sistema tiene errores de conexión constantes.</p>
+                    <div class="log-date">ID: 002 // 2026.01.02</div>
                 </div>
             </section>
 
             <section id="visuals" class="content-section">
                 <h2>VISUAL_ARCHIVE</h2>
+                <p style="font-family: monospace; color: var(--text-muted); font-size: 11px;">> Hover to decode image data...</p>
                 <div class="photo-grid">
                     <script>
+                        // Generamos las 27 fotos.
                         for(let i=27; i>=1; i--) {
                             let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
                             document.write(`
@@ -201,18 +299,22 @@
             </section>
 
             <footer id="protocol">
+                <div style="font-size: 14px; color: var(--neon-purple); letter-spacing: 3px; font-weight: bold; margin-bottom: 20px;">PROTOCOL_DIRECTORIES</div>
                 <div class="contact-links">
-                    <a href="https://www.instagram.com/iannknow_wred.sys/" target="_blank">INSTAGRAM</a>
+                    <a href="https://www.instagram.com/iannget.raped_/" target="_blank">INSTAGRAM</a>
                     <a href="https://github.com/catekath" target="_blank">GITHUB</a>
                     <a href="https://x.com/tu_usuario" target="_blank">X.COM</a>
                 </div>
-                <p style="font-size: 9px; color: #333; margin-top: 20px;">No matter where you are, everyone is always connected.</p>
+                <p style="font-size: 10px; color: var(--text-muted); margin-top: 30px; font-family: monospace;">
+                    And you don't even need a body...
+                </p>
             </footer>
         </main>
     </div>
 
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     <script>
+        // ZOOM DE FOTOS CORREGIDO
         function openZoom(element) {
             var img = element.getElementsByTagName('img')[0];
             if(img) {
@@ -220,10 +322,16 @@
                 const zoomImg = document.getElementById('zoom-img');
                 zoomImg.src = img.src;
                 modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden'; // Detiene el scroll de la página de fondo
             }
         }
         
+        document.getElementById('zoom-modal').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaura el scroll
+        });
+
+        // MUSICA LAST.FM
         async function updateMusic() {
             const user = "catekath";
             const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
@@ -232,7 +340,7 @@
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
                 document.getElementById('music-status').innerText = `${track.name.toUpperCase()} - ${track.artist['#text'].toUpperCase()}`;
-            } catch (e) { document.getElementById('music-status').innerText = "OFFLINE"; }
+            } catch (e) { document.getElementById('music-status').innerText = "SIGNAL_LOST"; }
         }
         updateMusic();
         setInterval(updateMusic, 30000);
