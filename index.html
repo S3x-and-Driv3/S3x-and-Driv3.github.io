@@ -2,49 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LAYER_03 // PROTOCOL: WIRED</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAYER_04 // PROTOCOL: WIRED</title>
     
+    <link rel="icon" type="image/jpeg" href="niko.jpg">
+
     <style>
-        /* --- CORE: PROTOCOLO WIRED --- */
+        /* --- CORE: THE WIRED AESTHETIC --- */
         :root {
-            --bg-color: #000;
-            --wired-red: #8b0000; /* Rojo óxido */
+            --bg-color: #000000;
             --terminal-green: #00ff00; /* Verde fósforo */
-            --industrial-gray: #444;
-            --text-color: #c0c0c0; /* Gris pálido */
+            --neon-blue: #00ffff;
+            --neon-purple: #bc13fe;
+            --dark-purple: #2d004d;
+            --text-color: #a0ffa0; /* Verde pálido para texto largo */
             --font-stack: "MS UI Gothic", "Courier New", monospace;
+            --scanlines: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 50%);
         }
+
+        /* --- CONFIGURACIÓN BASE --- */
+        * { box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
-            /* Fondo: Estática y cables sutiles */
             background-image: 
-                url('https://web.archive.org/web/20091027102741im_/http://geocities.com/area51/vault/6433/wired.gif'),
-                linear-gradient(180deg, #000 0%, #111 100%);
+                url('https://web.archive.org/web/20091027102741im_/http://geocities.com/area51/vault/6433/wired.gif'); /* Fondo de cables sutil */
             background-attachment: fixed;
             margin: 0; padding: 0;
             font-family: var(--font-stack);
-            color: var(--text-color);
+            color: var(--terminal-green);
             overflow-x: hidden;
-            /* Filtro global crudo y desaturado */
-            filter: contrast(120%) brightness(90%) grayscale(30%);
+            font-size: 14px;
+            line-height: 1.5;
         }
 
-        /* --- EFECTO CRT (LINEAS DE ESCANEO) --- */
+        /* --- CAPA 1: EFECTO CRT (LINEAS DE ESCANEO) --- */
         body::before {
             content: " ";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background: var(--scanlines);
             background-size: 100% 4px;
             pointer-events: none; z-index: 9998;
+            opacity: 0.6;
         }
 
-        /* --- EFECTO DE TEMBLOR DE ESTÁTICA GLOBAL --- */
+        /* --- CAPA 2: RUIDO ESTÁTICO CONSTANTE --- */
         body::after {
             content: " ";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://web.archive.org/web/20090830045543im_/http://geocities.com/TimesSquare/Labyrinth/6104/noise.gif');
-            opacity: 0.03;
+            opacity: 0.04;
             pointer-events: none; z-index: 9999;
             animation: staticNoise 0.2s infinite;
         }
@@ -54,246 +61,409 @@
             100% { background-position: 10px 10px; }
         }
 
-        /* --- VENTANA MSN -> MÓDULO DE IDENTIDAD WIRED --- */
-        #social-window {
-            position: fixed; top: 40px; left: 20px; width: 210px;
-            background: #111; border: 1px solid var(--industrial-gray);
-            font-family: 'Courier New', monospace;
-            box-shadow: 15px 15px 0px rgba(0,0,0,0.5); z-index: 100;
+        /* --- CONTENEDOR PRINCIPAL (NAVI INTERFACE) --- */
+        .navi-wrapper {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            border-left: 1px solid var(--dark-purple);
+            border-right: 1px solid var(--dark-purple);
+            box-shadow: 0 0 20px var(--dark-purple);
+            position: relative;
         }
 
-        .win-title-bar {
-            background: var(--wired-red); color: #000;
-            padding: 2px 5px; font-size: 10px; font-weight: bold;
-            display: flex; justify-content: space-between;
-            text-transform: uppercase; letter-spacing: 1px;
+        /* Efecto de borde glitch sutil en el contenedor */
+        .navi-wrapper::before {
+            content: "";
+            position: absolute; inset: 0;
+            border: 2px solid transparent;
+            border-image: linear-gradient(to bottom, var(--neon-purple), transparent, var(--neon-blue)) 1;
+            opacity: 0.3;
+            pointer-events: none;
         }
 
-        .msn-header {
-            padding: 10px; background: #000; border-bottom: 1px solid var(--industrial-gray);
-            text-align: center;
-        }
-
-        .msn-header img {
-            width: 80px; height: 80px; border: 1px solid #00ff00;
-            /* Foto de perfil agresivamente procesada */
-            filter: grayscale(100%) contrast(200%) brightness(80%);
-            object-fit: cover;
-        }
-
-        .buddy-list { list-style: none; padding: 5px; margin: 0; font-size: 10px; color: #fff; }
-        .buddy-list li { margin-bottom: 5px; border-bottom: 1px solid #222; padding-bottom: 3px; }
-        .buddy-item-link { text-decoration: none; color: #fff; display: flex; justify-content: space-between; }
-        .buddy-item-link:hover { color: var(--terminal-green); }
-
-        /* MÚSICA TIPO 'NAVI SIGNAL' */
-        .music-card {
-            margin-top: 15px; font-size: 9px; color: var(--terminal-green);
-            border: 1px solid var(--terminal-green); padding: 5px; background: #000;
-        }
-        
-        /* Marquee verde fósforo */
-        marquee { background: #000; color: var(--terminal-green); font-family: monospace; font-size: 11px; }
-
-        /* --- VENTANA PRINCIPAL (ESTILO NAVI TERMINAL) --- */
-        #netscape-window {
-            width: 880px; margin: 60px auto;
-            background: #111; border: 1px solid var(--industrial-gray);
-            display: flex; flex-direction: column;
-            box-shadow: 20px 20px 0px rgba(0,0,0,0.7);
-        }
-
-        #viewport {
-            background: #000; border: 1px solid var(--industrial-gray);
-            margin: 2px; display: flex; flex-grow: 1; height: 650px;
-        }
-
-        /* SIDEBAR / TERMINAL DE COMANDOS */
+        /* --- BARRA LATERAL (TERMINAL DE COMANDOS) --- */
         .sidebar {
-            width: 170px; background: #000; color: var(--terminal-green);
-            padding: 15px; font-family: 'Courier New'; font-size: 11px;
-            border-right: 1px solid var(--industrial-gray);
-            display: flex; flex-direction: column; justify-content: space-between;
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            border-right: 1px solid var(--neon-blue);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
         }
 
-        .sidebar nav a {
-            color: var(--terminal-green); text-decoration: none;
-            display: block; padding: 6px 0; border-bottom: 1px solid #222;
-            text-transform: uppercase; letter-spacing: 1px;
+        .profile-area {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
         }
 
-        .sidebar nav a:hover {
-            background: var(--terminal-green); color: #000;
-            box-shadow: 0 0 10px var(--terminal-green);
+        .profile-pic {
+            width: 150px; height: 150px;
+            object-fit: cover;
+            border: 1px solid var(--neon-green);
+            /* Filtro Lain Extremo: Grises, alto contraste y tono morado */
+            filter: grayscale(100%) contrast(150%) brightness(80%) sepia(50%) hue-rotate(240deg);
+            box-shadow: 0 0 15px var(--dark-purple);
+            margin-bottom: 15px;
         }
 
-        /* CONTENIDO PRINCIPAL (CAOS DIGITAL) */
-        .main-content { 
-            flex-grow: 1; padding: 25px; overflow-y: auto; 
-            background: #000;
-            background-image: url('https://web.archive.org/web/20091027005003im_/http://geocities.com/SunsetStrip/Mezzanine/5115/bloody.gif');
-            background-size: 50px; opacity: 0.8;
+        .user-id {
+            color: #fff;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px var(--neon-blue);
         }
 
-        section { display: none; }
-        #inicio { display: block; }
-
-        /* TÍTULOS AGRESIVOS MILITARES */
-        h1, h2 { 
-            background: #000; color: #fff; padding: 5px 10px;
-            font-family: "Impact", sans-serif; text-transform: uppercase;
-            letter-spacing: 5px; font-weight: normal; border: 1px solid #fff;
-            margin-bottom: 20px; text-align: center;
+        /* --- NAVEGACIÓN RETRO 90s --- */
+        .sidebar-nav {
+            width: 100%;
+            border-top: 1px dashed var(--industrial-gray);
+            padding-top: 20px;
         }
 
-        /* BLOG POSTS TIPO 'SYSTEM_ERROR_LOG' */
-        .manual-post {
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--terminal-green); padding: 20px; margin-bottom: 35px;
-            line-height: 1.7; position: relative;
-            color: #aaa; /* Texto pálido */
+        .sidebar-nav a {
+            display: block;
+            color: var(--terminal-green);
+            text-decoration: none;
+            padding: 10px;
+            margin-bottom: 8px;
+            border: 1px solid transparent;
+            transition: 0.2s;
+            text-transform: uppercase;
+            font-family: monospace;
+            font-size: 12px;
         }
 
-        .manual-post h3 { color: #fff; text-transform: uppercase; font-size: 14px; margin-top: 0; }
-        .post-date { font-family: monospace; font-size: 10px; color: var(--wired-red); position: absolute; top: 5px; right: 10px; }
+        .sidebar-nav a:before { content: "> "; opacity: 0.5; }
 
-        /* GALERÍA (EL FILTRO LAIN EXTREMO) */
+        .sidebar-nav a:hover {
+            background: rgba(0, 255, 0, 0.1);
+            border-color: var(--terminal-green);
+            color: #fff;
+            text-shadow: 0 0 10px var(--terminal-green);
+            transform: translateX(5px);
+        }
+
+        /* --- ÁREA DE CONTENIDO PRINCIPAL --- */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: rgba(10, 10, 10, 0.5);
+        }
+
+        /* TÍTULOS CON EFECTO DE PARPADEO Y GLITCH */
+        h1, h2 {
+            font-family: "Impact", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--neon-purple);
+            padding-bottom: 10px;
+            animation: titlePulse 4s infinite;
+        }
+
+        h1 { color: #fff; text-shadow: 0 0 10px var(--neon-purple); font-size: 24px; }
+        h2 { color: var(--neon-blue); text-shadow: 0 0 8px var(--neon-blue); font-size: 18px; margin-top: 40px; }
+
+        @keyframes titlePulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--neon-purple); }
+            50% { opacity: 0.7; text-shadow: 0 0 20px var(--neon-purple), 0 0 30px var(--neon-purple); }
+            52% { opacity: 1; }
+            54% { opacity: 0.7; }
+        }
+
+        /* PÁRRAFOS TIPO TEXTO DE TERMINAL */
+        p {
+            color: var(--text-color);
+            margin-bottom: 20px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        /* --- BLOQUES DE CONTENIDO (LOGS) --- */
+        .log-entry {
+            background: rgba(20, 0, 20, 0.6);
+            border: 1px solid var(--dark-purple);
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(188, 19, 254, 0.1);
+        }
+
+        .log-entry::before {
+            content: "DATA_STREAM_ACTIVE";
+            position: absolute; top: -8px; left: 15px;
+            background: #000; color: var(--neon-purple);
+            font-size: 9px; padding: 0 5px; font-family: monospace;
+        }
+
+        .log-entry h3 {
+            color: #fff;
+            font-family: monospace;
+            text-transform: uppercase;
+            margin-top: 0;
+            font-size: 14px;
+        }
+
+        .post-date {
+            font-size: 10px;
+            color: var(--dark-purple);
+            position: absolute; bottom: 5px; right: 10px;
+            font-family: monospace;
+        }
+
+        /* --- GALERÍA (FILTRO LAIN CORE EXTREMO) --- */
         .photo-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px;
         }
-        .photo-card { 
-            border: 1px solid var(--industrial-gray); background: #000; padding: 2px;
-            /* Filtro de bajo bits y alto contraste (Lain Style) */
-            filter: grayscale(100%) contrast(150%) brightness(70%) sepia(20%);
-            transition: 0.1s; cursor: pointer;
+
+        .photo-card {
+            border: 1px solid var(--industrial-gray);
+            background: #000;
+            padding: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            /* Filtro Lain: Gris, alto contraste, tono morado y oscuro */
+            filter: grayscale(100%) contrast(160%) brightness(60%) sepia(40%) hue-rotate(260deg);
+            transition: 0.1s;
         }
-        .photo-card:hover { filter: none; transform: scale(1.05); border-color: #fff; }
+
+        .photo-card:hover {
+            filter: none;
+            border-color: var(--neon-blue);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--neon-blue);
+            z-index: 10;
+        }
+
         .photo-card img { width: 100%; height: 90px; object-fit: cover; }
 
-        /* GUESTBOOK */
-        #cusdis_thread { filter: invert(1) grayscale(1) contrast(150%); }
-
-        /* Animación para el título glitch */
-        @keyframes glitch {
-            0% { content: "PRESENT DAY"; }
-            50% { content: "PRESENT TIME"; }
-            100% { content: "HA HA HA HA"; }
+        /* Efecto de líneas de escaneo solo en la galería */
+        .photo-card::after {
+            content: "";
+            position: absolute; inset: 0;
+            background: var(--scanlines);
+            background-size: 100% 2px;
+            pointer-events: none; opacity: 0.3;
         }
+
+        /* --- MODAL DE ZOOM (AERO GLASS OSCURO) --- */
+        #zoom-modal {
+            display: none; position: fixed; z-index: 99999;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            justify-content: center; align-items: center;
+        }
+        #zoom-img {
+            max-width: 90%; max-height: 80%;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 30px var(--dark-purple);
+            /* Zoom mantenemos un poco de filtro */
+            filter: grayscale(50%) contrast(120%) hue-rotate(260deg);
+        }
+
+        /* --- GUESTBOOK --- */
+        #cusdis_thread {
+            filter: invert(1) grayscale(1) contrast(150%) hue-rotate(180deg);
+            background: transparent !important;
+        }
+
+        /* --- REPRODUCTOR DE MÚSICA (WINAMP WIRED ERA) --- */
+        .wired-player {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--neon-purple);
+            padding: 10px;
+            margin-top: auto; /* Al final de la sidebar */
+            font-family: monospace;
+            font-size: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(188, 19, 254, 0.2);
+        }
+
+        .player-title { color: var(--neon-purple); font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
         
-        #glitch-title::after {
-            content: "PRESENT DAY";
-            animation: glitch 5s infinite;
-            color: var(--wired-red);
+        marquee {
+            background: #111;
+            color: var(--terminal-green);
+            padding: 2px;
+            border: 1px solid #333;
+            text-transform: uppercase;
         }
 
-        /* Responsivo básico */
-        @media (max-width: 800px) {
-            .desktop-wrapper { flex-direction: column; align-items: center; padding: 10px; }
-            #netscape-window { width: 100%; margin: 20px 0; }
-            #social-window { position: static; width: 100%; margin-bottom: 20px; }
-            #viewport { height: auto; min-height: 500px; }
+        /* --- RESPONSIVE ESPECÍFICO PARA TELÉFONOS --- */
+        @media (max-width: 768px) {
+            .navi-wrapper {
+                flex-direction: column;
+                border: none;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--neon-blue);
+                padding: 15px;
+                position: relative;
+            }
+
+            .profile-pic { width: 80px; height: 80px; margin-bottom: 10px; }
+            .user-id { font-size: 10px; }
+
+            .sidebar-nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+                padding-top: 10px;
+                border-top: 1px dashed #333;
+            }
+
+            .sidebar-nav a {
+                padding: 5px 10px;
+                margin-bottom: 0;
+                font-size: 10px;
+            }
+
+            .wired-player {
+                position: static;
+                margin-top: 15px;
+            }
+
+            .main-content { padding: 15px; }
+            h1 { font-size: 20px; }
+            .log-entry { padding: 15px; }
+            .photo-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
         }
+
+        /* --- EXTRAS: EFECTOS DE TEXTO PARPADEANTE --- */
+        .blink { animation: blinker 1.5s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        .glitch-text { position: relative; color: #fff; }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .glitch-text::before {
+            left: 2px; text-shadow: -2px 0 var(--neon-blue);
+            background: #000;
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px; text-shadow: -2px 0 var(--neon-purple);
+            background: #000;
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(20px, 9999px, 10px, 0); }
+            100% { clip: rect(80px, 9999px, 90px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(50px, 9999px, 60px, 0); }
+            100% { clip: rect(10px, 9999px, 30px, 0); }
+        }
+
     </style>
 </head>
 <body>
 
-    <div id="zoom-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center;" onclick="this.style.display='none'">
-        <img id="zoom-img" style="max-width:90%; border:1px solid var(--terminal-green); filter: grayscale(1) contrast(150%);">
+    <div id="zoom-modal" onclick="this.style.display='none'">
+        <img id="zoom-img" src="">
     </div>
 
-    <div class="desktop-wrapper">
-        <div id="social-window">
-            <div class="win-title-bar">
-                <span>Identity: iannget.raped_</span>
-                <span>[x]</span>
+    <div class="navi-wrapper">
+        
+        <aside class="sidebar">
+            <div class="profile-area">
+                <img src="./fotodeperfil.jpg" class="profile-pic">
+                <div class="user-id">iannget.raped_</div>
+                <div style="font-size:9px; color:var(--dark-purple); margin-top:5px;">System_Status: <span class="blink" style="color:var(--neon-blue);">CONNECTED</span></div>
             </div>
-            <div class="msn-header">
-                <img src="./fotodeperfil.jpg">
-                <div style="font-size:10px; margin-top:5px;">
-                    STATUS: <span style="color:red; font-weight:bold;">DISCONNECTED</span>
+
+            <nav class="sidebar-nav">
+                <a href="#inicio">Access_Log</a>
+                <a href="#fotos">Visual_Data</a>
+                <a href="#comentarios">Signal_Book</a>
+            </nav>
+
+            <div style="margin-top: 20px; text-align: center; border-top: 1px dashed #222; padding-top: 10px; opacity:0.3;">
+                <img src="https://web.archive.org/web/20091027102741im_/http://geocities.com/area51/vault/6433/wired.gif" style="width: 80px; filter: grayscale(1) invert(1);">
+            </div>
+
+            <div class="wired-player">
+                <div class="player-title">Wired_Signal_v5.0</div>
+                <marquee id="music-status" scrollamount="2">Initializing Navi...</marquee>
+                <div style="font-size:8px; color:#555; margin-top:3px;">No matter where you are...</div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section id="inicio" style="display: block;">
+                <h1><span class="glitch-text" data-text="PRESENT DAY, PRESENT TIME">PRESENT DAY, PRESENT TIME</span><span style="color:var(--neon-purple);">... hahaha</span></h1>
+                
+                <p class="blink" style="color:#666;">> Initializing secure connection...</p>
+                <p class="blink" style="color:#666;">> Local_IP: 192.168.1.104 // Wired_Node: LAYER_04</p>
+
+                <div class="log-entry">
+                    <h3>[ENTRY_01: INTRO]</h3>
+                    <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
+                    <div class="post-date">TYPE: BASIC_INFO</div>
                 </div>
-            </div>
-            <div style="padding: 10px; font-size: 10px; background:#000;">
-                <p style="color:#666;">Data_Stream: +52 777 352 3251</p>
-                <div class="music-card">
-                    SIGNAL_DATA: <marquee id="music-status" scrollamount="2">Waiting for Navi...</marquee>
+
+                <div class="log-entry">
+                    <h3>[ENTRY_02: SYSTEM_ERROR]</h3>
+                    <p>La comunidad que desea discapacidades mentales... Vivir con paranoia y autismo no es un aesthetic de internet, es una realidad compleja. Socializar es un laberinto cuando el sistema tiene errores de conexión constantes.</p>
+                    <p>Gracias por leer este reporte.</p>
+                    <div class="post-date">TYPE: RANT // DATE: 2026.01.02</div>
                 </div>
-            </div>
-        </div>
 
-        <div id="netscape-window">
-            <div class="win-title-bar" style="background: #222; color: var(--text-color);">
-                <span>Copland_OS // Layer: 03 // Vanguard</span>
-                <span>[_][口][x]</span>
-            </div>
-            
-            <div id="viewport">
-                <aside class="sidebar">
-                    <div style="text-align:center; margin-bottom: 20px;">
-                        <img src="CALLME.jpg" style="width: 100%; filter: grayscale(1) invert(1) contrast(200%); border: 1px solid var(--terminal-green);">
-                    </div>
-                    <nav>
-                        <a href="#inicio">> LOG_ENTRIES</a>
-                        <a href="#fotos">> VISUAL_DATA</a>
-                        <a href="#comentarios">> SIGNAL_BOOK</a>
-                    </nav>
-                    <div style="margin-top: 30px; text-align: center; border-top: 1px dashed #333; padding-top: 10px;">
-                        <img src="https://web.archive.org/web/20091027102741im_/http://geocities.com/area51/vault/6433/wired.gif" style="width: 80px; filter: grayscale(1); opacity: 0.3;">
-                        <p style="font-size: 8px; color: #555; margin-top: 10px;">And you don't even need a body.</p>
-                    </div>
-                </aside>
+                <div style="text-align:center; margin-top: 40px; opacity:0.2;">
+                    <p style="font-size:10px;">And you don't even need a body.</p>
+                </div>
+            </section>
 
-                <main class="main-content">
-                    <section id="inicio">
-                        <h1><span id="glitch-title"></span></h1>
-                        
-                        <div class="manual-post">
-                            <span class="post-date">[ENTRY: 2026.03.12]</span>
-                            <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
-                            <img src="https://web.archive.org/web/20091027083038im_/http://geocities.com/SiliconValley/Way/1400/static.gif" style="width: 100px; height: 10px; filter: grayscale(1);">
-                        </div>
+            <section id="fotos">
+                <h1>Visual_Archive</h1>
+                <p>> Loading visual data stream...</p>
+                <div class="photo-grid">
+                    <script>
+                        for(let i=27; i>=1; i--) {
+                            let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
+                            document.write(`
+                                <div class="photo-card" onclick="openZoom(this)">
+                                    <img src="IMG${i}.${ext}" alt="Data_${i}">
+                                </div>
+                            `);
+                        }
+                    </script>
+                </div>
+            </section>
 
-                        <div class="manual-post">
-                            <span class="post-date">[ENTRY: 2026.01.02]</span>
-                            <h3>SYSTEM_ERROR: TIKTOK_BRAIN</h3>
-                            <p>La comunidad que desea discapacidades mentales... Vivir con paranoia y autismo no es un aesthetic de internet, es una realidad compleja. Socializar es un laberinto cuando el sistema tiene errores de conexión constantes.</p>
-                        </div>
-                    </section>
-
-                    <section id="fotos">
-                        <h1>Visual_Archive</h1>
-                        <div class="photo-grid">
-                            <script>
-                                for(let i=27; i>=1; i--) {
-                                    let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
-                                    document.write(`
-                                        <div class="photo-card" onclick="openZoom(this)">
-                                            <img src="IMG${i}.${ext}" alt="Data_${i}">
-                                        </div>
-                                    `);
-                                }
-                            </script>
-                        </div>
-                    </section>
-
-                    <section id="comentarios">
-                        <h1>Signal_Book</h1>
-                        <div id="cusdis_thread" 
-                             data-host="https://cusdis.com" 
-                             data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" 
-                             data-page-id="vanguard_vfinal_lain"></div>
-                    </section>
-                </main>
-            </div>
-            <div style="background:#000; padding:2px 10px; font-size:9px; color:var(--wired-red); border-top:1px solid #333; font-family:monospace;">
-                Protocol Wired Active // No body required.
-            </div>
-        </div>
+            <section id="comentarios">
+                <h1>Guestbook</h1>
+                <p>> Waiting for external signals...</p>
+                <div id="cusdis_thread" 
+                     data-host="https://cusdis.com" 
+                     data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" 
+                     data-page-id="vanguard_vfinal_lain"></div>
+            </section>
+        </main>
     </div>
 
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     <script>
-        // Zoom de fotos con filtro agresivo
+        // Zoom de fotos
         function openZoom(element) {
             var img = element.getElementsByTagName('img')[0];
             if(img) {
@@ -317,7 +487,9 @@
                 const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
-                document.getElementById('music-status').innerText = `${track.name.toUpperCase()} // ${track.artist['#text'].toUpperCase()}`;
+                const artist = track.artist['#text'];
+                const songName = track.name;
+                document.getElementById('music-status').innerText = `${songName.toUpperCase()} // ${artist.toUpperCase()}`;
             } catch (e) { document.getElementById('music-status').innerText = "SIGNAL_LOST"; }
         }
         updateMusic();
