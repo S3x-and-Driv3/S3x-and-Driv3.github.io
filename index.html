@@ -2,402 +2,254 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> IFHY ₍^. .^₎Ⳋ</title>
+    <title>PRESENT DAY, PRESENT TIME... HAHAHA</title>
     
-    <link rel="icon" type="image/jpeg" href="./fotodeperfil.jpg">
-
     <style>
-        /* --- SCROLLBAR ROJA SUCIA --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #440000; border: 1px solid #ff0000; } /* Rojo más oscuro */
-        ::-webkit-scrollbar-thumb:hover { background: #ff0000; }
+        /* --- LAIN CORE AESTHETIC --- */
+        :root {
+            --bg-color: #d1d1d1; /* Gris clínico/pálido de los 90 */
+            --wired-red: #8b0000;
+            --shadow-gray: #4a4a4a;
+            --terminal-green: #00ff00;
+            --window-border: #808080;
+        }
 
-        /* --- ESTILOS BASE UNIFICADOS (GRIS/OSCURO) --- */
         body {
-            background-color: #0d0d0d; /* Casi negro pero con tono gris */
-            background-image: url('./FONDO.jpg'); /* Tu fondo */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            margin: 0; padding: 0;
-            font-family: "Courier New", Courier, monospace; /* Fuente monocromo más cruda */
-            color: #b0b0b0; /* Gris claro en lugar de blanco puro */
+            background-color: var(--bg-color);
+            /* Fondo con ruido estático y cables sutiles */
+            background-image: 
+                linear-gradient(rgba(209, 209, 209, 0.9), rgba(209, 209, 209, 0.9)),
+                url('https://web.archive.org/web/20090830045543im_/http://geocities.com/TimesSquare/Labyrinth/6104/noise.gif');
+            margin: 0;
+            font-family: "MS UI Gothic", "Courier New", monospace;
+            color: #000;
             overflow-x: hidden;
-            /* Filtro global para dar ese tono gris/sucio a TODO */
-            filter: contrast(110%) brightness(90%) sepia(10%); 
+            /* El filtro pálido y crudo que te gusta */
+            filter: contrast(115%) brightness(95%) grayscale(20%);
         }
 
-        /* Efecto de texto parpadeante para títulos */
-        blink { animation: blinker 1.5s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-
-        .desktop-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            min-height: 100vh;
-            box-sizing: border-box;
+        /* --- EFECTO DE INTERFERENCIA (STATIC) --- */
+        body::before {
+            content: " ";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://web.archive.org/web/20091027083038im_/http://geocities.com/SiliconValley/Way/1400/static.gif');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9999;
         }
 
-        /* --- VENTANA MSN (ESTILO RETRO OBSCURO) --- */
+        /* --- VENTANA MSN -> COPLAND INTERFACE --- */
         #social-window {
-            position: fixed; top: 20px; left: 20px; width: 220px;
-            background-color: #222; border: 2px outset #444; /* Gris oscuro */
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.7); z-index: 100;
+            position: fixed; top: 40px; left: 20px; width: 200px;
+            background: #c0c0c0; border: 2px solid #fff;
+            border-right-color: #404040; border-bottom-color: #404040;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2); z-index: 100;
         }
 
         .win-title-bar {
-            /* Degradado MSN pero en tonos oscuros/rojos */
-            background: linear-gradient(to bottom, #330000 0%, #000000 100%);
-            color: #ff0000; padding: 3px 5px; font-weight: bold; font-size: 11px;
+            background: #000080; color: #fff;
+            padding: 2px 5px; font-size: 10px; font-weight: bold;
             display: flex; justify-content: space-between;
-            border-bottom: 1px solid #ff0000;
-        }
-
-        .win-content {
-            padding: 0; border: 2px inset #111; background: #111; /* Interior negro */
-            max-height: 550px; overflow-y: auto;
         }
 
         .msn-header {
-            display: flex; align-items: center; padding: 10px; gap: 10px; 
-            background: #000; border-bottom: 1px solid #333;
-        }
-
-        /* Estilo de la foto de estado de MSN */
-        .msn-header img {
-            border: 2px solid #ff0000; 
-            width: 45px; 
-            height: 45px; 
-            object-fit: cover;
-            /* Filtro sucio para la foto del MSN */
-            filter: grayscale(100%) contrast(120%);
-        }
-
-        .buddy-list { list-style: none; padding: 0; margin: 0; font-size: 11px; }
-        .buddy-list li { display: flex; flex-direction: column; padding: 6px; border-bottom: 1px solid #222; } 
-        
-        .buddy-item-link { 
-            text-decoration: none; color: #b0b0b0; display: flex; align-items: center; width: 100%; transition: 0.2s; 
-            flex-direction: row; justify-content: space-between;
-        }
-        .buddy-item-link:hover { color: #ff0000; font-weight: bold; transform: translateX(3px); }
-        
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid #555; }
-        .online { background: #0f0; box-shadow: 0 0 5px #0f0; } /* Brillo neón */
-
-        /* REPRODUCTOR DE MÚSICA ABAJO (ESTILO GRIS SUCIO) */
-        .music-big-card {
-            background: #000;
-            color: #888; /* Gris apagado */
-            padding: 10px;
-            border-top: 1px solid #333;
-            font-family: 'Courier New', Courier, monospace;
+            padding: 10px; background: #eee; border-bottom: 1px solid #808080;
             text-align: center;
         }
-        #music-status-big {
-            display: block;
-            font-size: 11px;
-            font-weight: bold;
-            margin-top: 5px;
-            text-transform: uppercase;
-            color: #ff0000; /* Texto de la música en rojo */
+
+        .msn-header img {
+            width: 80px; height: 80px; border: 1px solid #000;
+            filter: grayscale(100%) contrast(150%); /* Foto de perfil cruda */
         }
 
-        /* --- VENTANA PRINCIPAL NETSCAPE (Gris industrial) --- */
+        /* --- VENTANA PRINCIPAL (ESTILO NAVI) --- */
         #netscape-window {
-            width: 950px; height: 650px; 
-            background-color: #1a1a1a; border: 2px solid #333; /* Gris muy oscuro */
+            width: 900px; margin: 50px auto;
+            background: #c0c0c0; border: 2px solid #fff;
             border-right-color: #000; border-bottom-color: #000;
-            display: flex; flex-direction: column; z-index: 10;
-        }
-
-        .app-title-bar {
-            /* Degradado rojo oscuro a negro */
-            background: linear-gradient(90deg, #440000, #000000);
-            color: #ff0000; padding: 4px 10px; font-weight: bold;
-            display: flex; justify-content: space-between;
-            border-bottom: 1px solid #ff0000;
+            display: flex; flex-direction: column;
         }
 
         #viewport {
-            background-color: #000; border: 2px inset #222;
-            margin: 5px; color: #b0b0b0; display: flex;
-            flex-grow: 1; overflow: hidden;
+            background: #fff; border: 2px inset #808080;
+            margin: 4px; display: flex; flex-grow: 1; height: 600px;
         }
 
-        /* SIDEBAR (Negro y Rojo) */
+        /* SIDEBAR / NAVI TERMINAL */
         .sidebar {
-            width: 200px; background: #050505; border-right: 2px solid #ff0000;
-            padding: 15px; text-align: center; flex-shrink: 0; overflow-y: auto;
+            width: 180px; background: #000; color: var(--terminal-green);
+            padding: 15px; font-family: 'Courier New'; font-size: 12px;
+            border-right: 2px solid #808080;
         }
 
-        .profile-pic { 
-            width: 120px; height: 120px; border: 2px solid #ff0000; object-fit: cover; margin-bottom: 10px; 
-            /* Filtro crudo para la foto de perfil */
-            filter: grayscale(100%) contrast(110%);
+        .sidebar a {
+            color: var(--terminal-green); text-decoration: none;
+            display: block; padding: 5px 0; border-bottom: 1px solid #333;
         }
 
-        .user-info {
-            font-size: 11px; text-align: left; color: #888; margin-bottom: 15px; 
-            padding: 8px; border: 1px solid #222; background: #000; line-height: 1.4;
+        .sidebar a:hover { background: var(--terminal-green); color: #000; }
+
+        /* CONTENIDO PRINCIPAL */
+        .main-content { 
+            flex-grow: 1; padding: 25px; overflow-y: auto; 
+            background: url('https://web.archive.org/web/20091027102741im_/http://geocities.com/area51/vault/6433/wired.gif');
+            background-attachment: fixed;
         }
 
-        .sidebar-nav a { 
-            display: block; padding: 8px; color: #ff0000; 
-            text-decoration: none; border-bottom: 1px solid #1a1a1a; font-size: 12px; 
-            text-transform: uppercase;
-        }
-        .sidebar-nav a:hover { background: #ff0000; color: #000; font-weight: bold; }
-
-        /* CONTENIDO PRINCIPAL (UNIFICADO CON EL ESTILO DE PICS) */
-        .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; background: #080808; }
-        section { display: none; } 
+        section { display: none; }
         #inicio { display: block; }
-        
-        /* Títulos Impacto Rojos Crudos */
+
         h1, h2 { 
-            color: #ff0000; font-family: "Impact", sans-serif; 
-            border-bottom: 1px solid #ff0000; margin-bottom: 15px; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            background: #000; color: #fff; padding: 5px 10px;
+            font-family: "Impact", sans-serif; text-transform: uppercase;
+            letter-spacing: 3px; font-weight: normal;
         }
 
-        /* POSTS MANUALES (Gris Sucio) */
+        /* BLOG POSTS ESTILO REPORTE DE SISTEMA */
         .manual-post {
-            background: #000; border: 1px solid #222; padding: 15px;
-            margin-bottom: 20px; position: relative; font-size: 13px;
-            color: #999; /* Texto del blog más apagado */
-        }
-        .post-date { font-size: 9px; color: #444; position: absolute; top: 5px; right: 10px; }
-        .manual-post h3 { color: #ff0000; font-family: 'Courier New'; margin-top: 0; border: none;}
-
-        /* COMENTARIOS (Invertidos para que sean oscuros) */
-        #cusdis_thread { 
-            background: #000 !important; color: #b0b0b0 !important; 
-            padding: 10px; border: 2px inset #222; 
-            filter: invert(90%) hue-rotate(180deg); /* Truco para oscurecer Cusdis */
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #000; padding: 20px; margin-bottom: 30px;
+            box-shadow: 5px 5px 0px #8b0000;
+            line-height: 1.6; position: relative;
         }
 
-        /* GALERÍA (Mismo estilo que antes, pero unificado) */
+        .post-date { font-family: monospace; font-size: 10px; color: #8b0000; }
+
+        /* GALERÍA (EL FILTRO GRIS QUE TE GUSTA) */
         .photo-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px;
         }
-        .photo-card { background: #000; border: 1px solid #ff0000; padding: 5px; cursor: pointer; transition: 0.3s; }
-        .photo-card:hover { transform: scale(1.03); background: #111; }
+        .photo-card { 
+            border: 1px solid #000; background: #fff; padding: 3px;
+            filter: grayscale(100%) contrast(120%) brightness(80%); /* El filtro Lain */
+            transition: 0.2s;
+        }
+        .photo-card:hover { filter: none; transform: translateY(-2px); }
+        .photo-card img { width: 100%; height: 100px; object-fit: cover; }
+
+        /* MÚSICA */
+        .music-card {
+            margin-top: 20px; font-size: 10px; color: #ff0000;
+            border: 1px solid #ff0000; padding: 5px; background: #000;
+        }
+
+        marquee { background: #000; color: #00ff00; font-family: monospace; }
         
-        /* El filtro grisáceo crudo que te gusta aplicado a las imágenes de la galería */
-        .photo-card img { 
-            width: 100%; height: 110px; object-fit: cover; 
-            filter: grayscale(100%) contrast(110%) brightness(90%); 
-        }
+        /* Cursdis Invisible/Incrustado */
+        #cusdis_thread { filter: grayscale(1); }
 
-        #zoom-modal {
-            display: none; position: fixed; z-index: 2000;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
-        }
-        #zoom-img { max-width: 95%; max-height: 85%; border: 2px solid #ff0000; filter: grayscale(50%); }
-
-        @media (max-width: 900px) {
-            .desktop-wrapper { display: block; padding: 10px; }
-            #social-window { position: relative; top: auto; left: auto; width: 100%; margin-bottom: 20px; }
-            #netscape-window { width: 100%; height: auto; min-height: 600px; }
-            #viewport { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 2px solid #ff0000; padding: 10px; }
-            .sidebar-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
-            .photo-grid { grid-template-columns: repeat(3, 1fr); }
-        }
     </style>
 </head>
 <body>
 
-    <div id="zoom-modal" onclick="this.style.display='none'">
-        <img id="zoom-img" src="">
-    </div>
-
-    <div class="desktop-wrapper">
-        <div id="social-window">
-            <div class="win-title-bar">
-                <span>Messenger</span>
-                <span>_ □ X</span>
-            </div>
-            <div class="win-content">
-                <div class="msn-header">
-                    <img src="CALLME.jpg">
-                    <div style="color:#b0b0b0; font-weight:bold; font-size:11px;">
-                        <span style="cursor:default;">Iannget.raped_</span><br>
-                        <span style="font-weight:normal; color: #ff0000; font-size: 10px;"><blink>Online</blink></span>
-                    </div>
-                </div>
-                <ul class="buddy-list">
-                    <li>
-                        <a href="https://github.com/catekath" target="_blank" class="buddy-item-link"> 
-                            GitHub <div class="status-dot online"></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/iannget.raped_/" target="_blank" class="buddy-item-link"> 
-                            Instagram <div class="status-dot online"></div>
-                        </a>
-                    </li>
-                    <li style="color:#888; font-size: 11px; padding: 10px; border-top: 1px dotted #333; background: #000; display: block;">
-                        <b>Tel:</b> +52 777 352 3251<br>
-                        <span style="font-size: 9px; color: #555; font-style: italic;">
-                            (mandame mensaje lwk o algo)
-                        </span>
-                    </li>
-                    <div class="music-big-card">
-                        <span style="font-size: 9px; color: #555;">NOW LISTENING:</span>
-                        <marquee id="music-status-big" scrollamount="3">Connecting...</marquee>
-                    </div>
-                </ul>
+    <div id="social-window">
+        <div class="win-title-bar">
+            <span>Protocol: Wired</span>
+            <span>[x]</span>
+        </div>
+        <div class="msn-header">
+            <img src="./fotodeperfil.jpg">
+            <div style="font-size:11px; margin-top:5px;">
+                <b>iannget.raped_</b><br>
+                <span style="color:red;">CONNECTION: ACTIVE</span>
             </div>
         </div>
-
-        <div id="netscape-window">
-            <div class="app-title-bar">
-                <span>vanguard_vfinal.html</span>
-                <span>_ ▢ X</span>
+        <div style="padding: 10px; font-size: 10px;">
+            <p>Tel: +52 777 352 3251</p>
+            <div class="music-card">
+                SIGNAL: <marquee id="music-status" scrollamount="2">Initializing Navi...</marquee>
             </div>
-            <div id="viewport">
-                <aside class="sidebar">
-                    <img src="./fotodeperfil.jpg" class="profile-pic">
-                    <div class="user-info">
-                        <b>User:</b> Iannget.raped_<br>
-                      
+        </div>
+    </div>
+
+    <div id="netscape-window">
+        <div class="win-title-bar" style="background: #4a4a4a;">
+            <span>Copland OS v1.0.1 - Vanguard</span>
+            <span>[_][口][x]</span>
+        </div>
+        
+        <div id="viewport">
+            <aside class="sidebar">
+                <div style="text-align:center; margin-bottom: 20px;">
+                    <img src="CALLME.jpg" style="width: 100%; filter: grayscale(1) invert(1); border: 1px solid #00ff00;">
+                </div>
+                <nav>
+                    <a href="#inicio">> LOG_ENTRIES</a>
+                    <a href="#fotos">> VISUAL_DATA</a>
+                    <a href="#comentarios">> SIGNAL_BOOK</a>
+                </nav>
+                <div style="margin-top: 30px; text-align: center;">
+                    <img src="https://web.archive.org/web/20091027102741im_/http://geocities.com/area51/vault/6433/wired.gif" style="width: 50px; opacity: 0.5;">
+                    <p style="font-size: 8px;">No matter where you are, everyone is always connected.</p>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <section id="inicio">
+                    <h1>System.log</h1>
+                    <div class="manual-post">
+                        <span class="post-date">[ENTRY_01: 2026.03.12]</span>
+                        <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
                     </div>
-                    <nav class="sidebar-nav">
-                        <a href="#inicio">:: Index ::</a>
-                        <a href="#fotos">:: Pics ::</a>
-                        <a href="#comentarios">:: Gbook ::</a>
-                    </nav>
-               
-                </aside>
 
-                <main class="main-content">
-                    <section id="inicio">
-                        <h1>Index</h1>
-                        <div style="background:#000; border:1px solid #222; padding:15px; margin-bottom:20px; color: #888;">
-                           <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas y encima hago cosas, aqui pues subo cosas que lwk me gustan y mas como un core yk y ya okay bai si okay</p>
-                           <img src="IMG24.jpg" style="width: 100%; height: 40px; margin-top: 10px; filter: grayscale(100%) contrast(200%);">
-                        </div>
-                        
-                        <h1>the real shit</h1>
-                        <div class="manual-post">
-                            <span class="post-date">05/03/2026</span>
-                            <h3>wsp niggas</h3>
-                            <p></p>
-                            <p>we no mames me maman las papas al microndas de que metes una papa por 3 minutos al micro y sale cocinada asi bien rico y te la comes asi como salga para la fibra y de que sabe rico aca bien fire nigga</p>
-                            <p>alch soy asi como gay pero como que lo oculto sabes</p>
-                            <p>es broma q pedo w pero lo de la papa no</p>
-                        </div>
+                    <div class="manual-post">
+                        <span class="post-date">[ENTRY_02: 2026.01.02]</span>
+                        <h3 style="margin: 0; color: #8b0000;">TIKTOK_BRAIN_ROT</h3>
+                        <p>La comunidad que desea discapacidades mentales... Vivir con paranoia y autismo no es un aesthetic de internet, es una realidad compleja. Socializar es un laberinto cuando el sistema (tu mente) tiene errores de conexión constantes.</p>
+                        <p>Gracias por leer este reporte.</p>
+                    </div>
+                </section>
 
-                        <div class="manual-post">
-                            <span class="post-date">02/01/2026</span>
-                            <h3>tiktok es una mierda (no todo tiktok btw)</h3>
-                            <p>Hola, un poco de contexto:</p>
-                            <p>Estaba viendo cosas de tiktok por que pues lwk no ocupo tiktok y decidi verlo, pues me encontre un grupo o bueno una "comunidad" de tiktok que DESEA CON TODA SU ALMA tener alguna discapacidad mental como autismo, TLP, paranoia o esquizofremia.</p>
-                            <p>Como algunos de ustedes ya saben padezco de la mayoria de estos desordenes mentales, en especifico padezco de paranoia relacionada a la ansiedad y autismo en el espectro de asperger, esa mierda es super asquerosa osea, por que seria gracioso o divertido tener algun tipo de discapacidad mental, no digo que todos los usuarios de tiktok esten asi de dañados, pero el problema es que es una comunidad grande que puede influenciar a mas personas a pedir de rodillas una enfermedad mental.</p>
-                            <p>Vivir con este tipo de problemas mentales es complejo, sin decir complicado, me ha costado mucho socializar o mantener un vinculo con toda esta mierda y no esta divertido encerrarse de todas las personas por 5 meses por miedo que te haran algo, se que algunos son ragebait pero incluso como ragebait no queda yk, ya mucha bullshit, espero que tu te hayas quedado hasta el final y por tu atencion.</p>
-                            <p>Gracias.</p>
-                        </div>
+                <section id="fotos">
+                    <h1>Visual_Archive</h1>
+                    <div class="photo-grid">
+                        <script>
+                            for(let i=27; i>=1; i--) {
+                                let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
+                                document.write(`
+                                    <div class="photo-card">
+                                        <img src="IMG${i}.${ext}" alt="Data_${i}">
+                                    </div>
+                                `);
+                            }
+                        </script>
+                    </div>
+                </section>
 
-                        <div class="manual-post">
-                            <span class="post-date">02/01/2026</span>
-                            <h3>wsp nigga</h3>
-                            <p>yo wsk, im testing thi shi, esto lo estoy haciendo usando la api de tumblr, osea es raro yk pero aja si ay si okay si esta bien hermano .</p>
-                            <img src="" style="width: 30px; filter: grayscale(100%) contrast(150%);">
-                        </div>
-                    </section>
-
-                    <section id="fotos">
-                        <h2>Gallery</h2>
-                        <div class="photo-grid">
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG27.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG26.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG25.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG24.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG23.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG22.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG21.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG20.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG19.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG18.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG17.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG16.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG15.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG14.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG13.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG12.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG11.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG10.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG09.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG08.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG7.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG6.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG5.png"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG4.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG3.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG2.jpg"></div>
-                            <div class="photo-card" onclick="openZoom(this)"><img src="IMG1.jpeg"></div>
-                        </div>
-                    </section>
-
-                    <section id="comentarios">
-                        <h2>Guestbook</h2>
-                        <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" data-page-id="vanguard_vfinal_new"></div>
-                        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-                    </section>
-                </main>
-            </div>
+                <section id="comentarios">
+                    <h1>Guestbook</h1>
+                    <div id="cusdis_thread" 
+                         data-host="https://cusdis.com" 
+                         data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f" 
+                         data-page-id="vanguard_lain"></div>
+                    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                </section>
+            </main>
         </div>
     </div>
 
     <script>
-        // Zoom de fotos con filtro sucio
-        function openZoom(element) {
-            var img = element.getElementsByTagName('img')[0];
-            if(img) {
-                document.getElementById('zoom-img').src = img.src;
-                document.getElementById('zoom-modal').style.display = 'flex';
-            }
-        }
-
-        // Navegación entre secciones
+        // Cambio de pestañas
         window.addEventListener('hashchange', function() {
-            const sections = document.querySelectorAll('section');
-            sections.forEach(s => s.style.display = 'none');
-            const activeSection = document.querySelector(window.location.hash || '#inicio');
-            if (activeSection) activeSection.style.display = 'block';
+            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+            const active = document.querySelector(window.location.hash || '#inicio');
+            if (active) active.style.display = 'block';
         });
 
-        // Script de Last.fm ( Catekath & API Key real)
+        // Música con Last.fm
         async function updateMusic() {
             const user = "catekath";
             const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
-            
             try {
                 const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
-                const artist = track.artist['#text'];
-                const songName = track.name;
-                
-                const isPlaying = track['@attr'] && track['@attr'].nowplaying;
-                const statusLabel = isPlaying ? "Escuchando: " : "Última: ";
-                
-                // Actualizamos el marquee grande debajo del teléfono
-                document.getElementById('music-status-big').innerText = statusLabel + songName + " - " + artist;
-            } catch (e) { 
-                document.getElementById('music-status-big').innerText = "Last.fm Offline"; 
-            }
+                document.getElementById('music-status').innerText = `${track.name.toUpperCase()} // ${track.artist['#text'].toUpperCase()}`;
+            } catch (e) { document.getElementById('music-status').innerText = "OFFLINE"; }
         }
-
         updateMusic();
-        setInterval(updateMusic, 30000); // Actualiza cada 30 seg
+        setInterval(updateMusic, 30000);
     </script>
 </body>
 </html>
