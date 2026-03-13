@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROTOCOL: WIRED // WORLD_MACHINE // iannknow_wred.sys</title>
+    <title> // WORLD_MACHINE // iannknow_wred.sys</title>
     
     <link rel="icon" type="image/jpeg" href="niko.jpg">
 
@@ -164,7 +164,7 @@
             </div>
 
             <div class="oneshot-player">
-                <span class="player-label">World_Machine.exe</span>
+                <span class="player-label">The shit i lisent</span>
                 <marquee id="music-status" scrollamount="3">Searching for music signal...</marquee>
             </div>
         </header>
@@ -178,10 +178,10 @@
 
         <main>
             <section id="inicio" class="content-section">
-                <h2 style="color:#fff; font-size: 18px; border-bottom: 1px solid var(--accent-red);">"You only have one shot, iann."</h2>
+                <h2 style="color:#fff; font-size: 18px; border-bottom: 1px solid var(--accent-red);">Real Shit</h2>
                 <div class="log-entry">
                     <h3>[ SYSTEM_REPORT ]</h3>
-                    <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas...</p>
+                    <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas pero omg le hice rework a esta mierda</p>
                 </div>
             </section>
 
@@ -207,9 +207,9 @@
             </section>
 
             <footer>
-                <p class="niko-msg">"Everything is going to be okay, right player?"</p>
+                <p class="niko-msg">"Everything is going to be okay nigga"</p>
                 <div style="display: flex; justify-content: center; gap: 20px;">
-                    <a href="https://www.instagram.com/iannget.raped_/" style="color:var(--accent-red); font-size: 11px; text-decoration:none;">INSTAGRAM</a>
+                    <a href="https://www.instagram.com/iannknow_wred.sys/" style="color:var(--accent-red); font-size: 11px; text-decoration:none;">INSTAGRAM</a>
                     <a href="https://github.com/catekath" style="color:var(--accent-red); font-size: 11px; text-decoration:none;">GITHUB</a>
                 </div>
             </footer>
@@ -218,15 +218,25 @@
 
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     <script>
+ // --- ZOOM DE FOTOS CORREGIDO (CON FIX DE SCROLL) ---
         function openZoom(element) {
             const img = element.getElementsByTagName('img')[0];
             const modal = document.getElementById('zoom-modal');
             const zoomImg = document.getElementById('zoom-img');
+            
             zoomImg.src = img.src;
             modal.style.display = 'flex';
+            
+            // Bloquea el scroll al abrir
             document.body.style.overflow = 'hidden';
         }
 
+        // Esta parte es la que faltaba para liberar el scroll
+        document.getElementById('zoom-modal').addEventListener('click', function() {
+            this.style.display = 'none';
+            // Libera el scroll al cerrar
+            document.body.style.overflow = 'auto'; 
+        });
         // --- FIX REPRODUCTOR DE MÚSICA ---
         async function updateMusic() {
             const user = "catekath";
