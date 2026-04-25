@@ -3,185 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROTOCOL // IANN_DEV</title>
-    
+    <title>TempleOS // C:/USER/IANN/DESKTOP.DD</title>
     <style>
         :root {
-            --bg: #0a0a0a;
-            --panel: #141414;
-            --accent: #ff0000;
-            --text: #e0e0e0;
-            --text-dim: #888;
-            --border: #222;
-            --font: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --c-blue: #0000AA;
+            --c-white: #FFFFFF;
+            --c-black: #000000;
+            --c-red: #AA0000;
+            --c-green: #00AA00;
+            --c-yellow: #FFFF55;
+            --c-gray: #AAAAAA;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { 
+            box-sizing: border-box; 
+            cursor: url('https://cur.cursors-4u.net/others/oth-2/oth147.cur'), auto !important; 
+        }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: var(--font);
+            background-color: var(--c-gray);
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+            margin: 0;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 10px;
             height: 100vh;
-            display: flex;
-            overflow: hidden; /* El scroll será interno */
         }
 
-        /* --- SIDEBAR --- */
-        .sidebar {
-            width: 300px;
-            background: var(--panel);
-            border-right: 1px solid var(--border);
+        /* --- ESTILO DE VENTANA TEMPLEOS --- */
+        .window {
+            background: var(--c-white);
+            border: 2px solid var(--c-black);
             display: flex;
             flex-direction: column;
-            padding: 30px;
-            z-index: 10;
+            box-shadow: 4px 4px 0px var(--c-black);
         }
 
-        .profile-section {
-            text-align: center;
-            margin-bottom: 40px;
+        .win-header {
+            background: var(--c-blue);
+            color: var(--c-white);
+            padding: 2px 8px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--c-black);
         }
 
-        .pfp {
-            width: 120px;
-            height: 120px;
-            border-radius: 12px;
-            border: 2px solid var(--border);
-            object-fit: cover;
-            margin-bottom: 15px;
-            filter: grayscale(100%);
-            transition: 0.3s;
-        }
-
-        .pfp:hover { filter: none; border-color: var(--accent); }
-
-        .username { font-size: 1.2rem; font-weight: bold; letter-spacing: 1px; }
-        .status { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; margin-top: 5px; }
-
-        /* REPRODUCTOR */
-        .music-player {
-            background: #000;
-            border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: auto;
-        }
-
-        .player-label { font-size: 10px; color: var(--text-dim); margin-bottom: 5px; display: block; }
-        #music-status { font-size: 12px; font-family: monospace; white-space: nowrap; overflow: hidden; }
-
-        /* --- CONTENIDO --- */
-        .main-content {
-            flex: 1;
+        .win-content {
+            padding: 10px;
             overflow-y: auto;
-            padding: 50px;
-            scroll-behavior: smooth;
+            flex: 1;
         }
 
-        section { margin-bottom: 60px; }
-        h2 { 
-            font-size: 0.9rem; 
-            color: var(--accent); 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
+        /* --- COMPONENTES ESPECÍFICOS --- */
+        .announcement { grid-column: 1 / 2; }
+        .god-word { grid-column: 2 / 3; }
+        .directory { grid-column: 1 / 2; }
+        .gallery-win { grid-column: 2 / 3; }
+
+        h3 { color: var(--c-red); font-size: 14px; margin-top: 0; text-transform: uppercase; border-bottom: 2px solid var(--c-black); }
+        
+        .pfp-box {
+            float: left;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--c-black);
+            margin-right: 10px;
+            background: #000;
         }
+        .pfp-box img { width: 100%; height: 100%; object-fit: cover; filter: contrast(150%) grayscale(100%); }
 
-        .bio-text { font-size: 1.1rem; color: var(--text-dim); line-height: 1.6; }
+        .dir-list { list-style: none; padding: 0; font-size: 12px; }
+        .dir-list li { color: var(--c-blue); margin-bottom: 4px; }
+        .dir-list li span { color: var(--c-red); }
 
-        /* GALERIA */
+        /* GALERÍA PIXELADA */
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 8px;
         }
-
         .photo-card {
-            aspect-ratio: 1;
-            background: var(--panel);
-            border-radius: 6px;
-            overflow: hidden;
+            border: 1px solid var(--c-black);
+            background: var(--c-gray);
+            padding: 2px;
             cursor: pointer;
-            border: 1px solid var(--border);
-            transition: 0.3s;
         }
-
-        .photo-card img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.3s; }
-        .photo-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .photo-card img { width: 100%; height: 60px; object-fit: cover; filter: grayscale(100%); }
         .photo-card:hover img { filter: none; }
 
-        /* COMENTARIOS */
-        .comments-container {
-            background: var(--panel);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
+        /* REPRODUCTOR */
+        .player-bar {
+            background: var(--c-black);
+            color: var(--c-lgreen);
+            padding: 5px;
+            border: 2px inset var(--c-gray);
+            font-size: 11px;
+            margin-top: 10px;
         }
 
         /* ZOOM MODAL */
         #zoom-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 9999;
+            background: rgba(0,0,170,0.7); z-index: 9999;
             justify-content: center; align-items: center;
         }
-        #zoom-img { max-width: 85vw; max-height: 85vh; border-radius: 8px; border: 1px solid #444; }
+        #zoom-box { background: #fff; border: 4px solid #000; padding: 5px; }
 
-        nav a {
-            display: block;
-            color: var(--text-dim);
-            text-decoration: none;
-            padding: 10px 0;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-        nav a:hover { color: var(--accent); padding-left: 10px; }
+        .blink { animation: blinker 1s steps(2, start) infinite; }
+        @keyframes blinker { to { visibility: hidden; } }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
+        /* CUSDIS TUNING */
+        #cusdis_thread { filter: contrast(1.2); font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <div id="zoom-modal">
-        <img id="zoom-img" src="">
+    <div id="zoom-modal" onclick="closeZoom()">
+        <div id="zoom-box">
+            <img id="zoom-img" style="max-width: 80vw; max-height: 80vh; display: block;">
+        </div>
     </div>
 
-    <aside class="sidebar">
-        <div class="profile-section">
-            <img src="./fotodeperfil.jpg" class="pfp">
-            <div class="username">iannknow_wred.sys</div>
-            <div class="status">● System Admin</div>
+    <section class="window announcement">
+        <div class="win-header">
+            <span>[ANNOUNCEMENT] iann.com/home</span>
+            <span>[X]</span>
         </div>
-
-        <nav>
-            <a href="#about">// INTRODUCTION</a>
-            <a href="#gallery">// REPOSITORY</a>
-            <a href="#comments">// NETWORK_LOGS</a>
-            <a href="https://github.com/catekath" target="_blank">// GITHUB</a>
-        </nav>
-
-        <div class="music-player">
-            <span class="player-label">NOW LISTENING:</span>
-            <div id="music-status">UPDATING SIGNAL...</div>
-        </div>
-    </aside>
-
-    <main class="main-content">
-        <section id="about">
-            <h2>About</h2>
-            <p class="bio-text">
-                Yo wsp, soy iann. Me dedico a desarrollar interfaces y explorar sistemas. 
-                Actualmente optimizando mi entorno digital. Bienvenido a mi nodo personal.
+        <div class="win-content">
+            <h3>--- IANN_SYSTEM_REPORT ---</h3>
+            <div class="pfp-box">
+                <img src="./fotodeperfil.jpg">
+            </div>
+            <p style="font-size: 13px;">
+                Yo wsp, soy iann. Bienvenido a mi nodo personal. 
+                Sigue el protocolo y respeta el estándar 640x480.<br>
+                <span class="blink" style="color:var(--c-red)">GOD IS WATCHING.</span>
             </p>
-        </section>
+        </div>
+    </section>
 
-        <section id="gallery">
-            <h2>Visual Archive</h2>
+    <section class="window god-word">
+        <div class="win-header">
+            <span>[GOD_WORD] line.com/god_word</span>
+            <span>[X]</span>
+        </div>
+        <div class="win-content" style="background: #eee;">
+            <p style="color: var(--c-red); margin: 0;">God says:</p>
+            <p id="god-msg" style="font-size: 13px; color: var(--c-blue);">"Bringing relief, the divine frequency is now operating within this terminal."</p>
+            <div class="player-bar">
+                SND_OUTPUT: <span id="music-status" style="color:#00FF00">SCANNING...</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="window directory">
+        <div class="win-header">
+            <span>[DIRECTORY] c:/ann/logs</span>
+            <span>[X]</span>
+        </div>
+        <div class="win-content">
+            <ul class="dir-list">
+                <li>> 04/24 21:19 [1337] <span>Holy_Code.CPP</span></li>
+                <li>> 04/23 10:44 [0788] <span>System_Rework.CPP</span></li>
+                <li>> 04/20 05:02 [1490] <span>Lain_Vibe.CPP</span></li>
+                <li>> 03/15 18:19 [1488] <span>OneShot_Ref.CPP</span></li>
+                <li>> 02/10 11:11 [1461] <span>Hello_World.CPP</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="window gallery-win">
+        <div class="win-header">
+            <span>[GRAPHICS] c:/ann/gfx</span>
+            <span>[X]</span>
+        </div>
+        <div class="win-content">
             <div class="photo-grid">
                 <script>
                     for(let i=27; i>=1; i--) {
@@ -194,47 +194,45 @@
                     }
                 </script>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="comments">
-            <h2>Communications</h2>
-            <div class="comments-container">
-                <div id="cusdis_thread"
-                    data-host="https://cusdis.com"
-                    data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
-                    data-page-id="iann_new_ui_2026"
-                    data-page-url="https://s3x-and-driv3.github.io/"
-                    data-page-title="IANN_NODE">
-                </div>
+    <section class="window" style="grid-column: 1 / 3;">
+        <div class="win-header">
+            <span>[COMM_LINK] line.com/guestbook</span>
+            <span>[X]</span>
+        </div>
+        <div class="win-content" style="background:#000;">
+            <div id="cusdis_thread"
+              data-host="https://cusdis.com"
+              data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
+              data-page-id="iann_temple_v3"
+              data-page-url="https://s3x-and-driv3.github.io/"
+              data-page-title="IANN_TEMPLE">
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     <script>
-        // ZOOM LOGIC
-        const modal = document.getElementById('zoom-modal');
-        const zoomImg = document.getElementById('zoom-img');
-
         function openZoom(element) {
             const img = element.querySelector('img');
-            zoomImg.src = img.src;
-            modal.style.display = 'flex';
+            document.getElementById('zoom-img').src = img.src;
+            document.getElementById('zoom-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
-        modal.onclick = () => {
-            modal.style.display = 'none';
-        };
+        function closeZoom() {
+            document.getElementById('zoom-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-        // MUSIC API
         async function updateMusic() {
             try {
                 const res = await fetch("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=catekath&api_key=296fbf5f08ff29425ffc176a6d4b88b2&format=json&limit=1");
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
-                const name = track.name.toUpperCase();
-                const artist = track.artist['#text'].toUpperCase();
-                document.getElementById('music-status').innerText = `${name} - ${artist}`;
+                document.getElementById('music-status').innerText = track.name.toUpperCase();
             } catch (e) {
                 document.getElementById('music-status').innerText = "OFFLINE";
             }
