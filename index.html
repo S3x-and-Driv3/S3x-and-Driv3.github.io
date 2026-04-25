@@ -3,179 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> // WORLD_MACHINE // iannknow_wred.sys</title>
+    <title>TempleOS // WORLD_MACHINE // iannknow_wred.sys</title>
     
     <link rel="icon" type="image/jpeg" href="niko.jpg">
 
     <style>
+        /* PALETA SAGRADA DE 16 COLORES */
         :root {
-            --bg-color: #000000;
-            --text-main: #ffffff;
-            --text-muted: #666666;
-            --accent-red: #ff0000; 
-            --oneshot-gold: #ffcc00;
-            --font-stack: "MS UI Gothic", "Courier New", monospace;
+            --bg-color: #ffffff;
+            --win-bg: #0000AA; /* Azul clásico de TempleOS */
+            --text-main: #000000;
+            --text-white: #ffffff;
+            --accent-red: #AA0000;
+            --accent-yellow: #FFFF55;
+            --accent-green: #55FF55;
+            --font-stack: "Courier New", Courier, monospace;
         }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
+        * { box-sizing: border-box; cursor: url('https://cur.cursors-4u.net/others/oth-2/oth147.cur'), auto !important; }
 
         body {
             background-color: var(--bg-color);
-            margin: 0; padding: 0;
+            margin: 0; padding: 20px;
             font-family: var(--font-stack);
+            font-weight: bold;
             color: var(--text-main);
-            overflow-x: hidden;
+            image-rendering: pixelated;
         }
 
-        /* FILTRO TV ANTIGUA */
+        /* --- FILTRO TV CRT (MÁS AGRESIVO) --- */
         #tv-filter {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000; pointer-events: none;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
-            background-size: 100% 4px;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 3px;
         }
 
-        .background-layers {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.1;
-            background-image: radial-gradient(var(--accent-red) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
+        /* --- MARCO DE VENTANA TIPO SISTEMA --- */
         .navi-wrapper {
-            max-width: 850px;
+            max-width: 800px;
             margin: 0 auto;
-            border-left: 1px solid #222;
-            border-right: 1px solid #222;
-            background: rgba(0, 0, 0, 0.9);
-            min-height: 100vh;
+            border: 4px double #000;
+            background: var(--bg-color);
+            box-shadow: 10px 10px 0px #888888;
         }
 
+        .system-title-bar {
+            background: var(--win-bg);
+            color: var(--text-white);
+            padding: 5px 10px;
+            display: flex; justify-content: space-between;
+            border-bottom: 4px double #000;
+            font-size: 14px;
+        }
+
+        /* --- HEADER --- */
         .fixed-header {
-            position: sticky; top: 0;
-            background: #000;
-            border-bottom: 2px solid var(--accent-red);
-            padding: 10px 20px;
+            background: #eeeeee;
+            border-bottom: 2px solid #000;
+            padding: 10px;
             display: flex; align-items: center; justify-content: space-between;
-            z-index: 1100;
         }
 
         .profile-area { display: flex; align-items: center; gap: 15px; }
-        .pfp-container { position: relative; width: 60px; height: 60px; }
-        .profile-pic {
-            width: 100%; height: 100%;
-            border: 2px solid #fff;
-            filter: grayscale(100%) contrast(120%);
-            object-fit: cover;
+        .pfp-container { 
+            border: 3px solid var(--win-bg); 
+            background: #fff;
+            padding: 2px;
         }
-        .niko-ears {
-            position: absolute; top: -10px; left: 0; width: 100%;
-            text-align: center; color: var(--accent-red); font-size: 20px;
+        .profile-pic {
+            width: 64px; height: 64px;
+            filter: contrast(150%) grayscale(100%);
+            object-fit: cover;
+            display: block;
         }
 
         .oneshot-player {
-            width: 280px;
-            background: #000;
-            border: 2px solid #fff;
-            padding: 5px 10px;
-            position: relative;
-            box-shadow: 4px 4px 0px var(--accent-red);
+            background: #fff;
+            border: 2px solid #000;
+            padding: 5px;
+            width: 300px;
         }
-        .player-label {
-            position: absolute; top: -10px; left: 10px;
-            background: #000; padding: 0 5px;
-            font-size: 9px; color: var(--accent-red);
-            border: 1px solid var(--accent-red);
-        }
-        #music-status {
-            font-size: 11px; color: #fff;
-            white-space: nowrap; overflow: hidden;
-            display: block; font-family: monospace;
-        }
+        .player-label { color: var(--accent-red); font-size: 10px; display: block; border-bottom: 1px solid #000; margin-bottom: 5px; }
+        #music-status { font-size: 12px; color: #000; font-family: monospace; }
 
+        /* --- MENÚ TIPO DOLDOC --- */
         .nav-bar {
-            padding: 10px; display: flex; justify-content: center; gap: 20px;
-            border-bottom: 1px dashed #333;
+            background: #ccc;
+            padding: 5px;
+            border-bottom: 2px solid #000;
+            display: flex; gap: 15px;
         }
-        .nav-bar a { text-decoration: none; color: #fff; font-size: 11px; text-transform: uppercase; }
-        .nav-bar a:hover { color: var(--accent-red); }
+        .nav-bar a { color: var(--win-bg); text-decoration: none; }
+        .nav-bar a:before { content: "["; color: #000; }
+        .nav-bar a:after { content: "]"; color: #000; }
+        .nav-bar a:hover { background: var(--win-bg); color: #fff; }
 
-        .content-section { padding: 30px; }
-        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 15px; }
+        /* --- SECCIONES --- */
+        .content-section { padding: 20px; border-bottom: 2px dashed #000; }
+        h2 { background: var(--accent-yellow); color: #000; display: inline-block; padding: 0 10px; border: 1px solid #000; font-size: 16px; }
+
+        .log-entry { margin: 20px 0; border-left: 5px solid var(--win-bg); padding-left: 10px; }
+        .log-entry h3 { color: var(--accent-red); font-size: 14px; margin: 0; }
+
+        /* --- GALERÍA (ESTILO TABLA) --- */
+        .photo-grid { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+            gap: 10px; margin-top: 10px;
+        }
         .photo-card {
-            background: #111; border: 1px solid #333; padding: 4px; cursor: pointer;
-            transition: 0.3s;
+            border: 2px solid #000;
+            padding: 2px;
+            background: #fff;
+            text-align: center;
         }
         .photo-card img { 
-            width: 100%; height: 110px; object-fit: cover; display: block;
-            filter: grayscale(100%) brightness(40%);
+            width: 100%; height: 80px; object-fit: cover;
+            filter: sepia(100%) saturate(200%) contrast(120%);
         }
-        .photo-card:hover { border-color: var(--accent-red); transform: translateY(-5px); }
         .photo-card:hover img { filter: none; }
 
+        /* --- ZOOM MODAL (LIMPIO) --- */
         #zoom-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 99999;
+            background: rgba(0,0,170,0.8); z-index: 99999;
             justify-content: center; align-items: center;
         }
-        #zoom-img { max-width: 90vw; max-height: 90vh; border: 2px solid #fff; filter: none !important; }
+        #zoom-img { border: 10px solid #fff; max-width: 80vw; max-height: 80vh; }
 
-        .log-entry { margin-bottom: 30px; padding: 15px; border: 1px solid #222; position: relative; }
-        .log-entry h3 { color: var(--accent-red); font-size: 14px; margin: 0 0 10px 0; text-transform: uppercase; }
-        .log-entry p { font-size: 13px; color: #ccc; margin: 0; }
+        /* --- COMENTARIOS --- */
+        #comment-wrapper {
+            background: #000; padding: 10px; border: 4px inset #ccc;
+        }
+        #cusdis_thread { filter: invert(1) hue-rotate(180deg); }
 
-        footer { text-align: center; padding: 40px; border-top: 1px solid #222; }
-        .niko-msg { color: var(--oneshot-gold); font-size: 11px; font-style: italic; margin-bottom: 20px; }
+        footer { background: #ccc; padding: 10px; text-align: center; font-size: 12px; }
+        .niko-msg { color: var(--accent-red); animation: blink 1s steps(1) infinite; }
+        @keyframes blink { 50% { visibility: hidden; } }
 
-        #cusdis_thread { filter: invert(1) grayscale(1); margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <div id="tv-filter"></div>
-    <div class="background-layers"></div>
 
     <div id="zoom-modal">
         <img id="zoom-img" src="">
     </div>
 
     <div class="navi-wrapper">
+        <div class="system-title-bar">
+            <span>C:/USER/IANN/WORLD_MACHINE.EXE</span>
+            <span>[X]</span>
+        </div>
+
         <header class="fixed-header">
             <div class="profile-area">
                 <div class="pfp-container">
-                    <div class="niko-ears">^..^</div>
                     <img src="./fotodeperfil.jpg" class="profile-pic">
                 </div>
-                <div class="user-info">
-                    <span class="user-name">iannknow_wred.sys</span>
-                    <span style="font-size: 9px; color: var(--accent-red);">[ PLAYER FOUND ]</span>
+                <div>
+                    <div style="color: var(--win-bg)">iannknow_wred.sys</div>
+                    <div style="font-size: 10px; color: var(--accent-green);">ONLINE_GOD_MODE</div>
                 </div>
             </div>
 
             <div class="oneshot-player">
-                <span class="player-label">The music i listen</span>
-                <marquee id="music-status" scrollamount="3">Searching for music signal...</marquee>
+                <span class="player-label">Divine_Frequencies.exe</span>
+                <div id="music-status">Waiting for God to speak...</div>
             </div>
         </header>
 
         <nav class="nav-bar">
             <a href="#inicio">LOGS</a>
-            <a href="#visuals">VISUALS</a>
-            <a href="#signals">SIGNALS</a>
-            <a href="#protocol">PROTOCOL</a>
+            <a href="#visuals">GFX</a>
+            <a href="#signals">CHAT</a>
+            <a href="#protocol">INFO</a>
         </nav>
 
         <main>
             <section id="inicio" class="content-section">
-                <h2 style="color:#fff; font-size: 18px; border-bottom: 1px solid var(--accent-red);">Real Shit</h2>
+                <h2>$RED "Real Shit" $FG</h2>
                 <div class="log-entry">
-                    <h3>[ SYSTEM_REPORT ]</h3>
-                    <p>Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas pero omg le hice rework a esta mierda</p>
+                    <h3>> SYSTEM_REPORT</h3>
+                    <p>Yo wsp, soy iann... El rework divino ha sido completado. 640x480 es todo lo que un hombre necesita.</p>
                 </div>
             </section>
 
             <section id="visuals" class="content-section">
-                <h2 style="color:#fff;">MEMORY_DISK</h2>
+                <h2>$BLUE MEMORY_DISK $FG</h2>
                 <div class="photo-grid">
                     <script>
                         for(let i=27; i>=1; i--) {
@@ -183,81 +199,67 @@
                             document.write(`
                                 <div class="photo-card" onclick="openZoom(this)">
                                     <img src="IMG${i}.${ext}">
+                                    <div style="font-size:8px;">IMG_${i}.BIN</div>
                                 </div>
                             `);
                         }
                     </script>
                 </div>
             </section>
-<section id="signals" class="content-section">
-    <h2 style="color:#fff;">GUESTBOOK</h2>
-    <div id="cusdis_thread"
-      data-host="https://cusdis.com"
-      data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
-      data-page-id="iann_world_machine_v1"
-      data-page-url="https://s3x-and-driv3.github.io/"
-      data-page-title="WORLD_MACHINE">
-    </div>
-</section>
 
-<script>
-    // Forzamos la carga de Cusdis
-    (function() {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://cusdis.com/js/cusdis.es.js';
-        s.async = true;
-        s.defer = true;
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
+            <section id="signals" class="content-section">
+                <h2>$GREEN GUESTBOOK $FG</h2>
+                <div id="comment-wrapper">
+                    <div id="cusdis_thread"
+                      data-host="https://cusdis.com"
+                      data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
+                      data-page-id="iann_world_machine_v1"
+                      data-page-url="https://s3x-and-driv3.github.io/"
+                      data-page-title="WORLD_MACHINE">
+                    </div>
+                </div>
+            </section>
 
             <footer>
-                <p class="niko-msg">"Everything is going to be okay nigga"</p>
+                <p class="niko-msg">GOD SAYS: EVERYTHING IS GOING TO BE OKAY</p>
                 <div style="display: flex; justify-content: center; gap: 20px;">
-                    <a href="https://www.instagram.com/iannknow_wred.sys/" style="color:var(--accent-red); font-size: 11px; text-decoration:none;">INSTAGRAM</a>
-                    <a href="https://github.com/catekath" style="color:var(--accent-red); font-size: 11px; text-decoration:none;">GITHUB</a>
+                    <a href="https://www.instagram.com/iannknow_wred.sys/" style="color:var(--win-bg);">[INSTAGRAM]</a>
+                    <a href="https://github.com/catekath" style="color:var(--win-bg);">[GITHUB]</a>
                 </div>
             </footer>
         </main>
     </div>
 
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     <script>
-        // FUNCIÓN ZOOM CON FIX DE SCROLL
         function openZoom(element) {
             const img = element.getElementsByTagName('img')[0];
             const modal = document.getElementById('zoom-modal');
             const zoomImg = document.getElementById('zoom-img');
             zoomImg.src = img.src;
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Bloquea scroll
+            document.body.style.overflow = 'hidden';
         }
 
-        // CERRAR ZOOM Y ACTIVAR SCROLL
         document.getElementById('zoom-modal').onclick = function() {
             this.style.display = 'none';
-            document.body.style.overflow = 'auto'; // DESBLOQUEA EL SCROLL
+            document.body.style.overflow = 'auto';
         };
 
-        // REPRODUCTOR LAST.FM
         async function updateMusic() {
             const user = "catekath";
             const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
             const statusBox = document.getElementById('music-status');
-            
             try {
                 const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
-                
                 const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
-                const prefix = isPlaying ? "♫ NOW_PLAYING: " : "☾ LAST_SEEN: ";
-                
-                statusBox.innerText = `${prefix}${track.name.toUpperCase()} - ${track.artist['#text'].toUpperCase()}`;
+                statusBox.innerText = (isPlaying ? ">> " : "|| ") + track.name.toUpperCase();
             } catch (e) {
-                statusBox.innerText = "SIGNAL_LOST: REBOOTING...";
+                statusBox.innerText = "OFFLINE";
             }
         }
-
         updateMusic();
         setInterval(updateMusic, 30000);
     </script>
