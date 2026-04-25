@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TempleOS // WORLD_MACHINE // iannknow_wred.sys</title>
+    <title>TempleOS // C:/USER/IANN/HOME.DD</title>
     
-    <link rel="icon" type="image/jpeg" href="niko.jpg">
-
     <style>
-        /* PALETA SAGRADA Y CURSOR */
+        /* ESTÁNDAR DIVINO DE 16 COLORES */
         :root {
-            --bg-color: #ffffff;
-            --win-bg: #0000AA;
-            --text-main: #000000;
-            --text-white: #ffffff;
-            --accent-red: #AA0000;
-            --accent-yellow: #FFFF55;
-            --accent-green: #55FF55;
-            --font-stack: "Courier New", Courier, monospace;
+            --c-black: #000000;
+            --c-blue: #0000AA;
+            --c-green: #00AA00;
+            --c-cyan: #00AAAA;
+            --c-red: #AA0000;
+            --c-purple: #AA00AA;
+            --c-brown: #AA5500;
+            --c-gray: #AAAAAA;
+            --c-dgray: #555555;
+            --c-lblue: #5555FF;
+            --c-lgreen: #55FF55;
+            --c-lcyan: #55FFFF;
+            --c-lred: #FF5555;
+            --c-lpurple: #FF55FF;
+            --c-yellow: #FFFF55;
+            --c-white: #FFFFFF;
         }
 
         * { 
@@ -26,239 +32,265 @@
         }
 
         body {
-            background-color: #888888; /* Fondo gris tipo escritorio antiguo */
-            margin: 0; padding: 10px;
-            font-family: var(--font-stack);
-            font-weight: bold;
-            color: var(--text-main);
-            image-rendering: pixelated;
+            background-color: var(--c-white);
+            margin: 0; padding: 15px;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: 900;
+            color: var(--c-black);
+            line-height: 1.2;
         }
 
-        /* FILTRO TV CRT */
+        /* FILTRO CRT AGRESIVO */
         #tv-filter {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000; pointer-events: none;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-            background-size: 100% 3px;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+            background-size: 100% 2px;
         }
 
-        /* CONTENEDOR PRINCIPAL: DISTRIBUCIÓN EN COLUMNAS */
-        .navi-wrapper {
-            max-width: 1000px;
+        /* MARCO PRINCIPAL */
+        .temple-wrapper {
+            max-width: 900px;
             margin: 0 auto;
-            border: 4px double #000;
-            background: var(--bg-color);
-            box-shadow: 10px 10px 0px #444;
+            border: 5px solid var(--c-black);
+            background: var(--c-white);
             display: flex;
             flex-direction: column;
         }
 
-        .system-title-bar {
-            background: var(--win-bg);
-            color: var(--text-white);
-            padding: 5px 10px;
-            display: flex; justify-content: space-between;
-            border-bottom: 4px double #000;
-        }
-
-        /* LAYOUT DE DOS COLUMNAS */
-        .main-layout {
+        /* BARRA DE TÍTULO DOLDOC */
+        .title-bar {
+            background: var(--c-blue);
+            color: var(--c-white);
+            padding: 2px 10px;
+            border-bottom: 5px solid var(--c-black);
             display: flex;
-            min-height: 80vh;
+            justify-content: space-between;
+            font-size: 16px;
         }
 
-        /* BARRA LATERAL (SISTEMA) */
+        .layout { display: flex; min-height: 500px; }
+
+        /* BARRA LATERAL IZQUIERDA */
         .sidebar {
-            width: 250px;
-            background: #ccc;
-            border-right: 4px double #000;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            width: 220px;
+            background: var(--c-gray);
+            border-right: 5px solid var(--c-black);
+            padding: 10px;
         }
 
-        /* ÁREA DE CONTENIDO (TRABAJO) */
-        .content-area {
+        .pfp-box {
+            border: 4px inset var(--c-white);
+            background: var(--c-black);
+            margin-bottom: 10px;
+        }
+        .profile-pic {
+            width: 100%; display: block;
+            filter: contrast(200%) grayscale(100%) brightness(0.8);
+            image-rendering: pixelated;
+        }
+
+        /* REPRODUCTOR TIPO TERMINAL */
+        .snd-output {
+            background: var(--c-black);
+            color: var(--c-lgreen);
+            padding: 5px;
+            border: 3px outset var(--c-gray);
+            font-size: 12px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        /* MENÚ DE COMANDOS */
+        .nav-cmd { display: flex; flex-direction: column; }
+        .nav-cmd a {
+            color: var(--c-blue);
+            text-decoration: none;
+            padding: 2px 5px;
+        }
+        .nav-cmd a:hover {
+            background: var(--c-blue);
+            color: var(--c-white);
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .main-content {
             flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background: #fff;
+            padding: 15px;
+            background: var(--c-white);
         }
 
-        /* COMPONENTES REORGANIZADOS */
-        .pfp-container { 
-            border: 3px solid var(--win-bg); 
-            background: #fff; padding: 2px;
-            width: 128px; margin: 0 auto;
-        }
-        .profile-pic { width: 100%; filter: contrast(150%) grayscale(100%); display: block; }
-
-        .oneshot-player {
-            background: #fff; border: 2px solid #000; padding: 5px;
-            font-size: 11px;
+        .doldoc-header {
+            background: var(--c-yellow);
+            border: 2px solid var(--c-black);
+            display: inline-block;
+            padding: 0 5px;
+            margin-bottom: 10px;
         }
 
-        .nav-menu {
-            display: flex; flex-direction: column; gap: 5px;
+        /* GALERÍA DE GRÁFICOS */
+        .gr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 5px;
         }
-        .nav-menu a {
-            text-decoration: none; color: var(--win-bg);
-            padding: 5px; border: 1px transparent;
+        .gr-item {
+            border: 3px solid var(--c-black);
+            background: var(--c-gray);
+            padding: 2px;
+            cursor: pointer;
         }
-        .nav-menu a:hover { background: var(--win-bg); color: #fff; border: 1px solid #000; }
-        .nav-menu a:before { content: "-> "; }
+        .gr-item img { width: 100%; height: 70px; object-fit: cover; filter: grayscale(100%); }
+        .gr-item:hover { background: var(--c-lblue); }
 
-        /* GALERÍA */
-        .photo-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
-            gap: 10px;
-        }
-        .photo-card {
-            border: 2px solid #000; background: #fff; padding: 2px;
-            transition: transform 0.1s;
-        }
-        .photo-card img { width: 100%; height: 80px; object-fit: cover; filter: grayscale(100%); }
-        .photo-card:hover { transform: scale(1.05); }
-        .photo-card:hover img { filter: none; }
-
-        /* MODAL */
+        /* ZOOM MODAL */
         #zoom-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 99999;
+            background: var(--c-blue); z-index: 9999;
             justify-content: center; align-items: center;
         }
-        #zoom-img { border: 5px solid #fff; max-width: 85vw; max-height: 85vh; }
+        #zoom-img { border: 8px solid var(--c-white); max-width: 90vw; }
 
-        h2 { background: var(--accent-yellow); border: 1px solid #000; padding: 2px 10px; font-size: 16px; margin-top: 0; }
-        footer { border-top: 4px double #000; padding: 10px; text-align: center; background: #eee; font-size: 11px; }
-
-        @media (max-width: 700px) {
-            .main-layout { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 4px double #000; }
+        /* COMENTARIOS */
+        .comm-link {
+            background: var(--c-black);
+            border: 4px double var(--c-gray);
+            padding: 5px;
+            margin-top: 20px;
         }
+        #cusdis_thread { filter: invert(1); }
+
+        footer {
+            border-top: 5px solid var(--c-black);
+            background: var(--c-gray);
+            padding: 5px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .blink { animation: blinker 0.8s steps(2, start) infinite; }
+        @keyframes blinker { to { visibility: hidden; } }
     </style>
 </head>
 <body>
 
-    <div id="tv-filter"></div>
+<div id="tv-filter"></div>
 
-    <div id="zoom-modal">
-        <img id="zoom-img" src="">
+<div id="zoom-modal">
+    <img id="zoom-img" src="">
+</div>
+
+<div class="temple-wrapper">
+    <div class="title-bar">
+        <span>TempleOS V3.0 // C:/HOME/IANN.DD</span>
+        <span>[INS] [CAPS]</span>
     </div>
 
-    <div class="navi-wrapper">
-        <div class="system-title-bar">
-            <span>TempleOS_V2 // WORLD_MACHINE // IANN</span>
-            <span>[_][#][X]</span>
-        </div>
-
-        <div class="main-layout">
-            <aside class="sidebar">
-                <div class="pfp-container">
-                    <img src="./fotodeperfil.jpg" class="profile-pic">
-                </div>
-                
-                <div style="text-align: center;">
-                    <div style="color: var(--win-bg)">iannknow_wred.sys</div>
-                    <div style="font-size: 10px; color: var(--accent-red);">[GOD_MODE: ON]</div>
-                </div>
-
-                <div class="oneshot-player">
-                    <span style="color:var(--accent-red)">$RADIO_FREQ</span>
-                    <marquee id="music-status" scrollamount="2">Waiting for signal...</marquee>
-                </div>
-
-                <nav class="nav-menu">
-                    <a href="#inicio">FILES</a>
-                    <a href="#visuals">GRAPHICS</a>
-                    <a href="#signals">COMM_LINK</a>
-                </nav>
-                
-                <div style="font-size: 9px; color: #666; margin-top: auto;">
-                    MEM_OS: 640KB<br>
-                    CPU: DIVINE_INTEL
-                </div>
-            </aside>
-
-            <main class="content-area">
-                <section id="inicio">
-                    <h2>$RED "SYSTEM_REPORT" $FG</h2>
-                    <p style="font-size: 14px;">Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas pero omg le hice rework a esta mierda. La distribución ha sido optimizada para el Player.</p>
-                    <hr border="1">
-                </section>
-
-                <section id="visuals" style="margin-top: 30px;">
-                    <h2>$BLUE "GFX_ARCHIVE" $FG</h2>
-                    <div class="photo-grid">
-                        <script>
-                            for(let i=27; i>=1; i--) {
-                                let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
-                                document.write(`
-                                    <div class="photo-card" onclick="openZoom(this)">
-                                        <img src="IMG${i}.${ext}">
-                                    </div>
-                                `);
-                            }
-                        </script>
-                    </div>
-                </section>
-
-                <section id="signals" style="margin-top: 30px;">
-                    <h2>$GREEN "GUEST_SIGNALS" $FG</h2>
-                    <div style="background: #000; padding: 10px; border: 2px inset #ccc;">
-                        <div id="cusdis_thread"
-                          data-host="https://cusdis.com"
-                          data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
-                          data-page-id="iann_world_machine_v1"
-                          data-page-url="https://s3x-and-driv3.github.io/"
-                          data-page-title="WORLD_MACHINE">
-                        </div>
-                    </div>
-                </section>
-            </main>
-        </div>
-
-        <footer>
-            <div style="color: var(--accent-red); animation: blink 1s steps(1) infinite;">
-                -- EVERYTHING IS GOING TO BE OKAY --
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="pfp-box">
+                <img src="./fotodeperfil.jpg" class="profile-pic">
             </div>
-            @ 2026 // iannknow_wred.sys // God's Computer
-        </footer>
+            
+            <div style="color: var(--c-blue); text-align: center; border-bottom: 2px solid #000;">
+                USER: IANN<br>
+                <span class="blink" style="color: var(--c-red);">[GOD_MODE]</span>
+            </div>
+
+            <div class="snd-output">
+                <span style="color: var(--c-white);">SND_FREQ:</span><br>
+                <marquee id="music-status" scrollamount="2">SCANNING...</marquee>
+            </div>
+
+            <nav class="nav-cmd">
+                <a href="#inicio">1. LOG_FILES</a>
+                <a href="#visuals">2. GR_SCREENS</a>
+                <a href="#signals">3. COMM_LINK</a>
+                <a href="https://github.com/catekath">4. SRC_CODE</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="inicio">
+                <div class="doldoc-header">DIARY_ENTRY:001</div>
+                <p>
+                    $FG,4$ /* ROJO DIVINO */<br>
+                    Yo wsp, soy iann. Rework completado. <br>
+                    Sistema operando en modo puro.<br>
+                    $FG,0$ /* NEGRO ESTÁNDAR */
+                </p>
+                <hr style="border: 1px dashed #000;">
+            </section>
+
+            <section id="visuals">
+                <div class="doldoc-header">GR_RESOURCE_FORK</div>
+                <div class="gr-grid">
+                    <script>
+                        for(let i=27; i>=1; i--) {
+                            let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
+                            document.write(`
+                                <div class="gr-item" onclick="openZoom(this)">
+                                    <img src="IMG${i}.${ext}">
+                                </div>
+                            `);
+                        }
+                    </script>
+                </div>
+            </section>
+
+            <section id="signals">
+                <div class="doldoc-header">REMOTE_COMM_LINK</div>
+                <div class="comm-link">
+                    <div id="cusdis_thread"
+                      data-host="https://cusdis.com"
+                      data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
+                      data-page-id="iann_world_machine_v1"
+                      data-page-url="https://s3x-and-driv3.github.io/"
+                      data-page-title="WORLD_MACHINE">
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-    <script>
-        function openZoom(element) {
-            const img = element.getElementsByTagName('img')[0];
-            const modal = document.getElementById('zoom-modal');
-            const zoomImg = document.getElementById('zoom-img');
-            zoomImg.src = img.src;
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+    <footer>
+        <span class="blink" style="color: var(--c-red);">GOD SAYS:</span> 
+        "640x480 IS THE DIVINE STANDARD. KEEP IT SIMPLE."
+    </footer>
+</div>
 
-        document.getElementById('zoom-modal').onclick = function() {
-            this.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        };
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+<script>
+    function openZoom(element) {
+        const img = element.getElementsByTagName('img')[0];
+        const modal = document.getElementById('zoom-modal');
+        const zoomImg = document.getElementById('zoom-img');
+        zoomImg.src = img.src;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
 
-        async function updateMusic() {
-            const user = "catekath";
-            const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
-            const statusBox = document.getElementById('music-status');
-            try {
-                const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
-                const data = await res.json();
-                const track = data.recenttracks.track[0];
-                const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
-                statusBox.innerText = (isPlaying ? "PLAYING: " : "LAST: ") + track.name.toUpperCase();
-            } catch (e) {
-                statusBox.innerText = "SIGNAL_LOST";
-            }
+    document.getElementById('zoom-modal').onclick = function() {
+        this.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+
+    async function updateMusic() {
+        const user = "catekath";
+        const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
+        const statusBox = document.getElementById('music-status');
+        try {
+            const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
+            const data = await res.json();
+            const track = data.recenttracks.track[0];
+            const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
+            statusBox.innerText = (isPlaying ? "> " : "| ") + track.name.toUpperCase();
+        } catch (e) {
+            statusBox.innerText = "NO_SIGNAL";
         }
-        updateMusic();
-        setInterval(updateMusic, 30000);
-    </script>
+    }
+    updateMusic();
+    setInterval(updateMusic, 30000);
+</script>
 </body>
 </html>
