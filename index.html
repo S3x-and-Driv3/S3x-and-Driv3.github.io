@@ -2,295 +2,141 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TempleOS // C:/USER/IANN/HOME.DD</title>
-    
+    <title>C:/USER/IANN/GOD_VIEW.DD</title>
     <style>
-        /* ESTÁNDAR DIVINO DE 16 COLORES */
+        /* PALETA VESA 16 COLORES - SIN COMPROMISOS */
         :root {
-            --c-black: #000000;
-            --c-blue: #0000AA;
-            --c-green: #00AA00;
-            --c-cyan: #00AAAA;
-            --c-red: #AA0000;
-            --c-purple: #AA00AA;
-            --c-brown: #AA5500;
-            --c-gray: #AAAAAA;
-            --c-dgray: #555555;
-            --c-lblue: #5555FF;
-            --c-lgreen: #55FF55;
-            --c-lcyan: #55FFFF;
-            --c-lred: #FF5555;
-            --c-lpurple: #FF55FF;
-            --c-yellow: #FFFF55;
-            --c-white: #FFFFFF;
+            --BLACK: #000000; --BLUE: #0000AA; --GREEN: #00AA00; --CYAN: #00AAAA;
+            --RED: #AA0000; --PURPLE: #AA00AA; --BROWN: #AA5500; --LGRAY: #AAAAAA;
+            --DGRAY: #555555; --LBLUE: #5555FF; --LGREEN: #55FF55; --LCYAN: #55FFFF;
+            --LRED: #FF5555; --LPURPLE: #FF55FF; --YELLOW: #FFFF55; --WHITE: #FFFFFF;
         }
 
-        * { 
-            box-sizing: border-box; 
-            cursor: url('https://cur.cursors-4u.net/others/oth-2/oth147.cur'), auto !important; 
-        }
+        * { cursor: url('https://cur.cursors-4u.net/others/oth-2/oth147.cur'), auto !important; box-sizing: border-box; }
 
         body {
-            background-color: var(--c-white);
-            margin: 0; padding: 15px;
+            background-color: var(--BLUE);
+            color: var(--WHITE);
             font-family: "Courier New", Courier, monospace;
-            font-weight: 900;
-            color: var(--c-black);
-            line-height: 1.2;
-        }
-
-        /* FILTRO CRT AGRESIVO */
-        #tv-filter {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1000; pointer-events: none;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-            background-size: 100% 2px;
-        }
-
-        /* MARCO PRINCIPAL */
-        .temple-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            border: 5px solid var(--c-black);
-            background: var(--c-white);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* BARRA DE TÍTULO DOLDOC */
-        .title-bar {
-            background: var(--c-blue);
-            color: var(--c-white);
-            padding: 2px 10px;
-            border-bottom: 5px solid var(--c-black);
-            display: flex;
-            justify-content: space-between;
             font-size: 16px;
+            margin: 0; padding: 10px;
+            overflow-x: hidden;
         }
 
-        .layout { display: flex; min-height: 500px; }
-
-        /* BARRA LATERAL IZQUIERDA */
-        .sidebar {
-            width: 220px;
-            background: var(--c-gray);
-            border-right: 5px solid var(--c-black);
+        /* DOLDOC ESTRICTO */
+        .doc-screen {
+            border: 4px solid var(--LGRAY);
+            background: var(--BLUE);
             padding: 10px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .pfp-box {
-            border: 4px inset var(--c-white);
-            background: var(--c-black);
-            margin-bottom: 10px;
-        }
-        .profile-pic {
-            width: 100%; display: block;
-            filter: contrast(200%) grayscale(100%) brightness(0.8);
-            image-rendering: pixelated;
+        .header-bar {
+            background: var(--WHITE);
+            color: var(--BLACK);
+            padding: 2px 10px;
+            font-weight: 900;
         }
 
-        /* REPRODUCTOR TIPO TERMINAL */
-        .snd-output {
-            background: var(--c-black);
-            color: var(--c-lgreen);
-            padding: 5px;
-            border: 3px outset var(--c-gray);
-            font-size: 12px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
+        .blink { animation: blink 0.5s step-start infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        /* MENÚ DE COMANDOS */
-        .nav-cmd { display: flex; flex-direction: column; }
-        .nav-cmd a {
-            color: var(--c-blue);
-            text-decoration: none;
-            padding: 2px 5px;
-        }
-        .nav-cmd a:hover {
-            background: var(--c-blue);
-            color: var(--c-white);
-        }
+        /* ELEMENTOS DOLDOC */
+        h1, h2 { color: var(--YELLOW); margin: 5px 0; }
+        a { color: var(--LCYAN); text-decoration: none; }
+        a:hover { background: var(--WHITE); color: var(--BLUE); }
 
-        /* CONTENIDO PRINCIPAL */
-        .main-content {
-            flex: 1;
-            padding: 15px;
-            background: var(--c-white);
-        }
+        .btn-box { border: 2px solid var(--WHITE); padding: 5px; display: inline-block; margin: 5px; }
 
-        .doldoc-header {
-            background: var(--c-yellow);
-            border: 2px solid var(--c-black);
-            display: inline-block;
-            padding: 0 5px;
-            margin-bottom: 10px;
-        }
+        .img-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+        .img-thumb { border: 2px solid var(--WHITE); width: 100%; height: 80px; object-fit: cover; cursor: pointer; }
+        .img-thumb:hover { border: 2px solid var(--RED); }
 
-        /* GALERÍA DE GRÁFICOS */
-        .gr-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 5px;
-        }
-        .gr-item {
-            border: 3px solid var(--c-black);
-            background: var(--c-gray);
-            padding: 2px;
-            cursor: pointer;
-        }
-        .gr-item img { width: 100%; height: 70px; object-fit: cover; filter: grayscale(100%); }
-        .gr-item:hover { background: var(--c-lblue); }
-
-        /* ZOOM MODAL */
-        #zoom-modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--c-blue); z-index: 9999;
-            justify-content: center; align-items: center;
-        }
-        #zoom-img { border: 8px solid var(--c-white); max-width: 90vw; }
-
-        /* COMENTARIOS */
-        .comm-link {
-            background: var(--c-black);
-            border: 4px double var(--c-gray);
-            padding: 5px;
-            margin-top: 20px;
-        }
-        #cusdis_thread { filter: invert(1); }
-
-        footer {
-            border-top: 5px solid var(--c-black);
-            background: var(--c-gray);
-            padding: 5px;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .blink { animation: blinker 0.8s steps(2, start) infinite; }
-        @keyframes blinker { to { visibility: hidden; } }
+        /* ZOOM */
+        #zoom-modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: var(--BLACK); z-index: 999; justify-content: center; align-items: center; }
+        #zoom-img { border: 5px solid var(--WHITE); max-width: 90%; }
+        
+        #cusdis_thread { filter: invert(1) hue-rotate(180deg); }
     </style>
 </head>
 <body>
 
-<div id="tv-filter"></div>
+<div class="doc-screen">
+    <div class="header-bar">
+        TEMPLE_OS_V5.03 // C:/HOME/GOD.HC // <span class="blink">_</span>
+    </div>
 
-<div id="zoom-modal">
-    <img id="zoom-img" src="">
+    <pre>
+    
+    // GOD SAYS: 640x480 IS THE DIVINE RESOLUTION.
+    // KEEP THE CODE SIMPLE. NO BLOAT.
+
+    </pre>
+
+    <div class="btn-box">
+        [<a href="#LOGS">1. READ_LOGS</a>] [<a href="#GR">2. VIEW_GR</a>] [<a href="#COMM">3. COMM_LINK</a>]
+    </div>
+
+    <h2 id="LOGS">LOG_ENTRIES</h2>
+    <div style="border-left: 4px solid var(--RED); padding-left: 10px;">
+        <p>Iann, User #001. System rework status: COMPLETE.</p>
+        <p>Memory integrity: 100%. Bloat removed.</p>
+    </div>
+
+    <h2 id="GR">GR_RESOURCES</h2>
+    <div class="img-grid">
+        <script>
+            for(let i=27; i>=1; i--) {
+                let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
+                document.write(`<img src="IMG${i}.${ext}" class="img-thumb" onclick="openZoom(this)">`);
+            }
+        </script>
+    </div>
+
+    <h2 id="COMM">COMM_CHANNEL</h2>
+    <div style="background: var(--WHITE); padding: 5px;">
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
+          data-page-id="iann_temple_v1"
+          data-page-url="https://s3x-and-driv3.github.io/"
+          data-page-title="GOD_VIEW">
+        </div>
+    </div>
+
+    <pre>
+    
+    // CURRENT_SIGNAL: <span id="music-status">SCANNING...</span>
+    
+    </pre>
 </div>
 
-<div class="temple-wrapper">
-    <div class="title-bar">
-        <span>TempleOS V3.0 // C:/HOME/IANN.DD</span>
-        <span>[INS] [CAPS]</span>
-    </div>
-
-    <div class="layout">
-        <aside class="sidebar">
-            <div class="pfp-box">
-                <img src="./fotodeperfil.jpg" class="profile-pic">
-            </div>
-            
-            <div style="color: var(--c-blue); text-align: center; border-bottom: 2px solid #000;">
-                USER: IANN<br>
-                <span class="blink" style="color: var(--c-red);">[GOD_MODE]</span>
-            </div>
-
-            <div class="snd-output">
-                <span style="color: var(--c-white);">SND_FREQ:</span><br>
-                <marquee id="music-status" scrollamount="2">SCANNING...</marquee>
-            </div>
-
-            <nav class="nav-cmd">
-                <a href="#inicio">1. LOG_FILES</a>
-                <a href="#visuals">2. GR_SCREENS</a>
-                <a href="#signals">3. COMM_LINK</a>
-                <a href="https://github.com/catekath">4. SRC_CODE</a>
-            </nav>
-        </aside>
-
-        <main class="main-content">
-            <section id="inicio">
-                <div class="doldoc-header">DIARY_ENTRY:001</div>
-                <p>
-                    $FG,4$ /* ROJO DIVINO */<br>
-                    Yo wsp, soy iann. Rework completado. <br>
-                    Sistema operando en modo puro.<br>
-                    $FG,0$ /* NEGRO ESTÁNDAR */
-                </p>
-                <hr style="border: 1px dashed #000;">
-            </section>
-
-            <section id="visuals">
-                <div class="doldoc-header">GR_RESOURCE_FORK</div>
-                <div class="gr-grid">
-                    <script>
-                        for(let i=27; i>=1; i--) {
-                            let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
-                            document.write(`
-                                <div class="gr-item" onclick="openZoom(this)">
-                                    <img src="IMG${i}.${ext}">
-                                </div>
-                            `);
-                        }
-                    </script>
-                </div>
-            </section>
-
-            <section id="signals">
-                <div class="doldoc-header">REMOTE_COMM_LINK</div>
-                <div class="comm-link">
-                    <div id="cusdis_thread"
-                      data-host="https://cusdis.com"
-                      data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
-                      data-page-id="iann_world_machine_v1"
-                      data-page-url="https://s3x-and-driv3.github.io/"
-                      data-page-title="WORLD_MACHINE">
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <span class="blink" style="color: var(--c-red);">GOD SAYS:</span> 
-        "640x480 IS THE DIVINE STANDARD. KEEP IT SIMPLE."
-    </footer>
+<div id="zoom-modal" onclick="this.style.display='none'; document.body.style.overflow='auto';">
+    <img id="zoom-img" src="">
 </div>
 
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 <script>
-    function openZoom(element) {
-        const img = element.getElementsByTagName('img')[0];
-        const modal = document.getElementById('zoom-modal');
-        const zoomImg = document.getElementById('zoom-img');
-        zoomImg.src = img.src;
-        modal.style.display = 'flex';
+    function openZoom(el) {
+        document.getElementById('zoom-img').src = el.src;
+        document.getElementById('zoom-modal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
 
-    document.getElementById('zoom-modal').onclick = function() {
-        this.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    };
-
     async function updateMusic() {
-        const user = "catekath";
-        const apiKey = "296fbf5f08ff29425ffc176a6d4b88b2";
-        const statusBox = document.getElementById('music-status');
+        const u = "catekath";
+        const k = "296fbf5f08ff29425ffc176a6d4b88b2";
+        const box = document.getElementById('music-status');
         try {
-            const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`);
+            const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${u}&api_key=${k}&format=json&limit=1`);
             const data = await res.json();
             const track = data.recenttracks.track[0];
-            const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
-            statusBox.innerText = (isPlaying ? "> " : "| ") + track.name.toUpperCase();
-        } catch (e) {
-            statusBox.innerText = "NO_SIGNAL";
-        }
+            box.innerText = (track['@attr']?.nowplaying ? "PLAYING: " : "LAST: ") + track.name.toUpperCase();
+        } catch { box.innerText = "OFFLINE"; }
     }
-    updateMusic();
-    setInterval(updateMusic, 30000);
+    updateMusic(); setInterval(updateMusic, 30000);
 </script>
+
 </body>
 </html>
