@@ -8,10 +8,10 @@
     <link rel="icon" type="image/jpeg" href="niko.jpg">
 
     <style>
-        /* PALETA SAGRADA DE 16 COLORES */
+        /* PALETA SAGRADA Y CURSOR */
         :root {
             --bg-color: #ffffff;
-            --win-bg: #0000AA; /* Azul clásico de TempleOS */
+            --win-bg: #0000AA;
             --text-main: #000000;
             --text-white: #ffffff;
             --accent-red: #AA0000;
@@ -20,18 +20,21 @@
             --font-stack: "Courier New", Courier, monospace;
         }
 
-        * { box-sizing: border-box; cursor: url('https://cur.cursors-4u.net/others/oth-2/oth147.cur'), auto !important; }
+        * { 
+            box-sizing: border-box; 
+            cursor: url('https://cur.cursors-4u.net/others/oth-2/oth147.cur'), auto !important; 
+        }
 
         body {
-            background-color: var(--bg-color);
-            margin: 0; padding: 20px;
+            background-color: #888888; /* Fondo gris tipo escritorio antiguo */
+            margin: 0; padding: 10px;
             font-family: var(--font-stack);
             font-weight: bold;
             color: var(--text-main);
             image-rendering: pixelated;
         }
 
-        /* --- FILTRO TV CRT (MÁS AGRESIVO) --- */
+        /* FILTRO TV CRT */
         #tv-filter {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000; pointer-events: none;
@@ -39,13 +42,15 @@
             background-size: 100% 3px;
         }
 
-        /* --- MARCO DE VENTANA TIPO SISTEMA --- */
+        /* CONTENEDOR PRINCIPAL: DISTRIBUCIÓN EN COLUMNAS */
         .navi-wrapper {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             border: 4px double #000;
             background: var(--bg-color);
-            box-shadow: 10px 10px 0px #888888;
+            box-shadow: 10px 10px 0px #444;
+            display: flex;
+            flex-direction: column;
         }
 
         .system-title-bar {
@@ -54,93 +59,84 @@
             padding: 5px 10px;
             display: flex; justify-content: space-between;
             border-bottom: 4px double #000;
-            font-size: 14px;
         }
 
-        /* --- HEADER --- */
-        .fixed-header {
-            background: #eeeeee;
-            border-bottom: 2px solid #000;
-            padding: 10px;
-            display: flex; align-items: center; justify-content: space-between;
+        /* LAYOUT DE DOS COLUMNAS */
+        .main-layout {
+            display: flex;
+            min-height: 80vh;
         }
 
-        .profile-area { display: flex; align-items: center; gap: 15px; }
+        /* BARRA LATERAL (SISTEMA) */
+        .sidebar {
+            width: 250px;
+            background: #ccc;
+            border-right: 4px double #000;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ÁREA DE CONTENIDO (TRABAJO) */
+        .content-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #fff;
+        }
+
+        /* COMPONENTES REORGANIZADOS */
         .pfp-container { 
             border: 3px solid var(--win-bg); 
-            background: #fff;
-            padding: 2px;
+            background: #fff; padding: 2px;
+            width: 128px; margin: 0 auto;
         }
-        .profile-pic {
-            width: 64px; height: 64px;
-            filter: contrast(150%) grayscale(100%);
-            object-fit: cover;
-            display: block;
-        }
+        .profile-pic { width: 100%; filter: contrast(150%) grayscale(100%); display: block; }
 
         .oneshot-player {
-            background: #fff;
-            border: 2px solid #000;
-            padding: 5px;
-            width: 300px;
+            background: #fff; border: 2px solid #000; padding: 5px;
+            font-size: 11px;
         }
-        .player-label { color: var(--accent-red); font-size: 10px; display: block; border-bottom: 1px solid #000; margin-bottom: 5px; }
-        #music-status { font-size: 12px; color: #000; font-family: monospace; }
 
-        /* --- MENÚ TIPO DOLDOC --- */
-        .nav-bar {
-            background: #ccc;
-            padding: 5px;
-            border-bottom: 2px solid #000;
-            display: flex; gap: 15px;
+        .nav-menu {
+            display: flex; flex-direction: column; gap: 5px;
         }
-        .nav-bar a { color: var(--win-bg); text-decoration: none; }
-        .nav-bar a:before { content: "["; color: #000; }
-        .nav-bar a:after { content: "]"; color: #000; }
-        .nav-bar a:hover { background: var(--win-bg); color: #fff; }
+        .nav-menu a {
+            text-decoration: none; color: var(--win-bg);
+            padding: 5px; border: 1px transparent;
+        }
+        .nav-menu a:hover { background: var(--win-bg); color: #fff; border: 1px solid #000; }
+        .nav-menu a:before { content: "-> "; }
 
-        /* --- SECCIONES --- */
-        .content-section { padding: 20px; border-bottom: 2px dashed #000; }
-        h2 { background: var(--accent-yellow); color: #000; display: inline-block; padding: 0 10px; border: 1px solid #000; font-size: 16px; }
-
-        .log-entry { margin: 20px 0; border-left: 5px solid var(--win-bg); padding-left: 10px; }
-        .log-entry h3 { color: var(--accent-red); font-size: 14px; margin: 0; }
-
-        /* --- GALERÍA (ESTILO TABLA) --- */
+        /* GALERÍA */
         .photo-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
-            gap: 10px; margin-top: 10px;
+            gap: 10px;
         }
         .photo-card {
-            border: 2px solid #000;
-            padding: 2px;
-            background: #fff;
-            text-align: center;
+            border: 2px solid #000; background: #fff; padding: 2px;
+            transition: transform 0.1s;
         }
-        .photo-card img { 
-            width: 100%; height: 80px; object-fit: cover;
-            filter: sepia(100%) saturate(200%) contrast(120%);
-        }
+        .photo-card img { width: 100%; height: 80px; object-fit: cover; filter: grayscale(100%); }
+        .photo-card:hover { transform: scale(1.05); }
         .photo-card:hover img { filter: none; }
 
-        /* --- ZOOM MODAL (LIMPIO) --- */
+        /* MODAL */
         #zoom-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,170,0.8); z-index: 99999;
+            background: rgba(0,0,0,0.9); z-index: 99999;
             justify-content: center; align-items: center;
         }
-        #zoom-img { border: 10px solid #fff; max-width: 80vw; max-height: 80vh; }
+        #zoom-img { border: 5px solid #fff; max-width: 85vw; max-height: 85vh; }
 
-        /* --- COMENTARIOS --- */
-        #comment-wrapper {
-            background: #000; padding: 10px; border: 4px inset #ccc;
+        h2 { background: var(--accent-yellow); border: 1px solid #000; padding: 2px 10px; font-size: 16px; margin-top: 0; }
+        footer { border-top: 4px double #000; padding: 10px; text-align: center; background: #eee; font-size: 11px; }
+
+        @media (max-width: 700px) {
+            .main-layout { flex-direction: column; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 4px double #000; }
         }
-        #cusdis_thread { filter: invert(1) hue-rotate(180deg); }
-
-        footer { background: #ccc; padding: 10px; text-align: center; font-size: 12px; }
-        .niko-msg { color: var(--accent-red); animation: blink 1s steps(1) infinite; }
-        @keyframes blink { 50% { visibility: hidden; } }
-
     </style>
 </head>
 <body>
@@ -153,81 +149,82 @@
 
     <div class="navi-wrapper">
         <div class="system-title-bar">
-            <span>C:/USER/IANN/WORLD_MACHINE.EXE</span>
-            <span>[X]</span>
+            <span>TempleOS_V2 // WORLD_MACHINE // IANN</span>
+            <span>[_][#][X]</span>
         </div>
 
-        <header class="fixed-header">
-            <div class="profile-area">
+        <div class="main-layout">
+            <aside class="sidebar">
                 <div class="pfp-container">
                     <img src="./fotodeperfil.jpg" class="profile-pic">
                 </div>
-                <div>
+                
+                <div style="text-align: center;">
                     <div style="color: var(--win-bg)">iannknow_wred.sys</div>
-                    <div style="font-size: 10px; color: var(--accent-green);">ONLINE_GOD_MODE</div>
+                    <div style="font-size: 10px; color: var(--accent-red);">[GOD_MODE: ON]</div>
                 </div>
-            </div>
 
-            <div class="oneshot-player">
-                <span class="player-label">Divine_Frequencies.exe</span>
-                <div id="music-status">Waiting for God to speak...</div>
-            </div>
-        </header>
-
-        <nav class="nav-bar">
-            <a href="#inicio">LOGS</a>
-            <a href="#visuals">GFX</a>
-            <a href="#signals">CHAT</a>
-            <a href="#protocol">INFO</a>
-        </nav>
-
-        <main>
-            <section id="inicio" class="content-section">
-                <h2>$RED "Real Shit" $FG</h2>
-                <div class="log-entry">
-                    <h3>> SYSTEM_REPORT</h3>
-                    <p>Yo wsp, soy iann... El rework divino ha sido completado. 640x480 es todo lo que un hombre necesita.</p>
+                <div class="oneshot-player">
+                    <span style="color:var(--accent-red)">$RADIO_FREQ</span>
+                    <marquee id="music-status" scrollamount="2">Waiting for signal...</marquee>
                 </div>
-            </section>
 
-            <section id="visuals" class="content-section">
-                <h2>$BLUE MEMORY_DISK $FG</h2>
-                <div class="photo-grid">
-                    <script>
-                        for(let i=27; i>=1; i--) {
-                            let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
-                            document.write(`
-                                <div class="photo-card" onclick="openZoom(this)">
-                                    <img src="IMG${i}.${ext}">
-                                    <div style="font-size:8px;">IMG_${i}.BIN</div>
-                                </div>
-                            `);
-                        }
-                    </script>
+                <nav class="nav-menu">
+                    <a href="#inicio">FILES</a>
+                    <a href="#visuals">GRAPHICS</a>
+                    <a href="#signals">COMM_LINK</a>
+                </nav>
+                
+                <div style="font-size: 9px; color: #666; margin-top: auto;">
+                    MEM_OS: 640KB<br>
+                    CPU: DIVINE_INTEL
                 </div>
-            </section>
+            </aside>
 
-            <section id="signals" class="content-section">
-                <h2>$GREEN GUESTBOOK $FG</h2>
-                <div id="comment-wrapper">
-                    <div id="cusdis_thread"
-                      data-host="https://cusdis.com"
-                      data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
-                      data-page-id="iann_world_machine_v1"
-                      data-page-url="https://s3x-and-driv3.github.io/"
-                      data-page-title="WORLD_MACHINE">
+            <main class="content-area">
+                <section id="inicio">
+                    <h2>$RED "SYSTEM_REPORT" $FG</h2>
+                    <p style="font-size: 14px;">Yo wsp, soy iann y pues me gusta hacer cosas y hago cosas pero omg le hice rework a esta mierda. La distribución ha sido optimizada para el Player.</p>
+                    <hr border="1">
+                </section>
+
+                <section id="visuals" style="margin-top: 30px;">
+                    <h2>$BLUE "GFX_ARCHIVE" $FG</h2>
+                    <div class="photo-grid">
+                        <script>
+                            for(let i=27; i>=1; i--) {
+                                let ext = (i === 5) ? 'png' : (i === 1) ? 'jpeg' : 'jpg';
+                                document.write(`
+                                    <div class="photo-card" onclick="openZoom(this)">
+                                        <img src="IMG${i}.${ext}">
+                                    </div>
+                                `);
+                            }
+                        </script>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <footer>
-                <p class="niko-msg">GOD SAYS: EVERYTHING IS GOING TO BE OKAY</p>
-                <div style="display: flex; justify-content: center; gap: 20px;">
-                    <a href="https://www.instagram.com/iannknow_wred.sys/" style="color:var(--win-bg);">[INSTAGRAM]</a>
-                    <a href="https://github.com/catekath" style="color:var(--win-bg);">[GITHUB]</a>
-                </div>
-            </footer>
-        </main>
+                <section id="signals" style="margin-top: 30px;">
+                    <h2>$GREEN "GUEST_SIGNALS" $FG</h2>
+                    <div style="background: #000; padding: 10px; border: 2px inset #ccc;">
+                        <div id="cusdis_thread"
+                          data-host="https://cusdis.com"
+                          data-app-id="a78815c9-9166-4752-b9ce-74c20a78283f"
+                          data-page-id="iann_world_machine_v1"
+                          data-page-url="https://s3x-and-driv3.github.io/"
+                          data-page-title="WORLD_MACHINE">
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <footer>
+            <div style="color: var(--accent-red); animation: blink 1s steps(1) infinite;">
+                -- EVERYTHING IS GOING TO BE OKAY --
+            </div>
+            @ 2026 // iannknow_wred.sys // God's Computer
+        </footer>
     </div>
 
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
@@ -255,9 +252,9 @@
                 const data = await res.json();
                 const track = data.recenttracks.track[0];
                 const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
-                statusBox.innerText = (isPlaying ? ">> " : "|| ") + track.name.toUpperCase();
+                statusBox.innerText = (isPlaying ? "PLAYING: " : "LAST: ") + track.name.toUpperCase();
             } catch (e) {
-                statusBox.innerText = "OFFLINE";
+                statusBox.innerText = "SIGNAL_LOST";
             }
         }
         updateMusic();
